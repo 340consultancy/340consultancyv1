@@ -1,0 +1,11 @@
+{
+  "collectionName": "components_shared_urls",
+  "info": {
+    "displayName": "url"
+  },
+  "attributes": {
+    "url": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_shared_headlines",
+  "info": {
+    "displayName": "headline"
+  },
+  "attributes": {
+    "line1": {
+      "type": "string"
+    },
+    "line2": {
+      "type": "string"
+    }
+  }
+}

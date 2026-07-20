@@ -1,0 +1,99 @@
+{
+  "kind": "collectionType",
+  "collectionName": "case_studys",
+  "info": {
+    "singularName": "case-study",
+    "pluralName": "case-studys",
+    "displayName": "Case Study"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "slug": {
+      "type": "string",
+      "unique": true
+    },
+    "client": {
+      "type": "string"
+    },
+    "industry": {
+      "type": "string"
+    },
+    "services": {
+      "type": "string"
+    },
+    "website": {
+      "type": "string"
+    },
+    "headline": {
+      "type": "string"
+    },
+    "heroImg": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ]
+    },
+    "intro": {
+      "type": "text"
+    },
+    "challenge": {
+      "type": "text"
+    },
+    "approach": {
+      "type": "text"
+    },
+    "resultText": {
+      "type": "text"
+    },
+    "stats": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.stat"
+    },
+    "visuals": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ]
+    },
+    "gallery": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ]
+    },
+    "cardImg": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ]
+    },
+    "cardTag": {
+      "type": "string"
+    },
+    "cardStat": {
+      "type": "string"
+    },
+    "cardHeadline": {
+      "type": "text"
+    },
+    "order": {
+      "type": "integer"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    }
+  }
+}

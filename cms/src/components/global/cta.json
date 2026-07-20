@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_global_ctas",
+  "info": {
+    "displayName": "cta"
+  },
+  "attributes": {
+    "eyebrow": {
+      "type": "string"
+    },
+    "headline": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.headline"
+    },
+    "yesLabel": {
+      "type": "string"
+    },
+    "goLabel": {
+      "type": "string"
+    },
+    "nameLabel": {
+      "type": "string"
+    },
+    "namePlaceholder": {
+      "type": "string"
+    }
+  }
+}

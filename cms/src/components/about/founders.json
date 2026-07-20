@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_about_founderss",
+  "info": {
+    "displayName": "founders"
+  },
+  "attributes": {
+    "eyebrow": {
+      "type": "string"
+    },
+    "linda": {
+      "type": "component",
+      "repeatable": false,
+      "component": "about.founder"
+    },
+    "nancy": {
+      "type": "component",
+      "repeatable": false,
+      "component": "about.founder"
+    },
+    "quote": {
+      "type": "component",
+      "repeatable": false,
+      "component": "about.quote"
+    }
+  }
+}

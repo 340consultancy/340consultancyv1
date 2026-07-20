@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_home_ways",
+  "info": {
+    "displayName": "way"
+  },
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ]
+    },
+    "imagePosition": {
+      "type": "string"
+    },
+    "eyebrow": {
+      "type": "string"
+    },
+    "headline": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.headline"
+    },
+    "paragraphs": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.text"
+    },
+    "signoff": {
+      "type": "text"
+    }
+  }
+}

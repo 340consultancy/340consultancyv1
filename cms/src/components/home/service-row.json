@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_home_service_rows",
+  "info": {
+    "displayName": "service row"
+  },
+  "attributes": {
+    "num": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "price": {
+      "type": "string"
+    },
+    "tag": {
+      "type": "string"
+    },
+    "href": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_shared_showcase_halfs",
+  "info": {
+    "displayName": "showcase half"
+  },
+  "attributes": {
+    "text": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.showcase-text"
+    },
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.showcase-item"
+    },
+    "defaultImages": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ]
+    }
+  }
+}

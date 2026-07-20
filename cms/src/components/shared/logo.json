@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_shared_logos",
+  "info": {
+    "displayName": "logo"
+  },
+  "attributes": {
+    "src": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ]
+    },
+    "alt": {
+      "type": "string"
+    },
+    "ariaLabel": {
+      "type": "string"
+    }
+  }
+}

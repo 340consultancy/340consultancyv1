@@ -1,0 +1,59 @@
+{
+  "collectionName": "components_contact_forms",
+  "info": {
+    "displayName": "form"
+  },
+  "attributes": {
+    "photo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ]
+    },
+    "photoAlt": {
+      "type": "string"
+    },
+    "eyebrow": {
+      "type": "string"
+    },
+    "headline": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.headline"
+    },
+    "intro": {
+      "type": "text"
+    },
+    "labels": {
+      "type": "component",
+      "repeatable": false,
+      "component": "contact.form-labels"
+    },
+    "placeholders": {
+      "type": "component",
+      "repeatable": false,
+      "component": "contact.form-placeholders"
+    },
+    "serviceOptions": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.text"
+    },
+    "newsletter": {
+      "type": "component",
+      "repeatable": false,
+      "component": "contact.newsletter-note"
+    },
+    "submitLabel": {
+      "type": "string"
+    },
+    "successToast": {
+      "type": "string"
+    },
+    "errorToast": {
+      "type": "string"
+    }
+  }
+}

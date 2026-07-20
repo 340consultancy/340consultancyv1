@@ -1,0 +1,37 @@
+{
+  "kind": "singleType",
+  "collectionName": "services_pages",
+  "info": {
+    "singularName": "services-page",
+    "pluralName": "services-pages",
+    "displayName": "Page: Services"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "alsoOnThisPage": {
+      "type": "text"
+    },
+    "hero": {
+      "type": "component",
+      "repeatable": false,
+      "component": "services.hero"
+    },
+    "bento": {
+      "type": "component",
+      "repeatable": false,
+      "component": "services.bento"
+    },
+    "process": {
+      "type": "component",
+      "repeatable": false,
+      "component": "services.process"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    }
+  }
+}

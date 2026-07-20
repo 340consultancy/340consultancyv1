@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_contact_heros",
+  "info": {
+    "displayName": "hero"
+  },
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ]
+    },
+    "imagePosition": {
+      "type": "string"
+    },
+    "eyebrow": {
+      "type": "string"
+    },
+    "headline": {
+      "type": "string"
+    },
+    "tagline": {
+      "type": "string"
+    },
+    "scrollLabel": {
+      "type": "string"
+    }
+  }
+}

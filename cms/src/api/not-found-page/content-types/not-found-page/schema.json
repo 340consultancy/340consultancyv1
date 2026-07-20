@@ -1,0 +1,16 @@
+{
+  "kind": "singleType",
+  "collectionName": "not_found_pages",
+  "info": {
+    "singularName": "not-found-page",
+    "pluralName": "not-found-pages",
+    "displayName": "Page: 404 / Not found"
+  },
+  "options": { "draftAndPublish": true },
+  "attributes": {
+    "eyebrow": { "type": "string" },
+    "code": { "type": "string" },
+    "message": { "type": "text" },
+    "backLabel": { "type": "string" }
+  }
+}

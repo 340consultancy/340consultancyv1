@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_shared_headline3s",
+  "info": {
+    "displayName": "headline3"
+  },
+  "attributes": {
+    "line1": {
+      "type": "string"
+    },
+    "line2Lead": {
+      "type": "string"
+    },
+    "accent": {
+      "type": "string"
+    }
+  }
+}

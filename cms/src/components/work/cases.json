@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_work_casess",
+  "info": {
+    "displayName": "cases"
+  },
+  "attributes": {
+    "eyebrow": {
+      "type": "string"
+    },
+    "heading": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.lead-accent"
+    },
+    "viewLabel": {
+      "type": "string"
+    },
+    "cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.tag-image-card"
+    }
+  }
+}

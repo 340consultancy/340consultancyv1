@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_shared_route_links",
+  "info": {
+    "displayName": "route link"
+  },
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "to": {
+      "type": "string"
+    }
+  }
+}

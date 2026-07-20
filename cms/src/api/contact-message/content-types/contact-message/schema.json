@@ -1,0 +1,19 @@
+{
+  "kind": "collectionType",
+  "collectionName": "contact_messages",
+  "info": {
+    "singularName": "contact-message",
+    "pluralName": "contact-messages",
+    "displayName": "Inbox: Contact form",
+    "description": "Messages sent through the website's contact form."
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "name": { "type": "string", "required": true },
+    "email": { "type": "email", "required": true },
+    "igHandle": { "type": "string" },
+    "interest": { "type": "string" },
+    "message": { "type": "text", "required": true },
+    "newsletter": { "type": "boolean", "default": false }
+  }
+}

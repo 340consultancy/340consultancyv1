@@ -1,0 +1,42 @@
+{
+  "collectionName": "components_up2date_lead_magnets",
+  "info": {
+    "displayName": "lead magnet"
+  },
+  "attributes": {
+    "eyebrow": {
+      "type": "string"
+    },
+    "headline": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.headline"
+    },
+    "body": {
+      "type": "text"
+    },
+    "emailPlaceholder": {
+      "type": "string"
+    },
+    "buttonLabel": {
+      "type": "string"
+    },
+    "successToast": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ]
+    },
+    "imageAlt": {
+      "type": "string"
+    },
+    "errorToast": {
+      "type": "string"
+    }
+  }
+}

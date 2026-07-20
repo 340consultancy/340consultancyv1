@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_global_case_section_labelss",
+  "info": {
+    "displayName": "case section labels"
+  },
+  "attributes": {
+    "challenge": {
+      "type": "string"
+    },
+    "approach": {
+      "type": "string"
+    },
+    "results": {
+      "type": "string"
+    }
+  }
+}

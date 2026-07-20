@@ -1,0 +1,38 @@
+{
+  "collectionName": "components_global_navs",
+  "info": {
+    "displayName": "nav"
+  },
+  "attributes": {
+    "logo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.logo"
+    },
+    "leftLinks": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.link"
+    },
+    "rightLinks": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.link"
+    },
+    "bookNow": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.link"
+    },
+    "servicesLabel": { "type": "string" },
+    "serviceLinks": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.link"
+    },
+    "closeLabel": { "type": "string" },
+    "mobileTagline": { "type": "string" },
+    "openMenuLabel": { "type": "string" },
+    "closeMenuLabel": { "type": "string" }
+  }
+}

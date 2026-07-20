@@ -1,0 +1,64 @@
+# Runs the Strapi CMS + Postgres. The frontend itself is NOT in here — it is a
+# static Vite build deployed on Vercel (GitHub integration). Point the Vercel
+# env var VITE_STRAPI_URL at wherever this CMS container is reachable.
+#
+#   1. cp .env.docker.example .env.docker   (fill in the secrets)
+#   2. docker compose --env-file .env.docker up -d --build
+#   3. Admin: http://localhost:1337/admin  (create the first admin user)
+#
+# On first start with an empty database, the CMS seeds itself with the site's
+# bundled text content (cms/data/seed.json) AND uploads every bundled image
+# into the Media Library, linked to the right fields (cms/data/seed-media/).
+
+services:
+  cms-db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DATABASE_NAME:-strapi}
+      POSTGRES_USER: ${DATABASE_USERNAME:-strapi}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:?set DATABASE_PASSWORD in .env.docker}
+    volumes:
+      - cms-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${DATABASE_USERNAME:-strapi} -d ${DATABASE_NAME:-strapi}']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  cms:
+    build: ./cms
+    restart: unless-stopped
+    depends_on:
+      cms-db:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      HOST: 0.0.0.0
+      PORT: 1337
+      PUBLIC_URL: ${PUBLIC_URL:-}
+      APP_KEYS: ${APP_KEYS:?set APP_KEYS in .env.docker}
+      API_TOKEN_SALT: ${API_TOKEN_SALT:?set API_TOKEN_SALT in .env.docker}
+      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET:?set ADMIN_JWT_SECRET in .env.docker}
+      TRANSFER_TOKEN_SALT: ${TRANSFER_TOKEN_SALT:?set TRANSFER_TOKEN_SALT in .env.docker}
+      JWT_SECRET: ${JWT_SECRET:?set JWT_SECRET in .env.docker}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY:?set ENCRYPTION_KEY in .env.docker}
+      DATABASE_CLIENT: postgres
+      DATABASE_HOST: cms-db
+      DATABASE_PORT: 5432
+      DATABASE_NAME: ${DATABASE_NAME:-strapi}
+      DATABASE_USERNAME: ${DATABASE_USERNAME:-strapi}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      CORS_ORIGINS: ${CORS_ORIGINS:-}
+      CLIENT_URL: ${CLIENT_URL:-}
+      PREVIEW_SECRET: ${PREVIEW_SECRET:-}
+      SEED_FROM_DEFAULTS: ${SEED_FROM_DEFAULTS:-true}
+      CMS_APPLY_ADMIN_LABELS: ${CMS_APPLY_ADMIN_LABELS:-true}
+    ports:
+      - '1337:1337'
+    volumes:
+      - cms-uploads:/app/public/uploads
+
+volumes:
+  cms-db-data:
+  cms-uploads:

@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_about_quotes",
+  "info": {
+    "displayName": "quote"
+  },
+  "attributes": {
+    "solidLines": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.text"
+    },
+    "outlineLines": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.text"
+    },
+    "solid": {
+      "type": "string"
+    },
+    "outline": {
+      "type": "string"
+    }
+  }
+}

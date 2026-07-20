@@ -1,0 +1,41 @@
+{
+  "kind": "singleType",
+  "collectionName": "privacy_pages",
+  "info": {
+    "singularName": "privacy-page",
+    "pluralName": "privacy-pages",
+    "displayName": "Page: Privacy & Imprint"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "alsoOnThisPage": {
+      "type": "text"
+    },
+    "backLabel": {
+      "type": "string"
+    },
+    "eyebrow": {
+      "type": "string"
+    },
+    "heading": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.lead-accent"
+    },
+    "sections": {
+      "type": "component",
+      "repeatable": true,
+      "component": "privacy.section"
+    },
+    "lastUpdated": {
+      "type": "text"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_global_not_found_labelss",
+  "info": {
+    "displayName": "not found labels"
+  },
+  "attributes": {
+    "message": {
+      "type": "string"
+    },
+    "backLabel": {
+      "type": "string"
+    }
+  }
+}

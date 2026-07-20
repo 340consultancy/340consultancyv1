@@ -1,0 +1,68 @@
+{
+  "kind": "collectionType",
+  "collectionName": "services",
+  "info": {
+    "singularName": "service",
+    "pluralName": "services",
+    "displayName": "Service"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "key": {
+      "type": "string",
+      "unique": true
+    },
+    "label": {
+      "type": "text"
+    },
+    "eyebrow": {
+      "type": "string"
+    },
+    "img": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ]
+    },
+    "tagline": {
+      "type": "text"
+    },
+    "price": {
+      "type": "string"
+    },
+    "priceNote": {
+      "type": "string"
+    },
+    "body": {
+      "type": "text"
+    },
+    "facts": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.fact"
+    },
+    "includes": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.text"
+    },
+    "includesNote": {
+      "type": "text"
+    },
+    "ctaLabel": {
+      "type": "string"
+    },
+    "order": {
+      "type": "integer"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    }
+  }
+}

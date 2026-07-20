@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_shared_code_labels",
+  "info": {
+    "displayName": "code label"
+  },
+  "attributes": {
+    "code": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    }
+  }
+}

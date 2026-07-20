@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_services_bentos",
+  "info": {
+    "displayName": "bento"
+  },
+  "attributes": {
+    "eyebrow": {
+      "type": "string"
+    },
+    "heading": {
+      "type": "string"
+    },
+    "hint": {
+      "type": "string"
+    },
+    "viewDetailsLabel": {
+      "type": "string"
+    },
+    "workshopTools": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.text"
+    },
+    "workshopNote": {
+      "type": "string"
+    }
+  }
+}

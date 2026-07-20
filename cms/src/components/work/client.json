@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_work_clients",
+  "info": {
+    "displayName": "client"
+  },
+  "attributes": {
+    "initials": {
+      "type": "string"
+    },
+    "color": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    }
+  }
+}

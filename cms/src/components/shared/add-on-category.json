@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_shared_add_on_categorys",
+  "info": {
+    "displayName": "add on category"
+  },
+  "attributes": {
+    "category": {
+      "type": "string"
+    },
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.named-text"
+    }
+  }
+}

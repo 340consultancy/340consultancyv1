@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_shared_icon_items",
+  "info": {
+    "displayName": "icon item"
+  },
+  "attributes": {
+    "icon": {
+      "type": "enumeration",
+      "enum": [
+        "target",
+        "fingerprint",
+        "eye",
+        "mail",
+        "phone",
+        "instagram",
+        "linkedin"
+      ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "desc": {
+      "type": "text"
+    }
+  }
+}

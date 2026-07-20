@@ -1,0 +1,1702 @@
+{
+  "global": {
+    "nav": {
+      "logo": {
+        "src": "logo-340-white",
+        "alt": "340",
+        "ariaLabel": "340 Consultancy — Home"
+      },
+      "leftLinks": [
+        {
+          "label": "HOME",
+          "href": "/"
+        },
+        {
+          "label": "ABOUT US",
+          "href": "/about-us"
+        },
+        {
+          "label": "SERVICES",
+          "href": "/services"
+        }
+      ],
+      "rightLinks": [
+        {
+          "label": "OUR WORK",
+          "href": "/work"
+        },
+        {
+          "label": "UP2DATE",
+          "href": "/about"
+        }
+      ],
+      "bookNow": {
+        "label": "BOOK NOW",
+        "href": "/contact"
+      },
+      "servicesLabel": "SERVICES",
+      "serviceLinks": [
+        {
+          "label": "Social Media Strategy",
+          "href": "/services/strategy"
+        },
+        {
+          "label": "Social Media Management",
+          "href": "/services/management"
+        },
+        {
+          "label": "1:1 Coaching",
+          "href": "/services/coaching"
+        },
+        {
+          "label": "Content & Copywriting",
+          "href": "/services/content"
+        },
+        {
+          "label": "Workshops",
+          "href": "/services/workshops"
+        }
+      ],
+      "closeLabel": "CLOSE",
+      "mobileTagline": "Social Media Consultancy",
+      "openMenuLabel": "Open menu",
+      "closeMenuLabel": "Close menu"
+    },
+    "footer": {
+      "logo": {
+        "src": "logo-340",
+        "alt": "340 Consultancy"
+      },
+      "lockup": {
+        "line1": "Knows",
+        "line2Lead": "the ",
+        "accent": "way."
+      },
+      "quote": "\"Aesthetic posts don't build brands, strategy does.\"",
+      "hashtag": "#340consultancy",
+      "social": [
+        {
+          "icon": "instagram",
+          "href": "https://instagram.com/340consultancy",
+          "label": "Instagram"
+        },
+        {
+          "icon": "linkedin",
+          "href": "https://www.linkedin.com/company/340consultancy/",
+          "label": "LinkedIn"
+        },
+        {
+          "icon": "mail",
+          "href": "mailto:info@340consultancy.com",
+          "label": "Email us"
+        }
+      ],
+      "nav": [
+        {
+          "label": "Home",
+          "to": "/"
+        },
+        {
+          "label": "About Us",
+          "to": "/about-us"
+        },
+        {
+          "label": "Services",
+          "to": "/services"
+        },
+        {
+          "label": "Our Work",
+          "to": "/work"
+        },
+        {
+          "label": "UP2DATE",
+          "to": "/about"
+        },
+        {
+          "label": "Contact",
+          "to": "/contact"
+        }
+      ],
+      "backToTopLabel": "BACK TO TOP",
+      "copyright": "© 2026 340 CONSULTANCY V.O.F. · KvK 96558075",
+      "privacy": {
+        "label": "Privacy & Imprint",
+        "to": "/privacy"
+      },
+      "tagline": "Be the brand people remember."
+    },
+    "cta": {
+      "eyebrow": "NEXT STEP",
+      "headline": {
+        "line1": "Ready to",
+        "line2": "level up?"
+      },
+      "yesLabel": "YES",
+      "goLabel": "LET'S GO →",
+      "nameLabel": "Your name is...?",
+      "namePlaceholder": "Name"
+    },
+    "testimonialsCta": {
+      "label": "MEER KLANTENERVARINGEN",
+      "to": "/work"
+    },
+    "showcaseContent": {
+      "text": {
+        "eyebrow": "CONTENT WE CREATE",
+        "titleLead": "Content",
+        "titleAccent": "we create.",
+        "sub": "Each piece serves a purpose, designed to do more than look good."
+      },
+      "items": [
+        {
+          "label": "Informational Carousels",
+          "img": "showcase-carousels"
+        },
+        {
+          "label": "Product & Service Launches",
+          "img": "showcase-launches"
+        },
+        {
+          "label": "Holiday Campaigns",
+          "img": "showcase-holiday"
+        },
+        {
+          "label": "Presentation Decks",
+          "img": "showcase-decks"
+        },
+        {
+          "label": "Copywriting",
+          "img": "showcase-copywriting"
+        },
+        {
+          "label": "Reels & Short-form Videos",
+          "img": "showcase-reels"
+        }
+      ],
+      "defaultImages": [
+        "founders-sofa",
+        "linda-nancy-sofa"
+      ]
+    },
+    "showcaseIndustry": {
+      "text": {
+        "eyebrow": "INDUSTRIES WE'VE WORKED IN",
+        "titleLead": "Every",
+        "titleAccent": "industry.",
+        "sub": "No two fields are alike. Neither is the work we make for them."
+      },
+      "items": [
+        {
+          "label": "Exhibit Design",
+          "img": "showcase-exhibit"
+        },
+        {
+          "label": "Intercultural Consulting",
+          "img": "showcase-intercultural"
+        },
+        {
+          "label": "Food & Hospitality",
+          "img": "showcase-food"
+        },
+        {
+          "label": "Life Coaching",
+          "img": "showcase-coaching"
+        },
+        {
+          "label": "Retail",
+          "img": "showcase-retail"
+        },
+        {
+          "label": "Education",
+          "img": "showcase-education"
+        }
+      ],
+      "defaultImages": [
+        "linda-nancy",
+        "founders"
+      ]
+    },
+    "blogSection": {
+      "blogs": {
+        "eyebrow": "READ · LEARN",
+        "headline": [
+          "Our",
+          "Blogs"
+        ],
+        "body": "Short, sharp reads on social media strategy, content, and growth — straight from the 340 team.",
+        "ctaLabel": "READ ALL ARTICLES",
+        "ctaHref": "/blog"
+      },
+      "social": {
+        "eyebrow": "LIVE · SOCIAL",
+        "headline": [
+          "Social",
+          "Posts"
+        ],
+        "body": "Catch the latest from our feed — every post is a strategic decision, not a coincidence.",
+        "ctaLabel": "FOLLOW @340CONSULTANCY",
+        "ctaHref": "https://instagram.com/340consultancy",
+        "external": true
+      },
+      "readArticleLabel": "READ ARTICLE",
+      "comingSoonLabel": "COMING SOON",
+      "comingSoonWatermark": "BALD"
+    },
+    "blogPage": {
+      "listing": {
+        "eyebrow": "READ · LEARN",
+        "headline": {
+          "lead": "Our ",
+          "accent": "Blog"
+        },
+        "tagline": "Short, sharp reads on strategy, content and growth.",
+        "readLabel": "READ ARTICLE"
+      },
+      "article": {
+        "backLabel": "ALL ARTICLES",
+        "moreEyebrow": "KEEP READING",
+        "moreHeadline": {
+          "lead": "More ",
+          "accent": "articles"
+        },
+        "byLabel": "By"
+      }
+    },
+    "serviceDetailLabels": {
+      "addOns": {
+        "eyebrow": "PERSONALIZE IT",
+        "heading": {
+          "lead": "Add-",
+          "accent": "ons."
+        }
+      },
+      "serviceEyebrow": "THE SERVICE",
+      "pricingLabel": "PRICING",
+      "includesLabel": "WHAT'S INCLUDED",
+      "defaultCtaLabel": "BOOK A FREE CALL",
+      "availableInPrefix": "Available in",
+      "others": {
+        "eyebrow": "MORE FROM 340",
+        "heading": {
+          "lead": "Other ",
+          "accent": "services"
+        }
+      }
+    },
+    "caseStudyLabels": {
+      "notFound": {
+        "message": "Case not found",
+        "backLabel": "← Back to Work"
+      },
+      "backLabel": "ALL WORK",
+      "meta": {
+        "client": "Client",
+        "services": "Services",
+        "website": "Website",
+        "industry": "Industry"
+      },
+      "sections": {
+        "challenge": "The Challenge",
+        "approach": "Our Approach",
+        "results": "Results"
+      },
+      "others": {
+        "eyebrow": "MORE WORK",
+        "heading": {
+          "lead": "Other ",
+          "accent": "Cases"
+        },
+        "allWorkLabel": "All Work",
+        "viewCaseLabel": "VIEW CASE"
+      },
+      "scrollLabel": "SCROLL"
+    },
+    "managementAddOns": {
+      "intro": "Everything below is optional and available as custom add-on services.",
+      "outro": "Exact pricing is scoped in your intake call based on platforms, volume, and goals.",
+      "categories": [
+        {
+          "category": "CONTENT & CREATIVE",
+          "items": [
+            {
+              "name": "Copywriting",
+              "text": "Platform-native captions, hooks, and copy written for you."
+            },
+            {
+              "name": "Content creation",
+              "text": "Graphics, carousels, and visuals aligned to your brand."
+            },
+            {
+              "name": "Video editing",
+              "text": "Short-form editing for Reels, TikTok, and Shorts."
+            }
+          ]
+        },
+        {
+          "category": "ENGAGEMENT & GROWTH",
+          "items": [
+            {
+              "name": "Community management",
+              "text": "Extra engagement, the better your content performs. DMs, comments, and daily engagement handled for you."
+            },
+            {
+              "name": "Extra platforms",
+              "text": "Extend management to a second or third platform."
+            },
+            {
+              "name": "Paid social / ads",
+              "text": "Ad setup, copy, and performance management."
+            }
+          ]
+        },
+        {
+          "category": "SUPPORT & REPORTING",
+          "items": [
+            {
+              "name": "24/7 emergency support",
+              "text": "On-call response for urgent brand moments or crises."
+            },
+            {
+              "name": "Extra check-ins",
+              "text": "Weekly or bi-weekly calls on top of your monthly base."
+            }
+          ]
+        },
+        {
+          "category": "ONE-TIME SERVICES",
+          "items": [
+            {
+              "name": "One-time strategy",
+              "text": "A one-time social media strategy before starting management."
+            },
+            {
+              "name": "Social media audit",
+              "text": "Full review of your current presence, gaps, and opportunities."
+            },
+            {
+              "name": "Profile optimisation",
+              "text": "Bio, highlights, links, and first-impression polish across platforms."
+            },
+            {
+              "name": "Competitor analysis",
+              "text": "In-depth report on what your competitors are doing."
+            }
+          ]
+        }
+      ]
+    },
+    "strategyAddOns": {
+      "intro": "Everything below is optional and available as custom add-on services.",
+      "outro": "Exact pricing is scoped with you during the intake call.",
+      "categories": [
+        {
+          "category": "CREATIVE",
+          "items": [
+            {
+              "name": "Extra post prototypes",
+              "text": "Want your strategy to feel more tangible? Get additional post-ready content concepts."
+            },
+            {
+              "name": "SEO keywords & hashtags",
+              "text": "Receive SEO-optimized keywords and hashtags to improve discoverability across social platforms."
+            },
+            {
+              "name": "Prototype captions",
+              "text": "Ready-to-use captions for your content prototypes."
+            }
+          ]
+        },
+        {
+          "category": "STRATEGY",
+          "items": [
+            {
+              "name": "Social media audit",
+              "text": "A full review of your current social presence to identify strengths, gaps, opportunities, and your baseline."
+            },
+            {
+              "name": "Paid ad strategy",
+              "text": "Strategic recommendations for paid social advertising."
+            },
+            {
+              "name": "Community management strategy",
+              "text": "Tactics for growing and engaging your online community."
+            },
+            {
+              "name": "Geotargeting strategy",
+              "text": "Recommendations for reaching local audiences through organic and paid tactics."
+            }
+          ]
+        },
+        {
+          "category": "RESEARCH & INSIGHTS",
+          "items": [
+            {
+              "name": "Competitor analysis",
+              "text": "An in-depth review of your competitors' social media presence."
+            },
+            {
+              "name": "Inspiration analysis",
+              "text": "A breakdown of an inspirational brand's social media strategy and content."
+            },
+            {
+              "name": "Additional profile optimization",
+              "text": "Biography and profile optimization for any extra social platform."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "home-page": {
+    "alsoOnThisPage": "Shown on this page but edited elsewhere:\n• Testimonials slider → “Testimonial” entries (button: General → Testimonials button)\n• Blog & Social tiles → tile texts: General → Blog/Social section · posts: “Blog Article” + “Instagram Post” entries\n• Closing “Ready to level up?” → General → Closing section\n• Navigation & footer → General",
+    "hero": {
+      "image": "founders-sofa",
+      "eyebrow": "Be the brand people remember.",
+      "headline": {
+        "line1": "SOCIAL MEDIA THAT",
+        "line2Lead": "ACTUALLY ",
+        "accent": "WORKS"
+      },
+      "services": [
+        {
+          "name": "Social Media Strategy",
+          "slug": "strategy"
+        },
+        {
+          "name": "Social Media Management",
+          "slug": "management"
+        },
+        {
+          "name": "1:1 Coaching",
+          "slug": "coaching"
+        },
+        {
+          "name": "Content & Copywriting",
+          "slug": "content"
+        },
+        {
+          "name": "Workshops",
+          "slug": "workshops"
+        }
+      ],
+      "scrollLabel": "SCROLL"
+    },
+    "way": {
+      "image": "ipad-zebra",
+      "imagePosition": "50% 40%",
+      "eyebrow": "THE 340 WAY",
+      "headline": {
+        "line1": "340 knows",
+        "line2": "the way."
+      },
+      "paragraphs": [
+        "Since day one we've helped brands stop guessing and start growing. We're the boutique agency for founders and businesses who don't have the time to figure out every platform, the knowledge to know what actually works, or the energy to do it all alone.",
+        "Ready to stop guessing? Let's talk."
+      ],
+      "signoff": "Your go-to agency for all things social, strategy and content."
+    },
+    "servicesPanel": {
+      "image": "our-services",
+      "imagePosition": "50% 55%",
+      "eyebrow": "INVEST IN YOUR GROWTH",
+      "headline": {
+        "line1": "Our",
+        "line2": "Services"
+      },
+      "rows": [
+        {
+          "num": "01",
+          "name": "STRATEGY",
+          "price": "From €750",
+          "tag": "One-off",
+          "href": "/services#services-bento"
+        },
+        {
+          "num": "02",
+          "name": "MANAGEMENT",
+          "price": "From €800",
+          "tag": "Min. 3 months",
+          "href": "/services#services-bento"
+        },
+        {
+          "num": "03",
+          "name": "1:1 COACHING",
+          "price": "Custom",
+          "tag": "Flexible",
+          "href": "/services#services-bento"
+        },
+        {
+          "num": "04",
+          "name": "CONTENT & COPY",
+          "price": "Custom",
+          "tag": "Flexible",
+          "href": "/services#services-bento"
+        }
+      ],
+      "cta": {
+        "label": "VIEW ALL SERVICES & PRICING",
+        "href": "/services"
+      }
+    },
+    "foundersPanel": {
+      "image": "linda-nancy-sofa",
+      "imagePosition": "50% 20%",
+      "eyebrow": "MEET THE FOUNDERS",
+      "headline": {
+        "line1": "Nancy &",
+        "line2": "Linda"
+      },
+      "lede": "Two best friends who turned a missing room number into a social media consultancy.",
+      "body": "Nancy brings media strategy and operational precision. Linda brings bold creative ideas and a global perspective. Between them, they have worked across the Netherlands, the US, Germany, and Spain, giving them a perspective that's genuinely global. Together they deliver what big agencies can't: personal, strategic, results-driven social media, built for your business.",
+      "note": "Co-founders · EN · NL · DE · ES",
+      "cta": {
+        "label": "MEET THE TEAM",
+        "href": "/about-us"
+      }
+    },
+    "approachPanel": {
+      "image": "how-we-work",
+      "imagePosition": "50% 35%",
+      "eyebrow": "OUR APPROACH",
+      "headline": {
+        "line1": "How we",
+        "line2": "Work."
+      },
+      "cards": [
+        {
+          "num": "01",
+          "title": "Boutique by design",
+          "body": "Small client roster on purpose. Every brand gets our full attention, not a junior account manager and a template."
+        },
+        {
+          "num": "02",
+          "title": "Strategy first, always",
+          "body": "We never start creating before we understand your brand. Every post is rooted in a plan built specifically for you."
+        },
+        {
+          "num": "03",
+          "title": "Multilingual reach",
+          "body": "EN, NL, DE and ES. Your audience speaks different languages, so does your content."
+        },
+        {
+          "num": "04",
+          "title": "Honest Transparency",
+          "body": "We work remotely and flexibly, with clear and honest communication throughout. You always know what we're doing and why."
+        }
+      ],
+      "languages": {
+        "label": "WE WORK IN\n4 LANGUAGES",
+        "items": [
+          {
+            "code": "EN",
+            "label": "English"
+          },
+          {
+            "code": "NL",
+            "label": "Nederlands"
+          },
+          {
+            "code": "DE",
+            "label": "Deutsch"
+          },
+          {
+            "code": "ES",
+            "label": "Español"
+          }
+        ]
+      }
+    },
+    "cases": {
+      "eyebrow": "RESULTS THAT MATTER",
+      "headline": {
+        "line1": "Case",
+        "line2": "Studies"
+      },
+      "seeAllLabel": "SEE ALL WORK",
+      "mobileCtaLabel": "SEE ALL CASE STUDIES",
+      "cards": [
+        {
+          "client": "Studio Displays",
+          "tag": "Strategy + Management · US",
+          "headline": "REACH.\nENGAGE.\nGROW.",
+          "stat": "+420% Reach in 90 days",
+          "img": "sea-1",
+          "slug": "studio-displays"
+        },
+        {
+          "client": "AlbaNova",
+          "tag": "Strategy + Content · ES, DE",
+          "headline": "FROM\nIDEA TO\nIDENTITY.",
+          "stat": "2 Accounts Launched",
+          "img": "sea-2",
+          "slug": "albanova"
+        },
+        {
+          "client": "Galería Eldorado",
+          "tag": "Strategy · ES",
+          "headline": "ESTRATEGIA\nQUE\nFUNCIONA.",
+          "stat": "Christmas Campaign",
+          "img": "sea-3",
+          "slug": "galeria-eldorado"
+        }
+      ]
+    },
+    "quickCheck": {
+      "eyebrow": "IS THIS FOR ME?",
+      "headline": {
+        "line1": "You're in the",
+        "line2": "right place if..."
+      },
+      "items": [
+        "You're tired of posting without direction and seeing little return.",
+        "You need a clear strategy before investing more time or budget.",
+        "You want experts who understand your goals, not generic templates.",
+        "You're ready to hand off your social media to someone you trust."
+      ]
+    },
+    "phoneMock": {
+      "postImage": "cta-women",
+      "strategyImage": "sea-3",
+      "handle": "340consultancy",
+      "brandName": "340",
+      "brandTagline": "Social Media Strategy\nThat Drives Growth",
+      "keywords": "Strategy\nContent\nGrowth\nImpact",
+      "missionTitle": "our\nmission",
+      "missionText": "We help brands grow through strategies, data driven decisions, creative ideas, and focus on results that matter.",
+      "strategyLabel": "Social\nMedia\nStrategy",
+      "performanceTitle": "Performance\nOverview",
+      "metrics": [
+        {
+          "label": "Engagement rate",
+          "value": "5%"
+        },
+        {
+          "label": "Impressions",
+          "value": "+53%"
+        },
+        {
+          "label": "Clicks",
+          "value": "4x"
+        },
+        {
+          "label": "Reach",
+          "value": "+103%"
+        },
+        {
+          "label": "Views",
+          "value": "+84.5%"
+        },
+        {
+          "label": "Profile visits",
+          "value": "+78.2%"
+        }
+      ],
+      "postHeadline": "Strategy.\nContent.\nGrowth.\n",
+      "postHeadlineAccent": "Impact.",
+      "postSubtext": "Smart Strategies. Stronger Brands.\nReal Results.",
+      "captionText": "We turn ideas into impact.\nStrategy. Content. Growth. Impact.",
+      "moreLabel": "… more",
+      "viewCommentsPrefix": "View all",
+      "viewCommentsSuffix": "comments",
+      "commentUser": "brand.collective",
+      "commentText": "Love this! 🔥",
+      "likes": 12400,
+      "comments": 486,
+      "shares": 342,
+      "saves": 1800,
+      "floatingLabels": [
+        "+420% Reach",
+        "318 qualif. Leads",
+        "+86% Engagement",
+        "1.8K Saves"
+      ]
+    }
+  },
+  "about-page": {
+    "alsoOnThisPage": "Shown on this page but edited elsewhere:\n• Closing “Ready to level up?” → General → Closing section\n• Navigation & footer → General",
+    "hero": {
+      "image": "founders",
+      "imageAlt": "Linda & Nancy — 340 Consultancy",
+      "imagePosition": "50% 30%",
+      "headline": {
+        "lead": "WE ARE ",
+        "accent": "340"
+      },
+      "tagline": "Not your average agency.",
+      "scrollLabel": "SCROLL"
+    },
+    "story": {
+      "eyebrow": "OUR STORY",
+      "headline": {
+        "line1": "More than",
+        "line2": "just a number"
+      },
+      "paragraphs": [
+        "340 Consultancy began in 2025 with two best friends, a shared wall and a big idea. Linda was living in room 339. Nancy was in 341. And somewhere between late night study sessions and endless conversations about brands and social media, they realized something was missing. Room 340.",
+        "That gap became a name. And that name became a vision.",
+        "What started in two tiny student rooms has grown into something we never could have imagined: a social media agency working with clients across 3 continents. Built on bold ideas. Driven by a commitment to showing up for every client like it's our own brand on the line.",
+        "Social media that actually works."
+      ],
+      "signoff": "Linda & Nancy x"
+    },
+    "founders": {
+      "eyebrow": "CO-FOUNDER · 340 CONSULTANCY",
+      "linda": {
+        "img": "linda",
+        "imgPosDesktop": "74% 30%",
+        "imgPosMobile": "72% 52%",
+        "name": "Linda",
+        "surname": "Müller-Veerse.",
+        "role": "Co-Founder / Creative Director",
+        "bio": "Linda is the creative mind behind 340. She's the one dreaming up concepts, building the visuals and making sure every brand we work with has a look and feel that actually means something. Having lived and worked across multiple countries, she brings a perspective to creativity that you can't learn in a classroom.",
+        "langs": [
+          "DE",
+          "ES",
+          "EN",
+          "NL"
+        ]
+      },
+      "nancy": {
+        "img": "nancy-wide",
+        "imgPosDesktop": "35% 22%",
+        "imgPosMobile": "35% 22%",
+        "name": "Nancy",
+        "surname": "Boerjan.",
+        "role": "Co-Founder / Organisational Director",
+        "bio": "Nancy is the strategic mind behind 340. She's the one making sure everything runs smoothly: the plans, the clients, the details that keep our business moving. With experience across the Netherlands and the US, she knows how to build strategies that actually make sense, not just on paper but in practice.",
+        "langs": [
+          "EN",
+          "NL"
+        ]
+      },
+      "quote": {
+        "solidLines": [
+          "WHAT BEGAN",
+          "AS",
+          "FRIENDSHIP"
+        ],
+        "outlineLines": [
+          "BECAME",
+          "A JOURNEY",
+          "OF BIG DREAMS."
+        ],
+        "solid": "What began as friendship ",
+        "outline": "became a journey of big dreams."
+      }
+    },
+    "values": {
+      "eyebrow": "WHAT WE STAND FOR",
+      "headline": {
+        "line1": "Our",
+        "line2": "Values."
+      },
+      "items": [
+        {
+          "icon": "target",
+          "title": "INNOVATION",
+          "desc": "We stay ahead of social media trends, providing creative, cutting-edge solutions."
+        },
+        {
+          "icon": "fingerprint",
+          "title": "PASSION",
+          "desc": "We put heart into every story, strategy and solution we create."
+        },
+        {
+          "icon": "eye",
+          "title": "EMPOWERMENT",
+          "desc": "We aim to educate and equip our clients with the knowledge and tools they need to thrive online."
+        }
+      ]
+    }
+  },
+  "services-page": {
+    "alsoOnThisPage": "Shown on this page but edited elsewhere:\n• Service cards & detail pages → “Service” entries\n• Add-ons on the detail pages → General → Add-ons\n• Showcase “Content we create” / “Every industry” → General\n• Testimonials slider → “Testimonial” entries\n• Closing section, navigation & footer → General",
+    "hero": {
+      "headline": {
+        "lead": "OUR ",
+        "accent": "SERVICES"
+      },
+      "tagline": "Pick your game plan",
+      "image": "services-hero",
+      "imagePosition": "50% 20%",
+      "scrollLabel": "SCROLL"
+    },
+    "bento": {
+      "eyebrow": "WHAT WE DO",
+      "heading": "Our Services",
+      "hint": "Click any service for details & pricing",
+      "viewDetailsLabel": "VIEW DETAILS",
+      "workshopTools": [
+        "Canva",
+        "CapCut",
+        "Instagram"
+      ],
+      "workshopNote": "Remote"
+    },
+    "process": {
+      "eyebrow": "THE PROCESS",
+      "headline": {
+        "lead": "HOW IT ",
+        "accent": "WORKS"
+      },
+      "sub": "Four steps from first conversation to measurable growth.",
+      "steps": [
+        {
+          "phase": "1",
+          "title": "FREE INTRO CALL",
+          "desc": "We get to know your business, goals and challenges. No commitment, just clarity."
+        },
+        {
+          "phase": "2",
+          "title": "ONBOARDING",
+          "desc": "We share an onboarding questionnaire, gather your brand assets, and set the foundation."
+        },
+        {
+          "phase": "3",
+          "title": "EXECUTION",
+          "desc": "Strategy goes live. Content is created, published, and managed based on what your audience needs."
+        },
+        {
+          "phase": "4",
+          "title": "REVIEW & OPTIMIZE",
+          "desc": "Regular check-ins, performance tracking and transparent reporting. We optimize as we go."
+        }
+      ],
+      "hashtag": "#340consultancy"
+    }
+  },
+  "contact-page": {
+    "alsoOnThisPage": "Shown on this page but edited elsewhere:\n• Navigation & footer → General",
+    "hero": {
+      "image": "contact-sofa",
+      "imagePosition": "50% 40%",
+      "eyebrow": "GET IN TOUCH",
+      "headline": "CONTACT",
+      "tagline": "Let's talk.",
+      "scrollLabel": "SCROLL"
+    },
+    "form": {
+      "photo": "contact-sofa",
+      "photoAlt": "340 Consultancy founders",
+      "eyebrow": "WRITE TO US",
+      "headline": {
+        "line1": "Send us",
+        "line2": "a message."
+      },
+      "intro": "Whether you just have a question or you're ready to get started, either way, drop us a message. We'd love to chat.",
+      "labels": {
+        "name": "NAME",
+        "email": "EMAIL",
+        "instagram": "INSTAGRAM HANDLE",
+        "instagramOptional": "(optional)",
+        "interest": "I'M INTERESTED IN",
+        "message": "MESSAGE"
+      },
+      "placeholders": {
+        "name": "Linda Müller",
+        "email": "hello@brand.com",
+        "instagram": "@yourbrand",
+        "interest": "Select…",
+        "message": "Tell us about your brand and what you want to achieve…"
+      },
+      "serviceOptions": [
+        "Social Media Strategy",
+        "Social Media Management",
+        "1:1 Coaching",
+        "Content & Copywriting",
+        "Workshops",
+        "Not sure yet"
+      ],
+      "newsletter": {
+        "prefix": "I'd like to subscribe to the ",
+        "highlight": "340 Newsletter",
+        "suffix": ", no spam, just real insights and industry updates."
+      },
+      "submitLabel": "SEND MESSAGE →",
+      "successToast": "Thanks — we'll be in touch shortly.",
+      "errorToast": "Something went wrong — please try again or email us directly."
+    },
+    "links": [
+      {
+        "icon": "mail",
+        "label": "info@340consultancy.com",
+        "href": "mailto:info@340consultancy.com"
+      },
+      {
+        "icon": "phone",
+        "label": "+31 6 13866189",
+        "href": "tel:+31613866189"
+      },
+      {
+        "icon": "instagram",
+        "label": "@340consultancy",
+        "href": "https://instagram.com/340consultancy"
+      },
+      {
+        "icon": "linkedin",
+        "label": "340 Consultancy",
+        "href": "https://linkedin.com/company/340consultancy"
+      }
+    ],
+    "faq": {
+      "eyebrow": "YOU ASKED",
+      "headline": {
+        "line1": "Questions",
+        "line2": "Answered."
+      },
+      "items": [
+        {
+          "q": "How long until we see results?",
+          "a": "Organic growth takes time, but you'll start noticing shifts in engagement within the first few months. Paid campaigns move faster, often within weeks."
+        },
+        {
+          "q": "What do we as a client need to provide?",
+          "a": "We'll send you an onboarding questionnaire before we kick things off. From there, we'll need access to your social media accounts and any brand assets you already have — think logos, fonts, brand colors, existing content. Don't have everything? No problem. We'll help you figure out what's missing."
+        },
+        {
+          "q": "Do you also create the visuals / imagery?",
+          "a": "Yes. We design graphics and templates, and handle basic video editing. The one thing we'll need from you: the raw images and footage. You know your brand best — we'll make it look the part."
+        },
+        {
+          "q": "In which languages do you work?",
+          "a": "English, Dutch, German, and Spanish. Pick yours."
+        }
+      ]
+    },
+    "pricingFaq": {
+      "eyebrow": "PRICING & COMMITMENT",
+      "headline": {
+        "line1": "Pricing",
+        "line2": "FAQ."
+      },
+      "items": [
+        {
+          "q": "Is there a minimum term?",
+          "a": "For social media management, we work with a minimum of 3 months. Social media takes time to build momentum, and we're not in the business of quick fixes. All other services have no minimum term."
+        },
+        {
+          "q": "What does onboarding look like?",
+          "a": "We will have an introductory call with you to better understand your challenges and needs. Depending on which service we go through our questionnaire together or offer a flexible option to simply share it with you."
+        },
+        {
+          "q": "What happens if we want to cancel?",
+          "a": "For social media management, 30 days written notice is all we need. For one-off services like strategy, there's a 24-hour window after signing if you change your mind."
+        },
+        {
+          "q": "Do you guarantee results?",
+          "a": "Honestly? No, and we won't pretend otherwise. No one can guarantee specific numbers on social media. What we do guarantee is a strategy built to perform, continuous optimization based on real data, and full transparency throughout."
+        }
+      ]
+    }
+  },
+  "up2date-page": {
+    "alsoOnThisPage": "Shown on this page but edited elsewhere:\n• Blog & Social tiles → tile texts: General → Blog/Social section · posts: “Blog Article” + “Instagram Post” entries\n• Closing section, navigation & footer → General",
+    "hero": {
+      "title": {
+        "lead": "UP",
+        "accent": "2",
+        "tail": "DATE"
+      },
+      "tagline": "Consider yourself updated.",
+      "image": "up2date",
+      "scrollLabel": "SCROLL"
+    },
+    "leadMagnet": {
+      "eyebrow": "FREE DOWNLOAD",
+      "headline": {
+        "line1": "Your Free Social Media",
+        "line2": "Content Calendar."
+      },
+      "body": "Download our free social media content calendar and plan a full month of posts — the same framework our clients use to stay consistent and on-brand.",
+      "emailPlaceholder": "Your email…",
+      "buttonLabel": "GET IT FOR FREE →",
+      "successToast": "Thanks! Check your inbox.",
+      "errorToast": "Something went wrong — please try again in a moment.",
+      "image": "starterguide",
+      "imageAlt": "Social Media Content Calendar"
+    },
+    "newsletter": {
+      "eyebrow": "NEWSLETTER",
+      "headline": {
+        "line1": "Always stay",
+        "line2": "up2date."
+      },
+      "body": "No spam. Just real insights, new blog posts and fresh social strategies — straight to your inbox.",
+      "emailPlaceholder": "Your email…",
+      "buttonLabel": "SUBSCRIBE →",
+      "successToast": "You're in! 🎉",
+      "errorToast": "Something went wrong — please try again in a moment."
+    }
+  },
+  "work-page": {
+    "alsoOnThisPage": "Shown on this page but edited elsewhere:\n• Case cards & detail pages → “Case Study” entries (shared labels: General → Labels: case-study pages)\n• Showcase “Content we create” / “Every industry” → General\n• Testimonials slider → “Testimonial” entries\n• Closing section, navigation & footer → General",
+    "hero": {
+      "image": "work-hero",
+      "headline": {
+        "lead": "OUR ",
+        "accent": "WORK"
+      },
+      "subtitle": "The numbers speak for themselves.",
+      "scrollLabel": "SCROLL"
+    },
+    "separatorLogo": "logo-340-white",
+    "clients": [
+      {
+        "initials": "SD",
+        "color": "#3d2b1f",
+        "name": "Studio Displays"
+      },
+      {
+        "initials": "AN",
+        "color": "#1c2c1e",
+        "name": "AlbaNova"
+      },
+      {
+        "initials": "GE",
+        "color": "#26202f",
+        "name": "Galería Eldorado"
+      },
+      {
+        "initials": "BY",
+        "color": "#1e2830",
+        "name": "Becoming You"
+      },
+      {
+        "initials": "NS",
+        "color": "#2a1d1d",
+        "name": "NHL Stenden University"
+      },
+      {
+        "initials": "NH",
+        "color": "#1f2830",
+        "name": "Notiz Hotel"
+      },
+      {
+        "initials": "NE",
+        "color": "#24201c",
+        "name": "New Edge"
+      },
+      {
+        "initials": "WX",
+        "color": "#1c2020",
+        "name": "Weltladen Xanten"
+      }
+    ],
+    "stats": [
+      {
+        "value": "+200",
+        "label": "Followers in 10 days",
+        "client": ""
+      },
+      {
+        "value": "3K → 30K",
+        "label": "Profile views",
+        "client": ""
+      },
+      {
+        "value": "15.20%",
+        "label": "Engagement rate",
+        "client": ""
+      },
+      {
+        "value": "+84.5%",
+        "label": "Profile views in 30 days",
+        "client": ""
+      },
+      {
+        "value": "+78.2%",
+        "label": "Profile visits in 30 days",
+        "client": ""
+      },
+      {
+        "value": "3K → 30K",
+        "label": "Reach growth",
+        "client": ""
+      },
+      {
+        "value": "+103%",
+        "label": "Reach in 30 days",
+        "client": ""
+      }
+    ],
+    "cases": {
+      "eyebrow": "RESULTS THAT MATTER",
+      "heading": {
+        "lead": "Case ",
+        "accent": "Studies"
+      },
+      "viewLabel": "VIEW CASE",
+      "cards": [
+        {
+          "slug": "galeria-eldorado",
+          "client": "Galería Eldorado",
+          "tag": "Strategy · DE",
+          "headline": "ESTRATEGIA\nQUE\nFUNCIONA.",
+          "stat": "318 Qualified Leads",
+          "img": "sea-3"
+        },
+        {
+          "slug": null,
+          "client": "Bloom Collective",
+          "tag": "Content + Copy · EN",
+          "headline": "FROM 0\nTO 16K\nREACH.",
+          "stat": "+86% Engagement",
+          "img": "sea-4"
+        },
+        {
+          "slug": null,
+          "client": "Maison Verde",
+          "tag": "Management · NL",
+          "headline": "CONTENT\nWITH\nPURPOSE.",
+          "stat": "1.8K Saves / Month",
+          "img": "sea-2"
+        }
+      ]
+    }
+  },
+  "privacy-page": {
+    "alsoOnThisPage": "Shown on this page but edited elsewhere:\n• Navigation & footer → General",
+    "backLabel": "BACK TO HOME",
+    "eyebrow": "LEGAL",
+    "heading": {
+      "lead": "PRIVACY & ",
+      "accent": "IMPRINT"
+    },
+    "sections": [
+      {
+        "anchor": "imprint",
+        "title": "Imprint",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "340 Consultancy V.O.F."
+          },
+          {
+            "kind": "p",
+            "text": "Zangvogelstraat 18, 4451 CE Heinkenszand, Netherlands"
+          },
+          {
+            "kind": "p",
+            "text": "KvK: 96558075",
+            "mt": "0.75rem"
+          },
+          {
+            "kind": "p",
+            "text": "VAT: NL867660120B01"
+          },
+          {
+            "kind": "p",
+            "text": "Directors: Linda Müller-Veerse & Nancy Boerjan",
+            "mt": "0.75rem"
+          },
+          {
+            "kind": "p",
+            "lead": "Email: ",
+            "linkText": "info@340consultancy.com",
+            "linkHref": "mailto:info@340consultancy.com",
+            "mt": "0.75rem"
+          },
+          {
+            "kind": "p",
+            "lead": "Phone: ",
+            "linkText": "+31 6 13866189",
+            "linkHref": "tel:+31613866189"
+          }
+        ]
+      },
+      {
+        "anchor": "privacy",
+        "title": "Privacy Policy",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "340 Consultancy V.O.F. (\"we\", \"us\", \"our\") is committed to protecting and respecting your privacy. This policy explains how we collect, use, and store personal data when you visit our website or contact us."
+          }
+        ]
+      },
+      {
+        "anchor": "data",
+        "title": "Data We Collect",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "When you submit a contact form or otherwise communicate with us, we may collect:"
+          },
+          {
+            "kind": "ul",
+            "text": "Name and email address\nPhone number (if provided)\nSocial media handles (if provided)\nAny information you include in your message"
+          },
+          {
+            "kind": "p",
+            "text": "We do not use cookies for tracking purposes. Our website does not use analytics tools that identify individual users.",
+            "mt": "1rem"
+          }
+        ]
+      },
+      {
+        "anchor": "use",
+        "title": "How We Use Your Data",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "We use your personal data solely to respond to your enquiry and, where applicable, to fulfil our services. We do not sell, share, or transfer your data to third parties unless required by law."
+          }
+        ]
+      },
+      {
+        "anchor": "retention",
+        "title": "Data Retention",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "We retain personal data for as long as necessary to fulfil the purpose for which it was collected, or as required by applicable law."
+          }
+        ]
+      },
+      {
+        "anchor": "rights",
+        "title": "Your Rights",
+        "blocks": [
+          {
+            "kind": "p",
+            "lead": "Under GDPR, you have the right to access, correct, or delete your personal data. To exercise these rights, contact us at ",
+            "linkText": "info@340consultancy.com",
+            "linkHref": "mailto:info@340consultancy.com",
+            "tail": "."
+          }
+        ]
+      }
+    ],
+    "lastUpdated": "Last updated: May 2026 — Full privacy policy is being finalized. Contact us if you have any questions."
+  },
+  "not-found-page": {
+    "eyebrow": "Error 404",
+    "code": "404",
+    "message": "This page doesn't exist.",
+    "backLabel": "Back to Home"
+  },
+  "testimonial": [
+    {
+      "quote": "340 transformed our Instagram from a ghost town into our #1 lead channel. Within 3 months we doubled our inquiries.",
+      "name": "Sophie Hendriks",
+      "role": "Founder, Studio Displays · NL"
+    },
+    {
+      "quote": "Professional, strategic, and genuinely invested in our growth. They don't just post — they build a brand.",
+      "name": "Carlos Medina",
+      "role": "CEO, Galería Eldorado · ES"
+    },
+    {
+      "quote": "Working with Linda and Nancy felt like having an in-house team. Always on brand, always on time.",
+      "name": "Marie Dubois",
+      "role": "Marketing Director, AlbaNova · DE"
+    },
+    {
+      "quote": "Our reach grew 340% in the first quarter. I'm not even joking — the number fits perfectly.",
+      "name": "Lena Baumann",
+      "role": "Owner, Maison Verde · DE"
+    },
+    {
+      "quote": "They understood our multilingual audience immediately. Content in three languages, one consistent voice.",
+      "name": "Tim van den Berg",
+      "role": "Co-Founder, Bloom Collective · NL"
+    }
+  ],
+  "service": [
+    {
+      "key": "strategy",
+      "label": "SOCIAL MEDIA\nSTRATEGY",
+      "eyebrow": "SERVICE 01",
+      "img": "sea-1",
+      "tagline": "Smart strategies and clear insights to help your business grow, reach the right audience and stand out.",
+      "price": "Custom",
+      "priceNote": "one-off · no min. term",
+      "body": "Everyone can post on social media. Not everyone grows from it. At 340, we take the time to truly understand your brand, your market, and your audience before anything goes live. Whether you're just getting started, or going through a rebrand, strategy is the foundation that sets you up for long-term success.",
+      "facts": [
+        {
+          "label": "PRICING",
+          "value": "Upon request"
+        },
+        {
+          "label": "FORMAT",
+          "value": "Remote"
+        },
+        {
+          "label": "MIN. TERM",
+          "value": "None"
+        },
+        {
+          "label": "LANGUAGES",
+          "value": "EN · NL · DE · ES"
+        }
+      ],
+      "includes": [
+        "Brand overview",
+        "Market Analysis (Competitor and Inspiration Analysis)",
+        "Target Audience Insights",
+        "Sweetspot",
+        "Biography optimization",
+        "Content pillars, Ideas & Tone of voice",
+        "KPIs & optimization roadmap",
+        "Feed plan & post prototype per content pillar",
+        "Action plan"
+      ]
+    },
+    {
+      "key": "management",
+      "label": "SOCIAL MEDIA\nMANAGEMENT",
+      "eyebrow": "SERVICE 02",
+      "img": "sea-2",
+      "tagline": "Keeping your channels active, engaged and connecting with your audience, fully hands-off for you.",
+      "price": "Custom",
+      "priceNote": "tailored to your needs",
+      "body": "Social media takes time. Posting, engaging, replying, tracking results. It adds up fast. We take over the day-to-day management of your channels, fully adjusted to what you actually need. No rigid packages. We chat with you first, understand your goals and budget, then build something that fits.",
+      "facts": [
+        {
+          "label": "PRICING",
+          "value": "Upon request"
+        },
+        {
+          "label": "FORMAT",
+          "value": "Remote"
+        },
+        {
+          "label": "MIN. TERM",
+          "value": "3 months"
+        },
+        {
+          "label": "LANGUAGES",
+          "value": "EN · NL · DE · ES"
+        }
+      ],
+      "includes": [
+        "Management of 1 platform",
+        "Monthly visuals (standard is 8)",
+        "Copywriting",
+        "10 minutes of daily engagement",
+        "Planning and scheduling",
+        "Monthly performance reporting",
+        "Optional monthly 30-min virtual meeting"
+      ],
+      "includesNote": "We can customize the scope around your goals and budget. Book a free intro call and we'll figure out what fits you."
+    },
+    {
+      "key": "coaching",
+      "label": "1:1\nCOACHING",
+      "eyebrow": "SERVICE 03",
+      "img": "sea-3",
+      "tagline": "Periodic sessions for updates, optimization and strategizing, so you feel confident and informed.",
+      "price": "Upon request",
+      "priceNote": "custom proposal",
+      "body": "You bring the questions. We help you find the answers. Whether it's a brainstorming session for a new campaign, guidance on your content approach, or practical advice on what to focus on next, we tailor each session to exactly where you are right now.",
+      "facts": [
+        {
+          "label": "PRICING",
+          "value": "Upon request"
+        },
+        {
+          "label": "FORMAT",
+          "value": "Remote · 1:1"
+        },
+        {
+          "label": "MIN. TERM",
+          "value": "None"
+        },
+        {
+          "label": "LANGUAGES",
+          "value": "EN · NL · DE · ES"
+        }
+      ],
+      "includes": [
+        "Strategic brainstorming sessions",
+        "Platform tactics and solutions",
+        "Social media audit & performance review",
+        "Content direction & optimization advice",
+        "Content reviews with actionable tips",
+        "On-demand advice when you need it"
+      ],
+      "ctaLabel": "CONTACT US"
+    },
+    {
+      "key": "content",
+      "label": "CONTENT &\nCOPYWRITING",
+      "eyebrow": "SERVICE 04",
+      "img": "sea-4",
+      "tagline": "Words and visuals that tell your story, spark attention and drive action.",
+      "price": "Upon request",
+      "priceNote": "custom proposal",
+      "body": "Content & Copywriting is more than just visuals and captions, it's how your brand communicates, connects, and leaves a lasting impression. We create branded content that aligns with your identity, including presentation decks, documents, social posts, captions and other marketing materials. Available as standalone services or as add-ons to any management package.",
+      "facts": [
+        {
+          "label": "PRICING",
+          "value": "Upon request"
+        },
+        {
+          "label": "FORMAT",
+          "value": "Remote"
+        },
+        {
+          "label": "MIN. TERM",
+          "value": "None"
+        },
+        {
+          "label": "LANGUAGES",
+          "value": "EN · NL · DE · ES"
+        }
+      ],
+      "includes": [
+        "Individual social media posts (events, announcements)",
+        "Copywriting for posts, presentations or promotional materials",
+        "Professional company presentation design",
+        "Branded documents"
+      ],
+      "ctaLabel": "CONTACT US"
+    },
+    {
+      "key": "workshops",
+      "label": "WORKSHOPS",
+      "eyebrow": "SERVICE 05",
+      "img": "sea-1",
+      "tagline": "Workshops to level up your social media skills, we offer Canva, CapCut, Instagram and more.",
+      "price": "Upon request",
+      "priceNote": "custom proposal",
+      "body": "Whether you want to design stunning graphics in Canva, edit short-form video in CapCut, or master Instagram's algorithm or just need help setting up your account. Our workshops are built around what you or your team needs. Practical, interactive, and adapted to your level.",
+      "facts": [
+        {
+          "label": "PRICING",
+          "value": "Upon request"
+        },
+        {
+          "label": "FORMAT",
+          "value": "Remote"
+        },
+        {
+          "label": "MIN. TERM",
+          "value": "None"
+        },
+        {
+          "label": "LANGUAGES",
+          "value": "EN"
+        }
+      ],
+      "includes": [
+        "Canva workshop — design basics to advanced templates",
+        "CapCut workshop — video editing",
+        "Instagram workshop — features, algorithm & growth tactics",
+        "Custom workshop — built around your needs",
+        "Practical exercises & take-home resource packs",
+        "Follow-up Q&A session included"
+      ],
+      "ctaLabel": "CONTACT US"
+    }
+  ],
+  "case-study": [
+    {
+      "slug": "studio-displays",
+      "client": "Studio Displays",
+      "industry": "Exhibit Design & Fabrication · US",
+      "services": "Social Media Strategy + Management + Meta Ads",
+      "website": "studiodisplays.com",
+      "headline": "REACH. ENGAGE. GROW.",
+      "heroImg": "sea-1",
+      "intro": "Studio Displays had the craft. They needed the reach. In 90 days we turned a scattered social presence into a portfolio and touchpoint for potential clients.",
+      "challenge": "Despite being an established company, Studio Displays lacked the brand awareness it deserved. Their online presence didn't reflect the creativity and quality of their work, and without a clear strategy or the time to manage multiple accounts, the brand wasn't reaching its full potential.",
+      "approach": "We started with a full social media audit to identify gaps, define goals, and build a strategy tailored to Studio Displays' multiple target audiences. From there, we optimized every channel and took over day-to-day management, including Meta ad campaigns and monthly performance reviews.",
+      "resultText": "The first 90 days focused on building a strong organic foundation, resulting in 9× Instagram view growth, 300 local followers gained, and 38% growth in LinkedIn profile views. Afterward, targeted Meta ad campaigns were introduced to further expand reach and strengthen local brand awareness.",
+      "stats": [
+        {
+          "value": "×9",
+          "label": "Instagram views in 90 days"
+        },
+        {
+          "value": "+1,197",
+          "label": "LinkedIn clicks gained"
+        },
+        {
+          "value": "16k",
+          "label": "Facebook reach (was 115)"
+        }
+      ],
+      "visuals": [
+        "sea-2",
+        "sea-3"
+      ],
+      "gallery": [
+        "sea-1",
+        "sea-2",
+        "sea-3",
+        "sea-4",
+        "sea-1",
+        "sea-2"
+      ],
+      "cardImg": "sea-1",
+      "cardTag": "Strategy + Management · US",
+      "cardStat": "81× Increase Reach in 90 Days",
+      "cardHeadline": "REACH.\nENGAGE.\nGROW."
+    },
+    {
+      "slug": "albanova",
+      "client": "AlbaNova",
+      "industry": "Intercultural Consulting · ES, DE, EN",
+      "services": "Social Media Strategy + Content & Copywriting",
+      "headline": "FROM IDEA TO IDENTITY.",
+      "heroImg": "sea-2",
+      "intro": "A new organisation needed to translate their brand identity into a social media presence that actually resonated, across languages, cultures, and audiences.",
+      "challenge": "AlbaNova is a newly established organisation in its early development phase. After defining its brand identity with partnering agency New Edge, the next step was to translate that foundation into a clear and consistent social media presence that could work across multilingual and multicultural audiences.",
+      "approach": "We built a strategy grounded in research and cultural understanding, positioning AlbaNova as a genuine bridge between cultures. We defined clear content pillars, developed a content calendar, and designed core brand assets: a master presentation template and a pitch deck built for investor and partner conversations.",
+      "resultText": "AlbaNova launched with a coherent voice, a ready content strategy, and the assets to back it up. The groundwork is in place for sustained growth as the organisation scales.",
+      "stats": [
+        {
+          "value": "2",
+          "label": "Social accounts launched"
+        },
+        {
+          "value": "3",
+          "label": "Languages, one consistent voice"
+        },
+        {
+          "value": "100%",
+          "label": "Brand asset delivery on time"
+        }
+      ],
+      "visuals": [
+        "sea-3",
+        "sea-4"
+      ],
+      "gallery": [
+        "sea-2",
+        "sea-3",
+        "sea-4",
+        "sea-1",
+        "sea-2",
+        "sea-3"
+      ],
+      "cardImg": "sea-2",
+      "cardTag": "Strategy + Content & Copywriting · ES, DE, EN",
+      "cardStat": "2 Accounts Launched",
+      "cardHeadline": "FROM\nIDEA TO\nIDENTITY."
+    },
+    {
+      "slug": "galeria-eldorado",
+      "client": "Galería Eldorado / Café Ordoñez",
+      "industry": "Café & Retail · DE",
+      "services": "Social Media Strategy",
+      "website": "galeriaeldorado.de",
+      "headline": "ESTRATEGIA QUE FUNCIONA.",
+      "heroImg": "sea-3",
+      "intro": "A Colombian coffee café and concept store in Frankfurt that brings culture, craft, and fair trade together. They needed a strategy that honoured both their roots and their audience.",
+      "challenge": "Galería Eldorado operates at a unique intersection: café, gallery, and concept store, bridging Colombian culture and fair trade products with a German-speaking audience. Their social media wasn't capturing this complexity, posts lacked direction and the community wasn't growing.",
+      "approach": "We developed a strategy focused on unifying the brand voice across all touchpoints. Through audience research we identified a shared mindset: people who care about origin stories, craft, and fair trade. We built content pillars around that mindset and created a framework the team could execute independently.",
+      "resultText": "The strategy gave the team a clear, executable framework. The brand started attracting exactly the kind of customers who stay, come back, and bring others.",
+      "stats": [
+        {
+          "value": "3 weeks",
+          "label": "Strategy delivered"
+        },
+        {
+          "value": "2",
+          "label": "Christmas campaign concepts created"
+        },
+        {
+          "value": "100%",
+          "label": "Custom research-based strategy tailored to brand goals"
+        }
+      ],
+      "visuals": [
+        "sea-4",
+        "sea-1"
+      ],
+      "gallery": [
+        "sea-3",
+        "sea-4",
+        "sea-1",
+        "sea-2",
+        "sea-3",
+        "sea-4"
+      ],
+      "cardImg": "sea-3",
+      "cardTag": "Strategy · DE",
+      "cardStat": "Christmas Campaign",
+      "cardHeadline": "ESTRATEGIA\nQUE\nFUNCIONA."
+    }
+  ],
+  "blog-post": [
+    {
+      "slug": "blog-3",
+      "title": "What a Social Media Audit Actually Tells You (And How to Do One in an Afternoon)",
+      "excerpt": "You're posting consistently. You've got a calendar. So why aren't you sure it's working?",
+      "date": "SOCIAL MEDIA AUDITS",
+      "image": "sea-3",
+      "number": "03",
+      "author": "340 Consultancy",
+      "publishedDate": "June 2026",
+      "body": "An audit sounds like something you hire a consultancy for (and yes, we do them) — but a first honest pass takes one afternoon and answers the question your gut keeps asking: is any of this working?\n\n## Look at reach before likes\nLikes measure your existing audience's politeness. Reach measures whether new people see you at all. If reach is flat for three months, your content is talking to the same room.\n\n## Check your profile like a stranger\nOpen your profile in a private window. In five seconds, is it clear what you do, who it's for, and what to do next? Most bios fail at least one of the three.\n\n## Map your last 30 posts against your pillars\nCount how many posts served each theme. Almost every audit reveals one pillar hogging the feed and one — usually the one that converts — barely showing up.\n\n## Find your top three and your bottom three\nDon't average. Look at the extremes: what do your best posts share, and what do the flops have in common? That pattern is your next month's strategy.\n\nIf the afternoon version raises more questions than it answers, that's normal — it's exactly where a full audit (and a strategy built on it) starts."
+    },
+    {
+      "slug": "blog-2",
+      "title": "How to Set Up a Social Media Content Calendar: Is It Actually Worth It",
+      "excerpt": "Spoiler: it's not about whether you need one. It's about how long you've been without one.",
+      "date": "CONTENT PLANNING",
+      "image": "sea-2",
+      "number": "02",
+      "author": "340 Consultancy",
+      "publishedDate": "May 2026",
+      "body": "Every business that posts \"when we have time\" eventually stops posting. A content calendar isn't bureaucracy — it's the difference between a channel that compounds and one that restarts every month.\n\n## Start with pillars, not posts\nDefine three to five recurring themes your brand talks about. Every post slots into a pillar; if it doesn't fit any, it probably doesn't belong on your feed.\n\n## Plan two weeks, not two months\nLong horizons collapse under real life. A rolling two-week plan stays realistic, leaves room for reactive content, and still kills the \"what do we post today?\" panic.\n\n## Batch the boring parts\nWrite captions in one sitting, design visuals in another, schedule everything in a third. Context-switching is what makes social media feel like a full-time job.\n\n## Review what actually happened\nOnce a month, compare the plan against performance. Keep the formats that worked, drop the ones that didn't — the calendar is a living document, not a contract.\n\nWant a head start? Our free content calendar template (on the UP2DATE page) is the exact framework our clients use."
+    },
+    {
+      "slug": "blog-1",
+      "title": "What to Post on LinkedIn as a Small Business",
+      "excerpt": "Four types of LinkedIn content that actually work, with real examples you can steal.",
+      "date": "LINKEDIN TIPS",
+      "image": "sea-1",
+      "number": "01",
+      "author": "340 Consultancy",
+      "publishedDate": "May 2026",
+      "body": "LinkedIn is where your next client is already scrolling — but most small businesses post like it's a job board. Here are the four content types we see perform again and again, no matter the industry.\n\n## 1. Behind-the-scenes of real work\nShow the messy middle, not just the polished result. A photo of a project in progress with two sentences on what you're solving beats any stock-photo announcement.\n\n## 2. Lessons from client conversations\nAnonymize it, then share it: \"A client asked us this week whether X still works — here's what we told them.\" It positions you as the person people ask.\n\n## 3. Opinionated takes on your industry\nNot rage-bait — a clear stance. \"We stopped doing weekly reports and our clients are happier\" invites discussion and shows how you think.\n\n## 4. Small wins with real numbers\nConcrete beats impressive. \"+38% profile views in 30 days\" from a small account is more credible (and more shareable) than vague success claims.\n\nPick one type, post it this week, and watch what your network responds to. Consistency on one format beats sporadic attempts at all four."
+    }
+  ],
+  "instagram-post": [
+    {
+      "url": "https://www.instagram.com/p/DK98ahwMy_c/"
+    },
+    {
+      "url": "https://www.instagram.com/p/DLKSe8TMbx6/"
+    },
+    {
+      "url": "https://www.instagram.com/p/DLPwIVZMn-5/"
+    },
+    {
+      "url": "https://www.instagram.com/p/DMBIz8LsPm8/"
+    },
+    {
+      "url": "https://www.instagram.com/p/DNTW6r3MU_8/"
+    },
+    {
+      "url": "https://www.instagram.com/p/DNs9X6fWGyb/"
+    },
+    {
+      "url": "https://www.instagram.com/p/DOWJNQKjO43/"
+    },
+    {
+      "url": "https://www.instagram.com/p/DOYrFZvDBNB/"
+    },
+    {
+      "url": "https://www.instagram.com/p/DQCfrAljKla/"
+    },
+    {
+      "url": "https://www.instagram.com/p/DTs8Tq1jCGS/"
+    },
+    {
+      "url": "https://www.instagram.com/p/DT71Q4YjAed/"
+    },
+    {
+      "url": "https://www.instagram.com/p/DUIb6GIDB7b/"
+    },
+    {
+      "url": "https://www.instagram.com/p/DUQdunhDFsE/"
+    },
+    {
+      "url": "https://www.instagram.com/p/DUaXkP0jNYR/"
+    }
+  ]
+}

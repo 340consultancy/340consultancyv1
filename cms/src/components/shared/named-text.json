@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_shared_named_texts",
+  "info": {
+    "displayName": "named text"
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "text": {
+      "type": "text"
+    }
+  }
+}

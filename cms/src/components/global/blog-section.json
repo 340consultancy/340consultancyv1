@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_global_blog_sections",
+  "info": {
+    "displayName": "blog section"
+  },
+  "attributes": {
+    "blogs": {
+      "type": "component",
+      "repeatable": false,
+      "component": "global.blog-text-cell"
+    },
+    "social": {
+      "type": "component",
+      "repeatable": false,
+      "component": "global.blog-text-cell"
+    },
+    "readArticleLabel": {
+      "type": "string"
+    },
+    "comingSoonLabel": {
+      "type": "string"
+    },
+    "comingSoonWatermark": {
+      "type": "string"
+    }
+  }
+}

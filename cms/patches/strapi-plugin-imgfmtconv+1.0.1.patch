@@ -1,0 +1,261 @@
+diff --git a/node_modules/strapi-plugin-imgfmtconv/admin-page.jsx b/node_modules/strapi-plugin-imgfmtconv/admin-page.jsx
+index 0d365d0..c4f1382 100644
+--- a/node_modules/strapi-plugin-imgfmtconv/admin-page.jsx
++++ b/node_modules/strapi-plugin-imgfmtconv/admin-page.jsx
+@@ -1,6 +1,8 @@
+ import React, { useState, useEffect } from 'react';
++import { useFetchClient } from '@strapi/strapi/admin';
+ 
+ const SettingsPage = () => {
++  const { get, put, post } = useFetchClient();
+   const [settings, setSettings] = useState({
+     enabled: true,
+     autoConvert: true,
+@@ -23,64 +25,55 @@ const SettingsPage = () => {
+ 
+   const fetchSettings = async () => {
+     try {
+-      const response = await fetch('/imgfmtconv/settings');
+-      const result = await response.json();
++      const { data: result } = await get('/imgfmtconv/settings');
+       setSettings(result.data);
+     } catch (error) {
+-      setMessage('Ошибка загрузки настроек');
++      setMessage('Error loading settings');
+     }
+   };
+ 
+   const fetchStatus = async () => {
+     try {
+-      const response = await fetch('/imgfmtconv/status');
+-      const result = await response.json();
++      const { data: result } = await get('/imgfmtconv/status');
+       setStatus(result.data);
+     } catch (error) {
+-      // не критично
++      // not critical
+     }
+   };
+ 
+   const handleSave = async () => {
+     setLoading(true);
+     try {
+-      const response = await fetch('/imgfmtconv/settings', {
+-        method: 'PUT',
+-        headers: { 'Content-Type': 'application/json' },
+-        body: JSON.stringify(settings),
+-      });
+-      await response.json();
+-      setMessage('Настройки сохранены успешно!');
++      await put('/imgfmtconv/settings', settings);
++      setMessage('Settings saved successfully!');
+       setTimeout(() => setMessage(''), 3000);
+     } catch (error) {
+-      setMessage('Ошибка сохранения настроек');
++      setMessage('Error saving settings');
+     }
+     setLoading(false);
+   };
+ 
+   const handleBulkConvert = async () => {
+-    setBulkStatus('Запуск...');
++    setBulkStatus('Starting…');
+     try {
+-      const res = await fetch('/imgfmtconv/bulk-convert', { method: 'POST' });
+-      const data = await res.json();
+-      setBulkStatus(data.message || 'Готово');
++      const { data } = await post('/imgfmtconv/bulk-convert');
++      setBulkStatus(data.message || 'Done');
+     } catch (e) {
+-      setBulkStatus('Ошибка bulk-конвертации');
++      setBulkStatus('Bulk conversion failed');
+     }
+   };
+ 
+   const handleResetSettings = async () => {
+-    if (!confirm('Сбросить все настройки к значениям по умолчанию?')) return;
++    if (!confirm('Reset all settings to their defaults?')) return;
+ 
+     setLoading(true);
+     try {
+-      const response = await fetch('/imgfmtconv/settings/reset', { method: 'POST' });
+-      const result = await response.json();
++      const { data: result } = await post('/imgfmtconv/settings/reset');
+       setSettings(result.data);
+-      setMessage(result.message || 'Настройки сброшены');
++      setMessage(result.message || 'Settings reset');
+       setTimeout(() => setMessage(''), 3000);
+     } catch (error) {
+-      setMessage('Ошибка сброса настроек');
++      setMessage('Error resetting settings');
+     }
+     setLoading(false);
+   };
+@@ -88,13 +81,12 @@ const SettingsPage = () => {
+   const handleReloadSettings = async () => {
+     setLoading(true);
+     try {
+-      const response = await fetch('/imgfmtconv/settings/reload', { method: 'POST' });
+-      const result = await response.json();
++      const { data: result } = await post('/imgfmtconv/settings/reload');
+       setSettings(result.data);
+-      setMessage(result.message || 'Настройки перезагружены');
++      setMessage(result.message || 'Settings reloaded');
+       setTimeout(() => setMessage(''), 3000);
+     } catch (error) {
+-      setMessage('Ошибка перезагрузки настроек');
++      setMessage('Error reloading settings');
+     }
+     setLoading(false);
+   };
+@@ -161,14 +153,14 @@ const SettingsPage = () => {
+           color: colors.textMuted,
+           fontSize: 16,
+           marginBottom: 0,
+-        }}>Конвертация изображений в WebP/AVIF</div>
++        }}>Convert images to WebP/AVIF</div>
+       </div>
+ 
+       {message && (
+         <div style={{
+-          background: message.includes('Ошибка') ? '#fef2f2' : '#f0fdf4',
+-          border: `1.5px solid ${message.includes('Ошибка') ? colors.error : colors.success}`,
+-          color: message.includes('Ошибка') ? colors.error : colors.success,
++          background: message.includes('Error') ? '#fef2f2' : '#f0fdf4',
++          border: `1.5px solid ${message.includes('Error') ? colors.error : colors.success}`,
++          color: message.includes('Error') ? colors.error : colors.success,
+           borderRadius: 10,
+           padding: '0.75rem 1.5rem',
+           marginBottom: 20,
+@@ -189,10 +181,10 @@ const SettingsPage = () => {
+       }}>
+         <div style={{ display: 'flex', alignItems: 'center', marginBottom: 18 }}>
+           <span style={{ fontSize: 22, marginRight: 10 }}>⚙️</span>
+-          <span style={{ color: colors.text, fontWeight: 700, fontSize: 20 }}>Настройки</span>
++          <span style={{ color: colors.text, fontWeight: 700, fontSize: 20 }}>Settings</span>
+         </div>
+-        {[{ key: 'enabled', label: 'Включить плагин', desc: 'Глобальное включение/выключение' },
+-          { key: 'autoConvert', label: 'Автоматическая конвертация при загрузке', desc: 'Конвертировать изображения при загрузке' }].map(item => (
++        {[{ key: 'enabled', label: 'Enable plugin', desc: 'Global on/off switch' },
++          { key: 'autoConvert', label: 'Auto-convert on upload', desc: 'Convert images when they are uploaded' }].map(item => (
+           <div key={item.key} style={{
+             display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+             marginBottom: 10, padding: '8px 0',
+@@ -230,10 +222,10 @@ const SettingsPage = () => {
+       }}>
+         <div style={{ display: 'flex', alignItems: 'center', marginBottom: 18 }}>
+           <span style={{ fontSize: 22, marginRight: 10 }}>📄</span>
+-          <span style={{ color: colors.text, fontWeight: 700, fontSize: 20 }}>Форматы</span>
++          <span style={{ color: colors.text, fontWeight: 700, fontSize: 20 }}>Formats</span>
+         </div>
+         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, alignItems: 'center', marginBottom: 10 }}>
+-          <span style={{ color: colors.textSecondary, fontWeight: 500, fontSize: 15, minWidth: 180 }}>Форматы для конвертации:</span>
++          <span style={{ color: colors.textSecondary, fontWeight: 500, fontSize: 15, minWidth: 180 }}>Formats to convert:</span>
+           {formatOptions.map(opt => (
+             <label key={opt} style={{ display: 'flex', alignItems: 'center', marginRight: 12, fontSize: 15, color: colors.text }}>
+               <input type="checkbox" checked={settings.formatsToConvert.includes(opt)} onChange={() => handleMultiSelect('formatsToConvert', opt)} style={{ marginRight: 6 }} />
+@@ -242,7 +234,7 @@ const SettingsPage = () => {
+           ))}
+         </div>
+         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, alignItems: 'center' }}>
+-          <span style={{ color: colors.textSecondary, fontWeight: 500, fontSize: 15, minWidth: 180 }}>Конвертировать в:</span>
++          <span style={{ color: colors.textSecondary, fontWeight: 500, fontSize: 15, minWidth: 180 }}>Convert to:</span>
+           {convertToOptions.map(opt => (
+             <label key={opt} style={{ display: 'flex', alignItems: 'center', marginRight: 12, fontSize: 15, color: colors.text }}>
+               <input type="checkbox" checked={settings.convertTo.includes(opt)} onChange={() => handleMultiSelect('convertTo', opt)} style={{ marginRight: 6 }} />
+@@ -263,15 +255,15 @@ const SettingsPage = () => {
+       }}>
+         <div style={{ display: 'flex', alignItems: 'center', marginBottom: 18 }}>
+           <span style={{ fontSize: 22, marginRight: 10 }}>🔧</span>
+-          <span style={{ color: colors.text, fontWeight: 700, fontSize: 20 }}>Качество</span>
++          <span style={{ color: colors.text, fontWeight: 700, fontSize: 20 }}>Quality</span>
+         </div>
+         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 24, alignItems: 'center', marginBottom: 10 }}>
+-          <label style={{ color: colors.textSecondary, fontWeight: 500, fontSize: 15, minWidth: 180 }}>Качество WebP (0-100):</label>
++          <label style={{ color: colors.textSecondary, fontWeight: 500, fontSize: 15, minWidth: 180 }}>WebP quality (0-100):</label>
+           <input type="number" min={0} max={100} value={settings.qualityWebp} onChange={e => setSettings(prev => ({ ...prev, qualityWebp: Number(e.target.value) }))} style={{
+             width: 100, padding: '0.5rem', border: `1.5px solid ${colors.border}`, borderRadius: 8, fontSize: 15, color: colors.text, background: colors.card, fontWeight: 500 }} />
+         </div>
+         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 24, alignItems: 'center' }}>
+-          <label style={{ color: colors.textSecondary, fontWeight: 500, fontSize: 15, minWidth: 180 }}>Качество AVIF (0-100):</label>
++          <label style={{ color: colors.textSecondary, fontWeight: 500, fontSize: 15, minWidth: 180 }}>AVIF quality (0-100):</label>
+           <input type="number" min={0} max={100} value={settings.qualityAvif} onChange={e => setSettings(prev => ({ ...prev, qualityAvif: Number(e.target.value) }))} style={{
+             width: 100, padding: '0.5rem', border: `1.5px solid ${colors.border}`, borderRadius: 8, fontSize: 15, color: colors.text, background: colors.card, fontWeight: 500 }} />
+         </div>
+@@ -298,7 +290,7 @@ const SettingsPage = () => {
+           }}
+           onMouseEnter={e => { if (!loading) e.target.style.background = colors.switchOn; }}
+           onMouseLeave={e => { if (!loading) e.target.style.background = colors.accentLight; }}
+-        >Bulk-конвертация</button>
++        >Bulk-convert existing images</button>
+         
+         {/* Три кнопки управления настройками в ряд */}
+         <div style={{ display: 'flex', justifyContent: 'center', gap: 16 }}>
+@@ -320,7 +312,7 @@ const SettingsPage = () => {
+             }}
+             onMouseEnter={e => { if (!loading) e.target.style.background = colors.accentDark; }}
+             onMouseLeave={e => { if (!loading) e.target.style.background = colors.accent; }}
+-          >{loading ? 'Сохранение...' : 'Сохранить настройки'}</button>
++          >{loading ? 'Saving…' : 'Save settings'}</button>
+           
+           <button
+             onClick={handleReloadSettings}
+@@ -340,7 +332,7 @@ const SettingsPage = () => {
+             }}
+             onMouseEnter={e => { if (!loading) e.target.style.background = colors.accentLight; }}
+             onMouseLeave={e => { if (!loading) e.target.style.background = colors.accentLight; }}
+-          >Перезагрузить настройки</button>
++          >Reload settings</button>
+           
+           <button
+             onClick={handleResetSettings}
+@@ -360,7 +352,7 @@ const SettingsPage = () => {
+             }}
+             onMouseEnter={e => { if (!loading) e.target.style.background = colors.error; }}
+             onMouseLeave={e => { if (!loading) e.target.style.background = colors.error; }}
+-          >Сбросить настройки</button>
++          >Reset settings</button>
+         </div>
+       </div>
+       {bulkStatus && (
+diff --git a/node_modules/strapi-plugin-imgfmtconv/server/routes/index.js b/node_modules/strapi-plugin-imgfmtconv/server/routes/index.js
+index ef99cc6..663b00a 100644
+--- a/node_modules/strapi-plugin-imgfmtconv/server/routes/index.js
++++ b/node_modules/strapi-plugin-imgfmtconv/server/routes/index.js
+@@ -5,30 +5,30 @@ module.exports = [
+     method: 'GET',
+     path: '/settings',
+     handler: 'settings.getSettings',
+-    config: { auth: false },
++    
+   },
+   {
+     method: 'PUT',
+     path: '/settings',
+     handler: 'settings.updateSettings',
+-    config: { auth: false },
++    
+   },
+   {
+     method: 'POST',
+     path: '/settings/reset',
+     handler: 'settings.resetSettings',
+-    config: { auth: false },
++    
+   },
+   {
+     method: 'POST',
+     path: '/settings/reload',
+     handler: 'settings.reloadSettings',
+-    config: { auth: false },
++    
+   },
+   {
+     method: 'POST',
+     path: '/bulk-convert',
+     handler: 'convert.bulkConvert',
+-    config: { auth: false },
++    
+   },
+ ]; 
+\ No newline at end of file

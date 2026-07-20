@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_global_case_meta_labelss",
+  "info": {
+    "displayName": "case meta labels"
+  },
+  "attributes": {
+    "client": {
+      "type": "string"
+    },
+    "services": {
+      "type": "string"
+    },
+    "website": {
+      "type": "string"
+    },
+    "industry": {
+      "type": "string"
+    }
+  }
+}

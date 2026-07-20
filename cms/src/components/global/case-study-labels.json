@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_global_case_study_labelss",
+  "info": {
+    "displayName": "case study labels"
+  },
+  "attributes": {
+    "notFound": {
+      "type": "component",
+      "repeatable": false,
+      "component": "global.not-found-labels"
+    },
+    "backLabel": {
+      "type": "string"
+    },
+    "meta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "global.case-meta-labels"
+    },
+    "sections": {
+      "type": "component",
+      "repeatable": false,
+      "component": "global.case-section-labels"
+    },
+    "others": {
+      "type": "component",
+      "repeatable": false,
+      "component": "global.case-others-labels"
+    },
+    "scrollLabel": {
+      "type": "string"
+    }
+  }
+}

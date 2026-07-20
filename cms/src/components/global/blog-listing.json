@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_global_blog_listings",
+  "info": {
+    "displayName": "blog listing"
+  },
+  "attributes": {
+    "eyebrow": {
+      "type": "string"
+    },
+    "headline": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.lead-accent"
+    },
+    "tagline": {
+      "type": "string"
+    },
+    "readLabel": {
+      "type": "string"
+    }
+  }
+}

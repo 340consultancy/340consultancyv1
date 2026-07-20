@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_contact_form_placeholderss",
+  "info": {
+    "displayName": "form placeholders"
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "instagram": {
+      "type": "string"
+    },
+    "interest": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string"
+    }
+  }
+}

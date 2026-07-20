@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_home_approach_cards",
+  "info": {
+    "displayName": "approach card"
+  },
+  "attributes": {
+    "num": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "body": {
+      "type": "text"
+    }
+  }
+}

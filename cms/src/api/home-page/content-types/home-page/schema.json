@@ -1,0 +1,62 @@
+{
+  "kind": "singleType",
+  "collectionName": "home_pages",
+  "info": {
+    "singularName": "home-page",
+    "pluralName": "home-pages",
+    "displayName": "Page: Home"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "alsoOnThisPage": {
+      "type": "text"
+    },
+    "hero": {
+      "type": "component",
+      "repeatable": false,
+      "component": "home.hero"
+    },
+    "way": {
+      "type": "component",
+      "repeatable": false,
+      "component": "home.way"
+    },
+    "servicesPanel": {
+      "type": "component",
+      "repeatable": false,
+      "component": "home.services-panel"
+    },
+    "foundersPanel": {
+      "type": "component",
+      "repeatable": false,
+      "component": "home.founders-panel"
+    },
+    "approachPanel": {
+      "type": "component",
+      "repeatable": false,
+      "component": "home.approach-panel"
+    },
+    "cases": {
+      "type": "component",
+      "repeatable": false,
+      "component": "home.cases"
+    },
+    "quickCheck": {
+      "type": "component",
+      "repeatable": false,
+      "component": "home.quick-check"
+    },
+    "phoneMock": {
+      "type": "component",
+      "repeatable": false,
+      "component": "home.phone-mock"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "kind": "singleType",
+  "collectionName": "globals",
+  "info": {
+    "singularName": "global",
+    "pluralName": "globals",
+    "displayName": "General (Navigation, Footer, Buttons)"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "nav": {
+      "type": "component",
+      "repeatable": false,
+      "component": "global.nav"
+    },
+    "footer": {
+      "type": "component",
+      "repeatable": false,
+      "component": "global.footer"
+    },
+    "cta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "global.cta"
+    },
+    "testimonialsCta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.route-link"
+    },
+    "showcaseContent": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.showcase-half"
+    },
+    "showcaseIndustry": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.showcase-half"
+    },
+    "blogSection": {
+      "type": "component",
+      "repeatable": false,
+      "component": "global.blog-section"
+    },
+    "blogPage": {
+      "type": "component",
+      "repeatable": false,
+      "component": "global.blog-page"
+    },
+    "serviceDetailLabels": {
+      "type": "component",
+      "repeatable": false,
+      "component": "global.service-detail-labels"
+    },
+    "caseStudyLabels": {
+      "type": "component",
+      "repeatable": false,
+      "component": "global.case-study-labels"
+    },
+    "managementAddOns": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.add-ons"
+    },
+    "strategyAddOns": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.add-ons"
+    }
+  }
+}

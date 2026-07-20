@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_privacy_blocks",
+  "info": {
+    "displayName": "block"
+  },
+  "attributes": {
+    "kind": {
+      "type": "enumeration",
+      "enum": [
+        "p",
+        "ul"
+      ],
+      "default": "p"
+    },
+    "text": {
+      "type": "text"
+    },
+    "lead": {
+      "type": "string"
+    },
+    "linkText": {
+      "type": "string"
+    },
+    "linkHref": {
+      "type": "string"
+    },
+    "tail": {
+      "type": "string"
+    },
+    "mt": {
+      "type": "string"
+    }
+  }
+}

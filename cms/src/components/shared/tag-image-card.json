@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_shared_tag_image_cards",
+  "info": {
+    "displayName": "tag image card"
+  },
+  "attributes": {
+    "client": {
+      "type": "string"
+    },
+    "tag": {
+      "type": "string"
+    },
+    "headline": {
+      "type": "text"
+    },
+    "stat": {
+      "type": "string"
+    },
+    "img": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ]
+    },
+    "slug": {
+      "type": "string"
+    }
+  }
+}

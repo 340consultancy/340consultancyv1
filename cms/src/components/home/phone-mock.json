@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_home_phone_mocks",
+  "info": {
+    "displayName": "phone mock"
+  },
+  "attributes": {
+    "postImage": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
+    "strategyImage": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
+    "handle": { "type": "string" },
+    "brandName": { "type": "string" },
+    "brandTagline": { "type": "text" },
+    "keywords": { "type": "text" },
+    "missionTitle": { "type": "text" },
+    "missionText": { "type": "text" },
+    "strategyLabel": { "type": "text" },
+    "performanceTitle": { "type": "text" },
+    "metrics": { "type": "component", "repeatable": true, "component": "shared.fact" },
+    "postHeadline": { "type": "text" },
+    "postHeadlineAccent": { "type": "string" },
+    "postSubtext": { "type": "text" },
+    "captionText": { "type": "text" },
+    "moreLabel": { "type": "string" },
+    "viewCommentsPrefix": { "type": "string" },
+    "viewCommentsSuffix": { "type": "string" },
+    "commentUser": { "type": "string" },
+    "commentText": { "type": "string" },
+    "likes": { "type": "integer" },
+    "comments": { "type": "integer" },
+    "shares": { "type": "integer" },
+    "saves": { "type": "integer" },
+    "floatingLabels": { "type": "component", "repeatable": true, "component": "shared.text" }
+  }
+}

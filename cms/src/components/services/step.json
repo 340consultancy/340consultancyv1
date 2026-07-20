@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_services_steps",
+  "info": {
+    "displayName": "step"
+  },
+  "attributes": {
+    "phase": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "desc": {
+      "type": "text"
+    }
+  }
+}

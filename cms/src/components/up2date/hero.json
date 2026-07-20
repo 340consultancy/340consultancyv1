@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_up2date_heros",
+  "info": {
+    "displayName": "hero"
+  },
+  "attributes": {
+    "title": {
+      "type": "component",
+      "repeatable": false,
+      "component": "up2date.title"
+    },
+    "tagline": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ]
+    },
+    "scrollLabel": {
+      "type": "string"
+    }
+  }
+}

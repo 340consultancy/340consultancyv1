@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_about_valuess",
+  "info": {
+    "displayName": "values"
+  },
+  "attributes": {
+    "eyebrow": {
+      "type": "string"
+    },
+    "headline": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.headline"
+    },
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.icon-item"
+    }
+  }
+}

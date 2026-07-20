@@ -1,0 +1,42 @@
+{
+  "kind": "singleType",
+  "collectionName": "about_pages",
+  "info": {
+    "singularName": "about-page",
+    "pluralName": "about-pages",
+    "displayName": "Page: About Us"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "alsoOnThisPage": {
+      "type": "text"
+    },
+    "hero": {
+      "type": "component",
+      "repeatable": false,
+      "component": "about.hero"
+    },
+    "story": {
+      "type": "component",
+      "repeatable": false,
+      "component": "about.story"
+    },
+    "founders": {
+      "type": "component",
+      "repeatable": false,
+      "component": "about.founders"
+    },
+    "values": {
+      "type": "component",
+      "repeatable": false,
+      "component": "about.values"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    }
+  }
+}

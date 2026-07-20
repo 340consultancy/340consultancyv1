@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_up2date_titles",
+  "info": {
+    "displayName": "title"
+  },
+  "attributes": {
+    "lead": {
+      "type": "string"
+    },
+    "accent": {
+      "type": "string"
+    },
+    "tail": {
+      "type": "string"
+    }
+  }
+}

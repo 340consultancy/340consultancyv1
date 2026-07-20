@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_global_blog_text_cells",
+  "info": {
+    "displayName": "blog text cell"
+  },
+  "attributes": {
+    "eyebrow": {
+      "type": "string"
+    },
+    "headline": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.text"
+    },
+    "body": {
+      "type": "text"
+    },
+    "ctaLabel": {
+      "type": "string"
+    },
+    "ctaHref": {
+      "type": "string"
+    },
+    "external": {
+      "type": "boolean"
+    }
+  }
+}

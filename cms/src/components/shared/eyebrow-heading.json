@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_shared_eyebrow_headings",
+  "info": {
+    "displayName": "eyebrow heading"
+  },
+  "attributes": {
+    "eyebrow": {
+      "type": "string"
+    },
+    "heading": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.lead-accent"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_shared_facts",
+  "info": {
+    "displayName": "fact"
+  },
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "value": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_global_case_others_labelss",
+  "info": {
+    "displayName": "case others labels"
+  },
+  "attributes": {
+    "eyebrow": {
+      "type": "string"
+    },
+    "heading": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.lead-accent"
+    },
+    "allWorkLabel": {
+      "type": "string"
+    },
+    "viewCaseLabel": {
+      "type": "string"
+    }
+  }
+}

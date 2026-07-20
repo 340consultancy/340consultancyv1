@@ -1,0 +1,37 @@
+{
+  "kind": "singleType",
+  "collectionName": "up2date_pages",
+  "info": {
+    "singularName": "up2date-page",
+    "pluralName": "up2date-pages",
+    "displayName": "Page: UP2DATE"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "alsoOnThisPage": {
+      "type": "text"
+    },
+    "hero": {
+      "type": "component",
+      "repeatable": false,
+      "component": "up2date.hero"
+    },
+    "leadMagnet": {
+      "type": "component",
+      "repeatable": false,
+      "component": "up2date.lead-magnet"
+    },
+    "newsletter": {
+      "type": "component",
+      "repeatable": false,
+      "component": "up2date.newsletter"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    }
+  }
+}

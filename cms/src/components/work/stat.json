@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_work_stats",
+  "info": {
+    "displayName": "stat"
+  },
+  "attributes": {
+    "value": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    },
+    "client": {
+      "type": "string"
+    }
+  }
+}

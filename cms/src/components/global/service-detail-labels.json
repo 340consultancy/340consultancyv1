@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_global_service_detail_labelss",
+  "info": {
+    "displayName": "service detail labels"
+  },
+  "attributes": {
+    "addOns": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.eyebrow-heading"
+    },
+    "serviceEyebrow": {
+      "type": "string"
+    },
+    "pricingLabel": {
+      "type": "string"
+    },
+    "includesLabel": {
+      "type": "string"
+    },
+    "defaultCtaLabel": {
+      "type": "string"
+    },
+    "availableInPrefix": {
+      "type": "string"
+    },
+    "others": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.eyebrow-heading"
+    }
+  }
+}

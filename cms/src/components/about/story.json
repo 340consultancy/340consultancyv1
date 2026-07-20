@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_about_storys",
+  "info": {
+    "displayName": "story"
+  },
+  "attributes": {
+    "eyebrow": {
+      "type": "string"
+    },
+    "headline": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.headline"
+    },
+    "paragraphs": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.text"
+    },
+    "signoff": {
+      "type": "string"
+    }
+  }
+}

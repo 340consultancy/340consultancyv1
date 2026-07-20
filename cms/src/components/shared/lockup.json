@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_shared_lockups",
+  "info": {
+    "displayName": "lockup"
+  },
+  "attributes": {
+    "line1": {
+      "type": "string"
+    },
+    "line2Lead": {
+      "type": "string"
+    },
+    "accent": {
+      "type": "string"
+    }
+  }
+}

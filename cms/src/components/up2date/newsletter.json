@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_up2date_newsletters",
+  "info": {
+    "displayName": "newsletter"
+  },
+  "attributes": {
+    "eyebrow": {
+      "type": "string"
+    },
+    "headline": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.headline"
+    },
+    "body": {
+      "type": "text"
+    },
+    "emailPlaceholder": {
+      "type": "string"
+    },
+    "buttonLabel": {
+      "type": "string"
+    },
+    "successToast": {
+      "type": "string"
+    },
+    "errorToast": {
+      "type": "string"
+    }
+  }
+}

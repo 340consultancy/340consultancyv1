@@ -1,0 +1,15 @@
+{
+  "kind": "collectionType",
+  "collectionName": "newsletter_signups",
+  "info": {
+    "singularName": "newsletter-signup",
+    "pluralName": "newsletter-signups",
+    "displayName": "Inbox: Newsletter signups",
+    "description": "Email addresses collected via the website's newsletter and download forms."
+  },
+  "options": { "draftAndPublish": false },
+  "attributes": {
+    "email": { "type": "email", "required": true },
+    "source": { "type": "string" }
+  }
+}

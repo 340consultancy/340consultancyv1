@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_home_languagess",
+  "info": {
+    "displayName": "languages"
+  },
+  "attributes": {
+    "label": {
+      "type": "text"
+    },
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.code-label"
+    }
+  }
+}

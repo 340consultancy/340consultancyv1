@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_shared_showcase_items",
+  "info": {
+    "displayName": "showcase item"
+  },
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "img": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ]
+    }
+  }
+}

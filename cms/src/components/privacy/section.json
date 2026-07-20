@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_privacy_sections",
+  "info": {
+    "displayName": "section"
+  },
+  "attributes": {
+    "anchor": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "blocks": {
+      "type": "component",
+      "repeatable": true,
+      "component": "privacy.block"
+    }
+  }
+}

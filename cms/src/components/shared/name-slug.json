@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_shared_name_slugs",
+  "info": {
+    "displayName": "name slug"
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_home_heros",
+  "info": {
+    "displayName": "hero"
+  },
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ]
+    },
+    "eyebrow": {
+      "type": "string"
+    },
+    "headline": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.headline3"
+    },
+    "services": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.name-slug"
+    },
+    "scrollLabel": {
+      "type": "string"
+    }
+  }
+}

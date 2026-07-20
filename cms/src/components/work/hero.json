@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_work_heros",
+  "info": {
+    "displayName": "hero"
+  },
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ]
+    },
+    "headline": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.lead-accent"
+    },
+    "subtitle": {
+      "type": "string"
+    },
+    "scrollLabel": {
+      "type": "string"
+    }
+  }
+}

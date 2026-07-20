@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_shared_add_onss",
+  "info": {
+    "displayName": "add ons"
+  },
+  "attributes": {
+    "intro": {
+      "type": "text"
+    },
+    "outro": {
+      "type": "text"
+    },
+    "categories": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.add-on-category"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_contact_newsletter_notes",
+  "info": {
+    "displayName": "newsletter note"
+  },
+  "attributes": {
+    "prefix": {
+      "type": "text"
+    },
+    "highlight": {
+      "type": "string"
+    },
+    "suffix": {
+      "type": "text"
+    }
+  }
+}

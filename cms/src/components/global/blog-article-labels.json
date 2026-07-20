@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_global_blog_article_labelss",
+  "info": {
+    "displayName": "blog article labels"
+  },
+  "attributes": {
+    "backLabel": {
+      "type": "string"
+    },
+    "moreEyebrow": {
+      "type": "string"
+    },
+    "moreHeadline": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.lead-accent"
+    },
+    "byLabel": {
+      "type": "string"
+    }
+  }
+}

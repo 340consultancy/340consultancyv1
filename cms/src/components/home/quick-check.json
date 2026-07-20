@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_home_quick_checks",
+  "info": {
+    "displayName": "quick check"
+  },
+  "attributes": {
+    "eyebrow": {
+      "type": "string"
+    },
+    "headline": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.headline"
+    },
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.text"
+    }
+  }
+}

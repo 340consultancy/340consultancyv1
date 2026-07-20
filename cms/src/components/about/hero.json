@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_about_heros",
+  "info": {
+    "displayName": "hero"
+  },
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ]
+    },
+    "imageAlt": {
+      "type": "string"
+    },
+    "imagePosition": {
+      "type": "string"
+    },
+    "headline": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.lead-accent"
+    },
+    "tagline": {
+      "type": "string"
+    },
+    "scrollLabel": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "collectionName": "components_home_services_panels",
+  "info": {
+    "displayName": "services panel"
+  },
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ]
+    },
+    "imagePosition": {
+      "type": "string"
+    },
+    "eyebrow": {
+      "type": "string"
+    },
+    "headline": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.headline"
+    },
+    "rows": {
+      "type": "component",
+      "repeatable": true,
+      "component": "home.service-row"
+    },
+    "cta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.link"
+    }
+  }
+}
