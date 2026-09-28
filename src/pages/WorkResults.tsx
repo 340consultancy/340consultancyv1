@@ -141,10 +141,6 @@ const WorkResults: React.FC = () => {
           >
             {work.hero.subtitle}
           </motion.p>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7, duration: 0.6 }} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, marginTop: '2rem' }}>
-            <span style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '0.46rem', letterSpacing: '0.32em', textTransform: 'uppercase', color: 'hsl(36 21% 95% / 0.3)' }}>{work.hero.scrollLabel}</span>
-            <motion.div animate={{ scaleY: [0.4, 1, 0.4], opacity: [0.3, 0.7, 0.3] }} transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }} style={{ width: 1, height: 36, background: 'linear-gradient(to bottom, hsl(36 21% 95% / 0.5), transparent)', transformOrigin: 'top' }} />
-          </motion.div>
         </div>
       </section>
 

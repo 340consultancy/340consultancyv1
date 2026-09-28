@@ -111,20 +111,6 @@ const CaseStudyPage: React.FC = () => {
             </h1>
           </motion.div>
 
-          {/* Scroll indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.85, duration: 0.6 }}
-            style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 6, marginTop: 'clamp(1.5rem, 3vh, 2.5rem)' }}
-          >
-            <span style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '0.45rem', letterSpacing: '0.32em', textTransform: 'uppercase', color: 'hsl(36 21% 95% / 0.22)' }}>{caseStudyLabels.scrollLabel}</span>
-            <motion.div
-              animate={{ scaleY: [0.4, 1, 0.4], opacity: [0.3, 0.7, 0.3] }}
-              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-              style={{ width: 1, height: 32, background: 'linear-gradient(to bottom, hsl(36 21% 95% / 0.5), transparent)', transformOrigin: 'top' }}
-            />
-          </motion.div>
         </div>
       </section>
 

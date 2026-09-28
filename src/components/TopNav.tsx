@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { nav, img } from '@/content';
+import { nav } from '@/content';
 
 const NAV_H = 88; // px — tall enough for oversized logo
 
@@ -159,45 +159,6 @@ const BookNow: React.FC<{ mobile?: boolean }> = ({ mobile }) => {
   );
 };
 
-/* ─── Center Logo ───────────────────────────────────────────────────────── */
-const LogoLink: React.FC<{ height?: number }> = ({ height = NAV_H + 28 }) => {
-  const [hov, setHov] = useState(false);
-  return (
-    <Link
-      to="/"
-      aria-label={nav.logo.ariaLabel}
-      onMouseEnter={() => setHov(true)}
-      onMouseLeave={() => setHov(false)}
-      style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', flexShrink: 0 }}
-    >
-      <motion.div
-        aria-hidden
-        animate={{ opacity: hov ? 0.7 : 1 }}
-        transition={{ duration: 0.2 }}
-        style={{
-          height: height,
-          width: height,
-          backgroundColor: 'hsl(354 100% 87%)',
-          WebkitMaskImage: `url(${img(nav.logo.src)})`,
-          maskImage: `url(${img(nav.logo.src)})`,
-          // 59.2% = the wordmark's share of the old 500×500 canvas (296/500).
-          // The asset is now trimmed to the mark itself; this keeps the nav
-          // logo at exactly the size it always rendered.
-          WebkitMaskSize: '59.2% auto',
-          maskSize: '59.2% auto',
-          WebkitMaskRepeat: 'no-repeat',
-          maskRepeat: 'no-repeat',
-          WebkitMaskPosition: 'center',
-          maskPosition: 'center',
-          display: 'block',
-          userSelect: 'none',
-          pointerEvents: 'none',
-        }}
-      />
-    </Link>
-  );
-};
-
 /* ─── Mobile menu link ──────────────────────────────────────────────────── */
 const MobileLink: React.FC<{
   href: string; label: string; index: number; pathname: string; onClose: () => void;
@@ -312,16 +273,9 @@ const TopNav: React.FC = () => {
             ))}
           </div>
 
-          {/* Center logo — overflows nav bar top+bottom */}
-          <div style={{
-            flexShrink: 0,
-            paddingLeft: 'clamp(1rem, 2.5vw, 2.5rem)',
-            paddingRight: 'clamp(1rem, 2.5vw, 2.5rem)',
-            display: 'flex', alignItems: 'center',
-            position: 'relative', zIndex: 2,
-          }}>
-            <LogoLink />
-          </div>
+          {/* Gap between link groups (the centre logo was removed on client request) */}
+          <div style={{ flexShrink: 0, width: 'clamp(1.5rem, 4vw, 4rem)' }} />
+
 
           {/* Right links + BOOK NOW */}
           <div style={{
@@ -349,10 +303,6 @@ const TopNav: React.FC = () => {
           className="flex md:hidden"
           style={{ width: '100%', alignItems: 'center', position: 'relative' }}
         >
-          {/* Logo centred */}
-          <div style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>
-            <LogoLink height={NAV_H + 16} />
-          </div>
           <div style={{ flex: 1 }} />
           {/* Burger */}
           <button

@@ -255,11 +255,10 @@ export const home: HomeContent = {
     brandTagline: 'Social Media Strategy\nThat Drives Growth',
     keywords: 'Strategy\nContent\nGrowth\nImpact',
     missionTitle: 'our\nmission',
-    missionText: 'We help brands grow through strategies, data driven decisions, creative ideas, and focus on results that matter.',
+    missionText: 'We help brands grow with data driven decisions, creative ideas, and focus on results that matter.',
     strategyLabel: 'Social\nMedia\nStrategy',
     performanceTitle: 'Performance\nOverview',
     metrics: [
-      { label: 'Engagement rate', value: '5%' },
       { label: 'Impressions', value: '+53%' },
       { label: 'Clicks', value: '4x' },
       { label: 'Reach', value: '+103%' },

@@ -282,20 +282,6 @@ const ContactFAQ: React.FC = () => {
             {contact.hero.tagline}
           </motion.p>
 
-          {/* Scroll indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.7, duration: 0.6 }}
-            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, marginTop: '2.5rem' }}
-          >
-            <span style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, fontSize: '0.46rem', letterSpacing: '0.32em', textTransform: 'uppercase', color: 'hsl(36 21% 95% / 0.22)' }}>{contact.hero.scrollLabel}</span>
-            <motion.div
-              animate={{ scaleY: [0.4, 1, 0.4], opacity: [0.3, 0.7, 0.3] }}
-              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-              style={{ width: 1, height: 36, background: 'linear-gradient(to bottom, hsl(36 21% 95% / 0.5), transparent)', transformOrigin: 'top' }}
-            />
-          </motion.div>
         </div>
 
       </section>
@@ -306,11 +292,13 @@ const ContactFAQ: React.FC = () => {
       {/* ══════════════════════════════════════════════════════════════════ */}
       <section
         id="contacto"
-        style={{ background: 'hsl(0 0% 13%)', borderBottom: '1px solid hsl(36 21% 95% / 0.06)' }}
+        style={{ background: 'hsl(0 0% 13%)', borderBottom: '1px solid hsl(36 21% 95% / 0.06)', scrollMarginTop: 88 }}
       >
+        {/* min-height instead of a fixed height: the form column may grow taller
+            than the viewport and must never be clipped at the top or bottom. */}
         <div
           className="grid grid-cols-1 md:grid-cols-2"
-          style={{ height: isMobile ? 'auto' : 'calc(100vh - 72px)', overflow: isMobile ? 'visible' : 'hidden' }}
+          style={{ minHeight: isMobile ? 'auto' : 'calc(100vh - 72px)' }}
         >
           {/* ── Left: Founders photo ── */}
           <div
@@ -386,10 +374,10 @@ const ContactFAQ: React.FC = () => {
           {/* ── Right: Form ── */}
           <div
             style={{
-              padding: 'clamp(1.5rem, 3vw, 2.8rem) clamp(1.5rem, 4vw, 4rem)',
+              padding: 'clamp(3rem, 6vw, 5.5rem) clamp(1.75rem, 5vw, 5.5rem)',
               display: 'flex', flexDirection: 'column', justifyContent: 'center',
               borderLeft: '1px solid hsl(36 21% 95% / 0.06)',
-              overflow: 'hidden',
+              minWidth: 0,
             }}
           >
             {/* Header */}

@@ -181,40 +181,6 @@ const Home: React.FC = () => {
             ))}
           </motion.div>
 
-          {/* Scroll indicator — in flow, below services strip */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.1, duration: 0.6 }}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: 6,
-              marginTop: 'clamp(0.7rem, 1.8vh, 1.2rem)',
-            }}
-          >
-            <span style={{
-              fontFamily: "'Poppins', sans-serif",
-              fontWeight: 700,
-              fontSize: '0.52rem',
-              letterSpacing: '0.32em',
-              textTransform: 'uppercase',
-              color: 'hsl(36 21% 95% / 0.22)',
-            }}>
-              {home.hero.scrollLabel}
-            </span>
-            <motion.div
-              animate={{ scaleY: [0.4, 1, 0.4], opacity: [0.3, 0.7, 0.3] }}
-              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-              style={{
-                width: 1,
-                height: 28,
-                background: 'linear-gradient(to bottom, hsl(36 21% 95% / 0.5), transparent)',
-                transformOrigin: 'top',
-              }}
-            />
-          </motion.div>
         </div>
 
       </section>

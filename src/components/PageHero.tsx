@@ -12,11 +12,11 @@ interface PageHeroProps {
   lightPhoto?: boolean;
   /** Show the image raw — no tint, no vignette, just a bottom-only dark fade for text readability */
   noOverlay?: boolean;
-  /** Small "scroll" hint under the hero — always CMS-supplied (e.g. hero.scrollLabel). */
-  scrollLabel: string;
+  /** Deprecated: the "scroll" hint was removed from all heroes. Still accepted so CMS data keeps type-checking. */
+  scrollLabel?: string;
 }
 
-const PageHero: React.FC<PageHeroProps> = ({ title, subtitle, tagline, image, imageOpacity = 0.10, imagePosition = 'center top', lightPhoto = false, noOverlay = false, scrollLabel }) => (
+const PageHero: React.FC<PageHeroProps> = ({ title, subtitle, tagline, image, imageOpacity = 0.10, imagePosition = 'center top', lightPhoto = false, noOverlay = false }) => (
   <section
     style={{
       height: '88vh',
@@ -150,37 +150,6 @@ const PageHero: React.FC<PageHeroProps> = ({ title, subtitle, tagline, image, im
         </motion.p>
       )}
 
-      {/* Scroll indicator — in flow below subtitle */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.7, duration: 0.6 }}
-        style={{
-          display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8,
-          marginTop: '2.5rem',
-        }}
-      >
-        <span style={{
-          fontFamily: "'Poppins', sans-serif",
-          fontWeight: 700,
-          fontSize: '0.52rem',
-          letterSpacing: '0.32em',
-          textTransform: 'uppercase',
-          color: 'hsl(36 21% 95% / 0.22)',
-        }}>
-          {scrollLabel}
-        </span>
-        <motion.div
-          animate={{ scaleY: [0.4, 1, 0.4], opacity: [0.3, 0.7, 0.3] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          style={{
-            width: 1,
-            height: 36,
-            background: 'linear-gradient(to bottom, hsl(36 21% 95% / 0.5), transparent)',
-            transformOrigin: 'top',
-          }}
-        />
-      </motion.div>
     </div>
   </section>
 );
