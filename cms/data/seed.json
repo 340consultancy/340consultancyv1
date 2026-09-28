@@ -509,28 +509,28 @@
           "name": "STRATEGY",
           "price": "From €750",
           "tag": "One-off",
-          "href": "/services#services-bento"
+          "href": "/services/strategy"
         },
         {
           "num": "02",
           "name": "MANAGEMENT",
           "price": "From €800",
           "tag": "Min. 3 months",
-          "href": "/services#services-bento"
+          "href": "/services/management"
         },
         {
           "num": "03",
           "name": "1:1 COACHING",
           "price": "Custom",
           "tag": "Flexible",
-          "href": "/services#services-bento"
+          "href": "/services/coaching"
         },
         {
           "num": "04",
           "name": "CONTENT & COPY",
           "price": "Custom",
           "tag": "Flexible",
-          "href": "/services#services-bento"
+          "href": "/services/content"
         }
       ],
       "cta": {

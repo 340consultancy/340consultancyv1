@@ -13,6 +13,17 @@ import { home, img } from '@/content';
 import { SplitTransition } from '@/components/ui/animated-scroll';
 import ScrollAdventure from '@/components/ScrollAdventure';
 
+/**
+ * Each service row must open its own detail page. Older CMS entries still
+ * point every row at the generic "/services#services-bento" anchor, so any
+ * href that isn't a concrete /services/<slug> falls back to the row's slug.
+ */
+const SERVICE_ROW_SLUGS = ['strategy', 'management', 'coaching', 'content', 'workshops'];
+const serviceRowHref = (href: string | undefined, index: number): string =>
+  href && /^\/services\/[^/#?]+/.test(href)
+    ? href
+    : `/services/${SERVICE_ROW_SLUGS[index] ?? ''}`.replace(/\/$/, '');
+
 const Home: React.FC = () => {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
@@ -202,10 +213,10 @@ const Home: React.FC = () => {
                   className="mb-10"
                 />
                 <div className="space-y-px w-full" style={{ background: 'hsl(var(--background) / 0.08)' }}>
-                  {home.servicesPanel.rows.map((s) => (
+                  {home.servicesPanel.rows.map((s, i) => (
                     <Link
                       key={s.num}
-                      to={s.href}
+                      to={serviceRowHref(s.href, i)}
                       className="group flex items-center justify-between px-5 py-4 bg-foreground transition-colors duration-200 hover:bg-background/5"
                     >
                       <div className="flex items-center gap-4">
