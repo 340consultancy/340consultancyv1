@@ -189,31 +189,6 @@ const ContactFAQ: React.FC = () => {
           }}
         />
 
-        {/* Large 340 — right side, big watermark */}
-        <motion.span
-          initial={{ opacity: 0, x: 40 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-          aria-hidden
-          style={{
-            position: 'absolute',
-            top: '50%',
-            right: '-2vw',
-            transform: 'translateY(-50%)',
-            fontFamily: "'Kelson Sans BG', sans-serif",
-            fontWeight: 700,
-            fontSize: 'clamp(14rem, 36vw, 28rem)',
-            lineHeight: 0.85,
-            letterSpacing: '-0.04em',
-            color: 'transparent',
-            WebkitTextStroke: '1.5px hsl(354 100% 87% / 0.14)',
-            userSelect: 'none',
-            pointerEvents: 'none',
-            whiteSpace: 'nowrap',
-          }}
-        >
-          340
-        </motion.span>
 
         {/* Content — bottom-anchored like all other PageHero pages */}
         <div

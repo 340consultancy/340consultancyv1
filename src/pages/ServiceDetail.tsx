@@ -144,8 +144,6 @@ const ServiceDetail: React.FC = () => {
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
         />
         <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'linear-gradient(to bottom, hsl(0 0% 5% / 0.5) 0%, transparent 38%, hsl(0 0% 5% / 0.72) 80%, hsl(0 0% 5%) 100%)' }} />
-        {/* Watermark 340 */}
-        <span aria-hidden style={{ position: 'absolute', top: '50%', right: '-2vw', transform: 'translateY(-50%)', fontFamily: FONT.display, fontWeight: 700, fontSize: 'clamp(12rem, 32vw, 26rem)', lineHeight: 0.85, letterSpacing: '-0.04em', color: 'transparent', WebkitTextStroke: '1.5px hsl(354 100% 87% / 0.12)', userSelect: 'none', pointerEvents: 'none', whiteSpace: 'nowrap', zIndex: 1 }}>340</span>
 
         <div style={{ position: 'relative', zIndex: 2, width: '100%', maxWidth: 1180, margin: '0 auto', padding: 'clamp(1.5rem,5vw,4rem)' }}>
           <motion.p {...reveal(0)} style={{ fontFamily: FONT.body, fontSize: '0.56rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: ROSA, marginBottom: '1rem' }}>

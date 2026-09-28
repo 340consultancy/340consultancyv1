@@ -46,24 +46,6 @@ const CaseStudyPage: React.FC = () => {
         {/* Gradient overlay */}
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, hsl(0 0% 5% / 0.3) 0%, hsl(0 0% 5% / 0.05) 35%, hsl(0 0% 5% / 0.7) 75%, hsl(0 0% 5%) 100%)' }} />
 
-        {/* 340 watermark — right */}
-        <motion.span
-          initial={{ opacity: 0, x: 40 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-          aria-hidden
-          style={{
-            position: 'absolute', top: '50%', right: '-2vw',
-            transform: 'translateY(-50%)',
-            fontFamily: "'Kelson Sans BG', sans-serif", fontWeight: 700,
-            fontSize: 'clamp(14rem, 36vw, 28rem)', lineHeight: 0.85,
-            letterSpacing: '-0.04em', color: 'transparent',
-            WebkitTextStroke: `1.5px ${ROSA}24`,
-            userSelect: 'none', pointerEvents: 'none', whiteSpace: 'nowrap', zIndex: 1,
-          }}
-        >
-          340
-        </motion.span>
 
         {/* Hero content */}
         <div style={{
