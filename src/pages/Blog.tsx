@@ -66,7 +66,7 @@ const Blog: React.FC = () => (
               </span>
               <div style={{ position: 'absolute', left: 'clamp(18px, 3vw, 26px)', right: 'clamp(18px, 3vw, 26px)', bottom: 'clamp(18px, 3vw, 26px)' }}>
                 <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: 10, fontWeight: 700, letterSpacing: '0.28em', textTransform: 'uppercase', color: ROSA, marginBottom: 10 }}>
-                  {article.date}
+                  {article.category}
                 </p>
                 <h2 style={{ fontFamily: "'Kelson Sans BG', sans-serif", fontWeight: 700, fontSize: 'clamp(1.15rem, 1.6vw, 1.5rem)', lineHeight: 1.1, textTransform: 'uppercase', color: CREAM, margin: 0 }}>
                   {article.title}

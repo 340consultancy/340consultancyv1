@@ -9,7 +9,7 @@ export interface BlogArticle {
   title: string;
   excerpt: string;
   /** Category eyebrow shown above the title (or "Coming soon"). */
-  date: string;
+  category: string;
   image: AssetKey;
   number: string;
   /**
@@ -27,7 +27,7 @@ export const blogArticles: BlogArticle[] = [
     id: 'blog-1',
     title: 'What to Post on LinkedIn as a Small Business',
     excerpt: 'Four types of LinkedIn content that actually work, with real examples you can steal.',
-    date: 'LINKEDIN TIPS',
+    category: 'LINKEDIN TIPS',
     image: 'sea-1',
     number: '01',
     author: '340 Consultancy',
@@ -52,7 +52,7 @@ Pick one type, post it this week, and watch what your network responds to. Consi
     id: 'blog-2',
     title: 'How to Set Up a Social Media Content Calendar: Is It Actually Worth It',
     excerpt: "Spoiler: it's not about whether you need one. It's about how long you've been without one.",
-    date: 'CONTENT PLANNING',
+    category: 'CONTENT PLANNING',
     image: 'sea-2',
     number: '02',
     author: '340 Consultancy',
@@ -77,7 +77,7 @@ Want a head start? Our free content calendar template (on the UP2DATE page) is t
     id: 'blog-3',
     title: 'What a Social Media Audit Actually Tells You (And How to Do One in an Afternoon)',
     excerpt: "You're posting consistently. You've got a calendar. So why aren't you sure it's working?",
-    date: 'SOCIAL MEDIA AUDITS',
+    category: 'SOCIAL MEDIA AUDITS',
     image: 'sea-3',
     number: '03',
     author: '340 Consultancy',

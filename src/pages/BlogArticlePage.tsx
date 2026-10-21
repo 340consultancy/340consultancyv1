@@ -88,7 +88,7 @@ const BlogArticlePage: React.FC = () => {
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 700, fontSize: '0.58rem', letterSpacing: '0.32em', textTransform: 'uppercase', color: ROSA, marginBottom: '1rem' }}
           >
-            {article.date}
+            {article.category}
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
@@ -161,7 +161,7 @@ const BlogArticlePage: React.FC = () => {
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, hsl(0 0% 0% / 0.85) 0%, transparent 70%)' }} />
                 <div style={{ position: 'absolute', left: 20, right: 20, bottom: 20 }}>
                   <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: 9, fontWeight: 700, letterSpacing: '0.26em', textTransform: 'uppercase', color: ROSA, marginBottom: 8 }}>
-                    {other.date}
+                    {other.category}
                   </p>
                   <h3 style={{ fontFamily: "'Kelson Sans BG', sans-serif", fontWeight: 700, fontSize: 'clamp(1rem, 1.4vw, 1.25rem)', lineHeight: 1.12, textTransform: 'uppercase', color: CREAM, margin: 0 }}>
                     {other.title}

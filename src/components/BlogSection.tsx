@@ -26,7 +26,7 @@ const BlogAccordion: React.FC<{ items: BlogArticle[] }> = ({ items }) => {
     return (
       <div className="flex flex-col w-full">
         {items.map((article, i) => {
-          const isComingSoon = article.date === 'Coming soon';
+          const isComingSoon = article.category === 'Coming soon';
           return (
             <button
               key={article.id}
@@ -56,7 +56,7 @@ const BlogAccordion: React.FC<{ items: BlogArticle[] }> = ({ items }) => {
               </span>
               <div className="absolute z-10 flex flex-col" style={{ left: 'clamp(18px, 5vw, 28px)', right: 'clamp(18px, 5vw, 28px)', bottom: 'clamp(18px, 4vw, 28px)' }}>
                 <p className="text-micro mb-2" style={{ color: 'hsl(354 100% 87%)', letterSpacing: '0.28em', fontFamily: "'Poppins', sans-serif", fontSize: 10 }}>
-                  {isComingSoon ? blogSection.comingSoonLabel : article.date}
+                  {isComingSoon ? blogSection.comingSoonLabel : article.category}
                 </p>
                 <h3 style={{ fontFamily: "'Kelson Sans BG', sans-serif", fontWeight: 700, fontSize: 'clamp(1.2rem, 5vw, 1.5rem)', lineHeight: 1.08, letterSpacing: '-0.01em', color: 'hsl(36 21% 95%)', textTransform: 'uppercase', margin: 0 }}>
                   {article.title}
@@ -85,7 +85,7 @@ const BlogAccordion: React.FC<{ items: BlogArticle[] }> = ({ items }) => {
       {items.map((article, i) => {
         const isHovered = hovered === i;
         const flexGrow = hovered === null ? 1 : isHovered ? 3 : 1;
-        const isComingSoon = article.date === 'Coming soon';
+        const isComingSoon = article.category === 'Coming soon';
 
         return (
           <button
@@ -194,7 +194,7 @@ const BlogAccordion: React.FC<{ items: BlogArticle[] }> = ({ items }) => {
                   fontSize: 10,
                 }}
               >
-                {article.date}
+                {article.category}
               </p>
 
               {/* Title */}
