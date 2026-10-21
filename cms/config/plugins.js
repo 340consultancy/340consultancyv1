@@ -9,10 +9,12 @@ module.exports = ({ env }) => ({
   seo: {
     enabled: true,
   },
-  // Image format converter (strapi-plugin-imgfmtconv) — auto-converts uploads
-  // to WebP/AVIF and offers bulk conversion of existing media in the admin.
+  // Image format converter (strapi-plugin-imgfmtconv) — DISABLED 2026-10-21.
+  // It bundles sharp 0.32 next to Strapi's own sharp 0.33: two libvips copies
+  // in one process corrupt memory and crash Node on every image upload
+  // (Segmentation fault / munmap_chunk(): invalid pointer).
   imgfmtconv: {
-    enabled: true,
+    enabled: false,
   },
   // Preview button (strapi-plugin-preview-button) — "open on website" button in
   // the content manager. CLIENT_URL = the deployed frontend (Vercel) URL.
