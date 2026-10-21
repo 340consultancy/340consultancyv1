@@ -5,59 +5,11 @@ import { motion } from 'framer-motion';
 import TopNav from '@/components/TopNav';
 import Footer from '@/components/Footer';
 import YesCTA from '@/components/YesCTA';
+import ArticleBody from '@/components/ArticleBody';
 import { blogArticles, blogPage, img } from '@/content';
 
 const ROSA = 'hsl(354 100% 87%)';
 const CREAM = 'hsl(36 21% 95%)';
-
-const headingStyle: React.CSSProperties = {
-  fontFamily: "'Kelson Sans BG', sans-serif",
-  fontWeight: 700,
-  fontSize: 'clamp(1.2rem, 2vw, 1.6rem)',
-  lineHeight: 1.15,
-  textTransform: 'uppercase',
-  color: CREAM,
-  margin: 'clamp(1.8rem, 3vw, 2.4rem) 0 0.9rem',
-};
-
-const paragraphStyle: React.CSSProperties = {
-  fontFamily: "'Poppins', sans-serif",
-  fontSize: 'clamp(0.92rem, 1.15vw, 1.02rem)',
-  lineHeight: 1.9,
-  color: 'hsl(36 21% 95% / 0.68)',
-  margin: '0 0 1.1rem',
-};
-
-/**
- * Render the plain-text article body: blank lines separate paragraphs,
- * lines starting with "## " become subheadings (a paragraph may follow a
- * heading on the very next line).
- */
-const ArticleBody: React.FC<{ body: string }> = ({ body }) => {
-  const nodes: React.ReactNode[] = [];
-  let paragraph: string[] = [];
-
-  const flush = (key: string) => {
-    if (paragraph.length === 0) return;
-    nodes.push(<p key={key} style={paragraphStyle}>{paragraph.join(' ')}</p>);
-    paragraph = [];
-  };
-
-  body.split('\n').forEach((rawLine, i) => {
-    const line = rawLine.trim();
-    if (line === '') {
-      flush(`p-${i}`);
-    } else if (line.startsWith('## ')) {
-      flush(`p-${i}`);
-      nodes.push(<h2 key={`h-${i}`} style={headingStyle}>{line.slice(3)}</h2>);
-    } else {
-      paragraph.push(line);
-    }
-  });
-  flush('p-end');
-
-  return <>{nodes}</>;
-};
 
 const BlogArticlePage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
