@@ -5,7 +5,8 @@ import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
-  { ignores: ["dist", "studio/dist", "studio/.sanity", "src/content/generated"] },
+  // studio/ is a separate app with its own package.json and dependencies.
+  { ignores: ["dist", "studio", "src/content/generated"] },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
     files: ["**/*.{ts,tsx}"],
