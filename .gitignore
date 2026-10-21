@@ -41,3 +41,9 @@ dist-ssr
 /STRAPI_MIGRATION.md
 .vercel
 .env*
+
+# Sanity: content generated at build time, Studio build output
+src/content/generated/
+studio/node_modules
+studio/dist
+studio/.sanity
