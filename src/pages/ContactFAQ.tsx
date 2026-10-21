@@ -8,7 +8,7 @@ import Footer from '@/components/Footer';
 import SplitHeading from '@/components/SplitHeading';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { contact, img, Icon } from '@/content';
-import { strapiCreate } from '@/lib/strapi';
+import { honeypot, postForm } from '@/lib/forms';
 
 /* ─── FAQ Accordion item ─────────────────────────────────────────────────── */
 
@@ -109,14 +109,15 @@ const ContactFAQ: React.FC = () => {
     if (submitting) return;
     setSubmitting(true);
     try {
-      // Lands in the CMS under Content Manager → “Inbox: Contact form”.
-      await strapiCreate('contact-messages', {
+      // Emailed to the owner (Resend); ticking "newsletter" also subscribes in Brevo.
+      await postForm('/api/contact', {
         name: form.name,
         email: form.email,
         igHandle: form.igHandle,
         interest: form.interest,
         message: form.message,
         newsletter: form.newsletter,
+        website: honeypot(e.currentTarget as HTMLFormElement),
       });
       toast.success(contact.form.successToast);
       setForm({ name: '', igHandle: '', email: '', interest: '', message: '', newsletter: false });
@@ -391,6 +392,9 @@ const ContactFAQ: React.FC = () => {
             </p>
 
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+              {/* Honeypot: invisible to people, bots fill it and get silently dropped. */}
+              <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true"
+                style={{ position: 'absolute', left: '-10000px', width: 1, height: 1, opacity: 0 }} />
               {/* Name + Email row */}
               <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: '0 2rem' }}>
                 <div style={{ marginBottom: '0.9rem' }}>

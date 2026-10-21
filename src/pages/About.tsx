@@ -8,7 +8,7 @@ import SplitHeading from '@/components/SplitHeading';
 import BlogSection from '@/components/BlogSection';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { up2date, img } from '@/content';
-import { strapiCreate } from '@/lib/strapi';
+import { honeypot, postForm } from '@/lib/forms';
 
 /* ─── Lead Magnet Section ──────────────────────────────────────────────────── */
 
@@ -22,8 +22,8 @@ const LeadMagnet: React.FC = () => {
     if (submitting) return;
     setSubmitting(true);
     try {
-      // Lands in the CMS under Content Manager → “Inbox: Newsletter signups”.
-      await strapiCreate('newsletter-signups', { email, source: 'lead-magnet' });
+      // Added to the Brevo newsletter list.
+      await postForm('/api/newsletter', { email, source: 'lead-magnet', website: honeypot(e.currentTarget as HTMLFormElement) });
       toast.success(up2date.leadMagnet.successToast);
       setEmail('');
     } catch (err) {
@@ -90,6 +90,9 @@ const LeadMagnet: React.FC = () => {
           onSubmit={handleSubmit}
           style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', width: '100%', maxWidth: 420 }}
         >
+          {/* Honeypot: invisible to people, bots fill it and get silently dropped. */}
+          <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true"
+            style={{ position: 'absolute', left: '-10000px', width: 1, height: 1, opacity: 0 }} />
           <input
             type="email"
             required
@@ -184,8 +187,8 @@ const Newsletter: React.FC = () => {
     if (submitting) return;
     setSubmitting(true);
     try {
-      // Lands in the CMS under Content Manager → “Inbox: Newsletter signups”.
-      await strapiCreate('newsletter-signups', { email, source: 'newsletter' });
+      // Added to the Brevo newsletter list.
+      await postForm('/api/newsletter', { email, source: 'newsletter', website: honeypot(e.currentTarget as HTMLFormElement) });
       toast.success(up2date.newsletter.successToast);
       setEmail('');
     } catch (err) {
@@ -259,6 +262,9 @@ const Newsletter: React.FC = () => {
             alignItems: 'stretch',
           }}
         >
+          {/* Honeypot: invisible to people, bots fill it and get silently dropped. */}
+          <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true"
+            style={{ position: 'absolute', left: '-10000px', width: 1, height: 1, opacity: 0 }} />
           <input
             type="email"
             required
