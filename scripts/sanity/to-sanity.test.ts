@@ -1,4 +1,5 @@
 // @vitest-environment node
+/* eslint-disable @typescript-eslint/no-explicit-any -- one-off migration code over loosely shaped CMS JSON */
 import { describe, it, expect } from 'vitest';
 import fixture from '../../src/test/fixtures/bundled-content.json';
 import { schemaTypes } from '../../studio/schemaTypes';
