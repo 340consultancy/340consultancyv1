@@ -51,7 +51,8 @@ export default {
           "type": "string",
           validation: (Rule: any) => Rule.required()
         }
-      ]
+      ],
+      validation: (Rule: any) => Rule.required()
     },
     {
       "name": "separatorLogo",
@@ -228,7 +229,8 @@ export default {
             }
           ]
         }
-      ]
+      ],
+      validation: (Rule: any) => Rule.required()
     }
   ]
 };

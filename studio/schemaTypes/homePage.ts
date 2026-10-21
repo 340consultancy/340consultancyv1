@@ -88,7 +88,8 @@ export default {
           "type": "string",
           validation: (Rule: any) => Rule.required()
         }
-      ]
+      ],
+      validation: (Rule: any) => Rule.required()
     },
     {
       "name": "way",
@@ -152,7 +153,8 @@ export default {
           "type": "string",
           validation: (Rule: any) => Rule.required()
         }
-      ]
+      ],
+      validation: (Rule: any) => Rule.required()
     },
     {
       "name": "servicesPanel",
@@ -267,7 +269,8 @@ export default {
             }
           ]
         }
-      ]
+      ],
+      validation: (Rule: any) => Rule.required()
     },
     {
       "name": "foundersPanel",
@@ -351,7 +354,8 @@ export default {
             }
           ]
         }
-      ]
+      ],
+      validation: (Rule: any) => Rule.required()
     },
     {
       "name": "approachPanel",
@@ -479,7 +483,8 @@ export default {
             }
           ]
         }
-      ]
+      ],
+      validation: (Rule: any) => Rule.required()
     },
     {
       "name": "cases",
@@ -581,7 +586,8 @@ export default {
             }
           ]
         }
-      ]
+      ],
+      validation: (Rule: any) => Rule.required()
     },
     {
       "name": "quickCheck",
@@ -624,7 +630,8 @@ export default {
           ],
           validation: (Rule: any) => Rule.required()
         }
-      ]
+      ],
+      validation: (Rule: any) => Rule.required()
     },
     {
       "name": "phoneMock",
@@ -817,7 +824,8 @@ export default {
           ],
           validation: (Rule: any) => Rule.required()
         }
-      ]
+      ],
+      validation: (Rule: any) => Rule.required()
     }
   ]
 };

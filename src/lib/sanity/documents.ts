@@ -30,6 +30,8 @@ export interface CollectionDef {
   ordering: 'order' | 'publishedAt';
   /** Fields recomputed from the display position, never stored. */
   derivedFields: string[];
+  /** Pages read this many items by position: fewer fails the build. */
+  minItems?: number;
 }
 
 export const SINGLETONS: SingletonDef[] = [
@@ -53,7 +55,8 @@ export const SINGLETONS: SingletonDef[] = [
 
 export const COLLECTIONS: CollectionDef[] = [
   { type: 'testimonial', title: 'Testimonials', export: 'testimonials', idField: null, titleField: 'name', ordering: 'order', derivedFields: [] },
-  { type: 'service', title: 'Services', export: 'services', idField: 'key', titleField: 'label', ordering: 'order', derivedFields: [] },
+  // ServicesPackages.tsx reads services[0]…services[4] by position.
+  { type: 'service', title: 'Services', export: 'services', idField: 'key', titleField: 'label', ordering: 'order', derivedFields: [], minItems: 5 },
   { type: 'caseStudy', title: 'Case studies', export: 'caseStudies', idField: 'slug', titleField: 'client', ordering: 'order', derivedFields: [] },
   { type: 'blogPost', title: 'Blog posts', export: 'blogArticles', idField: 'id', titleField: 'title', ordering: 'publishedAt', derivedFields: ['number'] },
 ];

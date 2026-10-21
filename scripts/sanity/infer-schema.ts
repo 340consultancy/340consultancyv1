@@ -131,9 +131,11 @@ export function buildSchemas(content: ContentBundle, ctx: InferContext): Documen
   for (const s of SINGLETONS) {
     const doc = s.export ? content[s.export] : Object.fromEntries((s.fields ?? []).map((f) => [f, content[f]]));
     if (!isRecord(doc)) throw new Error(`${s.type} : contenu introuvable`);
+    // Pages read every top-level section unconditionally: none may be emptied.
     const fields = Object.keys(doc)
       .map((k) => inferField(k, [doc[k]], `${s.type}.${k}`, ctx))
-      .filter((f): f is FieldDef => f !== null);
+      .filter((f): f is FieldDef => f !== null)
+      .map((f) => (f.type === 'boolean' ? f : { ...f, required: true }));
     schemas.push({ name: s.type, title: s.title, type: 'document', fields });
   }
 

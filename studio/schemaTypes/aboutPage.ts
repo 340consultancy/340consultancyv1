@@ -63,7 +63,8 @@ export default {
           "type": "string",
           validation: (Rule: any) => Rule.required()
         }
-      ]
+      ],
+      validation: (Rule: any) => Rule.required()
     },
     {
       "name": "story",
@@ -112,7 +113,8 @@ export default {
           "type": "string",
           validation: (Rule: any) => Rule.required()
         }
-      ]
+      ],
+      validation: (Rule: any) => Rule.required()
     },
     {
       "name": "founders",
@@ -292,7 +294,8 @@ export default {
             }
           ]
         }
-      ]
+      ],
+      validation: (Rule: any) => Rule.required()
     },
     {
       "name": "values",
@@ -372,7 +375,8 @@ export default {
             }
           ]
         }
-      ]
+      ],
+      validation: (Rule: any) => Rule.required()
     }
   ]
 };

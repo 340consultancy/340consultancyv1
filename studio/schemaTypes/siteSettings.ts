@@ -181,7 +181,8 @@ export default {
           "type": "string",
           validation: (Rule: any) => Rule.required()
         }
-      ]
+      ],
+      validation: (Rule: any) => Rule.required()
     },
     {
       "name": "footer",
@@ -363,7 +364,8 @@ export default {
           "type": "string",
           validation: (Rule: any) => Rule.required()
         }
-      ]
+      ],
+      validation: (Rule: any) => Rule.required()
     },
     {
       "name": "cta",
@@ -419,7 +421,8 @@ export default {
           "type": "string",
           validation: (Rule: any) => Rule.required()
         }
-      ]
+      ],
+      validation: (Rule: any) => Rule.required()
     },
     {
       "name": "testimonialsCta",
@@ -438,7 +441,8 @@ export default {
           "type": "string",
           validation: (Rule: any) => Rule.required()
         }
-      ]
+      ],
+      validation: (Rule: any) => Rule.required()
     },
     {
       "name": "showcase",
@@ -617,7 +621,8 @@ export default {
             }
           ]
         }
-      ]
+      ],
+      validation: (Rule: any) => Rule.required()
     },
     {
       "name": "blogSection",
@@ -731,7 +736,8 @@ export default {
           "type": "string",
           validation: (Rule: any) => Rule.required()
         }
-      ]
+      ],
+      validation: (Rule: any) => Rule.required()
     },
     {
       "name": "blogPage",
@@ -826,7 +832,8 @@ export default {
             }
           ]
         }
-      ]
+      ],
+      validation: (Rule: any) => Rule.required()
     },
     {
       "name": "serviceDetailLabels",
@@ -927,7 +934,8 @@ export default {
             }
           ]
         }
-      ]
+      ],
+      validation: (Rule: any) => Rule.required()
     },
     {
       "name": "caseStudyLabels",
@@ -1065,7 +1073,8 @@ export default {
           "type": "string",
           validation: (Rule: any) => Rule.required()
         }
-      ]
+      ],
+      validation: (Rule: any) => Rule.required()
     },
     {
       "name": "managementAddOns",
@@ -1140,7 +1149,8 @@ export default {
             }
           ]
         }
-      ]
+      ],
+      validation: (Rule: any) => Rule.required()
     },
     {
       "name": "strategyAddOns",
@@ -1215,7 +1225,8 @@ export default {
             }
           ]
         }
-      ]
+      ],
+      validation: (Rule: any) => Rule.required()
     },
     {
       "name": "igPostUrls",

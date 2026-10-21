@@ -5,12 +5,16 @@ import { SINGLETONS } from './documents';
 const cfg = { projectId: 'proj', dataset: 'prod' };
 const image = (id: string) => ({ _type: 'image', asset: { _type: 'reference', _ref: `image-${id}-800x600-jpg` } });
 
-/** Minimal set of published singletons so assembleContent can run. */
-function singletonDocs(overrides: Record<string, Record<string, unknown>> = {}) {
-  return SINGLETONS.map((s) => {
+/** Minimal set of published singletons (and the 5 services the pages need) so assembleContent can run. */
+function singletonDocs(overrides: Record<string, Record<string, unknown>> = {}, serviceCount = 5): Record<string, unknown>[] {
+  const singletons = SINGLETONS.map((s) => {
     const body = s.fields ? Object.fromEntries(s.fields.map((f) => [f, { label: f }])) : { title: s.title };
     return { _id: s.type, _type: s.type, ...body, ...(overrides[s.type] ?? {}) };
   });
+  const services = Array.from({ length: serviceCount }, (_, i) => ({
+    _id: `service-${i + 1}`, _type: 'service', key: { _type: 'slug', current: `s${i + 1}` }, order: i + 1,
+  }));
+  return [...singletons, ...services];
 }
 
 describe('imageUrl', () => {
@@ -72,6 +76,19 @@ describe('assembleContent', () => {
     const settings = docs.find((d) => d._id === 'siteSettings') as Record<string, unknown>;
     delete settings.footer;
     expect(() => assembleContent(docs, cfg)).toThrow('footer');
+  });
+
+  it('fails the build when a page section was emptied in the Studio', () => {
+    const docs = singletonDocs({ homePage: { hero: { title: 'Hi' } } });
+    expect(() => assembleContent(docs, cfg, { homePage: ['hero', 'way'] })).toThrow('way');
+    expect(() => assembleContent(docs, cfg, { homePage: ['hero'] })).not.toThrow();
+  });
+
+  it('fails the build when a collection has fewer items than the pages need', () => {
+    const services = [1, 2, 3, 4].map((n) => ({ _id: 'service-' + n, _type: 'service', key: { _type: 'slug', current: 's' + n }, order: n }));
+    expect(() => assembleContent([...singletonDocs({}, 0), ...services], cfg)).toThrow('Services');
+    const five = [...services, { _id: 'service-5', _type: 'service', key: { _type: 'slug', current: 's5' }, order: 5 }];
+    expect(assembleContent([...singletonDocs({}, 0), ...five], cfg).services).toHaveLength(5);
   });
 
   it('ignores drafts', () => {

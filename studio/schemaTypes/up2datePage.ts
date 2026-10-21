@@ -57,7 +57,8 @@ export default {
           "type": "string",
           validation: (Rule: any) => Rule.required()
         }
-      ]
+      ],
+      validation: (Rule: any) => Rule.required()
     },
     {
       "name": "leadMagnet",
@@ -134,7 +135,8 @@ export default {
           "type": "string",
           validation: (Rule: any) => Rule.required()
         }
-      ]
+      ],
+      validation: (Rule: any) => Rule.required()
     },
     {
       "name": "newsletter",
@@ -196,7 +198,8 @@ export default {
           "type": "string",
           validation: (Rule: any) => Rule.required()
         }
-      ]
+      ],
+      validation: (Rule: any) => Rule.required()
     }
   ]
 };

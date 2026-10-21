@@ -125,6 +125,13 @@ describe('buildSchemas', () => {
     ]);
   });
 
+  it('requires every top-level section of a page, so the Studio blocks emptying one', () => {
+    expect(byName.homePage.fields).toEqual([
+      expect.objectContaining({ name: 'hero', type: 'object', required: true }),
+    ]);
+    expect(byName.siteSettings.fields.every((f) => f.required)).toBe(true);
+  });
+
   it('uses the title field for the Studio list preview', () => {
     expect(byName.caseStudy.preview).toEqual({ select: { title: 'client' } });
   });

@@ -2,7 +2,8 @@
 // content to src/content/generated/content.json. Any failure exits non-zero,
 // so a Vercel build never publishes a site without content.
 import { mkdirSync, writeFileSync } from 'node:fs';
-import { CONTENT_TYPES } from '../src/lib/sanity/documents';
+import { schemaTypes } from '../studio/schemaTypes';
+import { CONTENT_TYPES, SINGLETONS } from '../src/lib/sanity/documents';
 import { assembleContent } from '../src/lib/sanity/from-sanity';
 import { loadDotEnv, requireEnv, sanityReadClient } from './sanity/cli';
 
@@ -14,7 +15,18 @@ const docs = await sanityReadClient(projectId, dataset).fetch<Record<string, unk
   '*[_type in $types]',
   { types: CONTENT_TYPES }
 );
-const content = assembleContent(docs, { projectId, dataset });
+if (docs.length === 0) {
+  throw new Error(`Sanity : aucun document dans le dataset « ${dataset} » du projet ${projectId} (dataset vide, privé ou mal nommé ?)`);
+}
+
+// Every top-level section of a page is read unconditionally by its component.
+const singletonTypes = new Set(SINGLETONS.map((s) => s.type));
+const requiredFields = Object.fromEntries(
+  (schemaTypes as unknown as { name: string; fields: { name: string }[] }[])
+    .filter((t) => singletonTypes.has(t.name))
+    .map((t) => [t.name, t.fields.map((f) => f.name)])
+);
+const content = assembleContent(docs, { projectId, dataset }, requiredFields);
 
 mkdirSync('src/content/generated', { recursive: true });
 writeFileSync('src/content/generated/content.json', JSON.stringify(content, null, 2) + '\n');

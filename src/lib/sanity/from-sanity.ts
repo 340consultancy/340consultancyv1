@@ -69,9 +69,16 @@ export function fromSanity(value: unknown, cfg: SanityConfig): unknown {
 
 const orderOf = (v: unknown): number => (typeof v === 'number' ? v : Number.MAX_SAFE_INTEGER);
 
-/** Build every content export from the published documents. Throws (and so
- *  fails the build) rather than publishing a site with missing content. */
-export function assembleContent(allDocs: Doc[], cfg: SanityConfig): ContentBundle {
+/**
+ * Build every content export from the published documents. Throws (and so
+ * fails the build, keeping the previous deployment live) rather than
+ * publishing a site with missing content.
+ *
+ * `requiredFields` lists, per singleton type, the top-level fields the pages
+ * read unconditionally (scripts/fetch-content.ts derives it from the Studio
+ * schemas). Site settings always require all of their fields.
+ */
+export function assembleContent(allDocs: Doc[], cfg: SanityConfig, requiredFields: Record<string, string[]> = {}): ContentBundle {
   const docs = allDocs.filter((d) => !String(d._id).startsWith('drafts.'));
   const byId = new Map(docs.map((d) => [String(d._id), d]));
   const content: ContentBundle = {};
@@ -80,13 +87,13 @@ export function assembleContent(allDocs: Doc[], cfg: SanityConfig): ContentBundl
     const doc = byId.get(s.type);
     if (!doc) throw new Error(`Sanity : la page « ${s.title} » (${s.type}) est introuvable ou n'a jamais été publiée`);
     const plain = fromSanity(doc, cfg) as Doc;
+    for (const field of s.fields ?? requiredFields[s.type] ?? []) {
+      if (plain[field] === undefined) throw new Error(`Sanity : le champ « ${field} » est vide dans « ${s.title} »`);
+    }
     if (s.export) {
       content[s.export] = plain;
     } else {
-      for (const field of s.fields ?? []) {
-        if (plain[field] === undefined) throw new Error(`Sanity : le champ « ${field} » est vide dans « ${s.title} »`);
-        content[field] = plain[field];
-      }
+      for (const field of s.fields ?? []) content[field] = plain[field];
     }
   }
 
@@ -97,13 +104,17 @@ export function assembleContent(allDocs: Doc[], cfg: SanityConfig): ContentBundl
         ? (a, b) => orderOf(a.order) - orderOf(b.order)
         : (a, b) => String(b.publishedAt ?? '').localeCompare(String(a.publishedAt ?? ''))
     );
-    content[c.export] = items
+    const plainItems = items
       .map((d) => fromSanity(d, cfg) as Doc)
       .filter((p) => !c.idField || (typeof p[c.idField] === 'string' && p[c.idField] !== ''))
       .map((p, i) => {
         const { order: _order, publishedAt: _publishedAt, ...rest } = p;
         return c.derivedFields.includes('number') ? { ...rest, number: String(i + 1).padStart(2, '0') } : rest;
       });
+    if (c.minItems && plainItems.length < c.minItems) {
+      throw new Error(`Sanity : « ${c.title} » doit contenir au moins ${c.minItems} éléments publiés (${plainItems.length} trouvés) — les pages les lisent par position`);
+    }
+    content[c.export] = plainItems;
   }
 
   return content;
