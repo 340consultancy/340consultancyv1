@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRef, useEffect } from "react";
 import Index from "./pages/Index";
@@ -17,26 +17,9 @@ import Blog from "./pages/Blog";
 import BlogArticlePage from "./pages/BlogArticlePage";
 import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
+import AdminRedirect from "@/components/AdminRedirect";
 
 const queryClient = new QueryClient();
-
-/**
- * /admin → the Strapi admin panel. The CMS is always reachable through the
- * website's own domain: <domain>/admin redirects to {VITE_STRAPI_URL}/admin
- * (locally e.g. localhost:1337/admin), where Strapi asks for the login.
- * Deep admin paths and query strings are preserved. Without a configured
- * CMS URL the route falls back to the home page.
- */
-function AdminRedirect() {
-  const strapiUrl = (import.meta.env.VITE_STRAPI_URL as string | undefined)?.replace(/\/+$/, "");
-  useEffect(() => {
-    if (strapiUrl) {
-      window.location.replace(`${strapiUrl}${window.location.pathname}${window.location.search}`);
-    }
-  }, [strapiUrl]);
-  if (!strapiUrl) return <Navigate to="/" replace />;
-  return null; // blank for the split second until the browser navigates
-}
 
 // Order matches the visual nav: HOME | ABOUT US | SERVICES | [340] | OUR WORK | UP2DATE | CONTACT
 const PAGE_ORDER = ['/', '/about-us', '/services', '/work', '/about', '/blog', '/contact', '/privacy'];
