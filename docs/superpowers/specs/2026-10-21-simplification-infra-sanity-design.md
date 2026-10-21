@@ -45,7 +45,7 @@ Cliente ──édite──▶ Sanity Studio (hébergé par Sanity, *.sanity.stud
                                           ▼
 Visiteur ◀── SPA statique (Vercel) ── images via CDN Sanity
     │
-    ├── POST /api/contact    (fonction Vercel) ──▶ Resend ──▶ email cliente
+    ├── POST /api/contact    (fonction Vercel) ──▶ Brevo (email) ──▶ cliente
     └── POST /api/newsletter (fonction Vercel) ──▶ API Brevo (ajout contact)
 ```
 
@@ -120,8 +120,8 @@ Chaque singleton reprend la forme de l'objet TypeScript correspondant dans
 ### `/api/contact` (fonction Vercel)
 - Entrée : name, email, message (+ champs actuels du formulaire de `ContactFAQ.tsx`) et un champ caché `website` (piège à robots).
 - Validation serveur avec zod. Piège rempli → réponse 200 sans envoi.
-- Envoi via Resend depuis une adresse du domaine `340consultancy.com`, vers `CONTACT_TO_EMAIL`, avec `reply_to` = email du visiteur.
-- Variables : `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`.
+- Envoi via l'API email transactionnelle de Brevo (même compte et même clé que la newsletter) depuis `CONTACT_FROM_EMAIL` (expéditeur validé dans Brevo), vers `CONTACT_TO_EMAIL`, avec `replyTo` = email du visiteur. (Décision du 2026-10-21 : Brevo partout au lieu de Resend, pour n'avoir qu'un fournisseur.)
+- Variables : `BREVO_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`, `CONTACT_FROM_NAME` (facultatif).
 
 ### `/api/newsletter` (fonction Vercel)
 - Entrée : email, source (`lead-magnet` | `newsletter`), champ piège.
@@ -160,13 +160,13 @@ définitif depuis Strapi vise le dataset `production`.
 | Sanity indisponible pendant un build | Build en échec, la version en ligne reste servie. |
 | Champ requis manquant | Publication bloquée dans le Studio. |
 | Champ optionnel vide | Le site masque le bloc concerné (comportement actuel des pages). |
-| Resend / Brevo en échec | Réponse 502 de la fonction ; le formulaire affiche le message de repli avec l'email de contact. |
+| Brevo en échec | Réponse 502 de la fonction ; le formulaire affiche le message de repli avec l'email de contact. |
 | Spam | Champ piège + validation zod ; pas de captcha visible. |
 
 ## 8. Tests
 
 - Vitest : transformation Sanity → types du site (y compris Portable Text et
-  images), validation et comportement des deux fonctions API (Resend et Brevo
+  images), validation et comportement des deux fonctions API (Brevo
   mockés, champ piège, entrées invalides).
 - Script de vérification de la migration (section 6).
 - Vérification manuelle de chaque route en local, puis sur la preview Vercel
@@ -179,7 +179,7 @@ définitif depuis Strapi vise le dataset `production`.
    `cms/config/plugins.js` sur `main`, pour que Strapi cesse de planter pendant
    la transition.
 1. Développement sur `simplify/sanity-migration` (production intacte).
-2. Création des comptes par le prestataire ou la cliente : projet Sanity, compte Resend
+2. Création des comptes par le prestataire ou la cliente : projet Sanity, compte Brevo
    avec domaine vérifié (DNS), clé API et liste Brevo, deploy hook Vercel relié
    au webhook Sanity.
 3. Import définitif du contenu depuis Strapi dès que Railway répond, puis vérification.

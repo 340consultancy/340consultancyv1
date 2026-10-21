@@ -1,7 +1,7 @@
 // One-off import of the site content into a Sanity dataset.
 //
 //   npm run sanity:import -- --source bundled                       (development dataset)
-//   npm run sanity:import -- --source strapi --strapi-url https://cms.340consultancy.com
+//   npm run sanity:import -- --source strapi --strapi-url https://cms.340consultancy.com --overwrite
 //
 // Needs SANITY_PROJECT_ID, SANITY_DATASET and SANITY_WRITE_TOKEN (Editor token).
 // Read-only towards Strapi: it never uploads anything there.
@@ -12,6 +12,7 @@ import fixture from '../src/test/fixtures/bundled-content.json';
 import { schemaTypes } from '../studio/schemaTypes';
 import { argValue, loadDotEnv, requireEnv, SANITY_API_VERSION } from './sanity/cli';
 import type { DocumentSchema } from './sanity/infer-schema';
+import { checkImportTarget } from './sanity/import-guard';
 import { fetchStrapiPayload, mergeStrapiPayload } from './sanity/strapi-merge';
 import { toSanityDocs, type ImageRef, type ResolveImage } from './sanity/to-sanity';
 
@@ -20,6 +21,7 @@ const source = argValue('source');
 if (source !== 'bundled' && source !== 'strapi') throw new Error('Préciser --source bundled ou --source strapi');
 
 const dataset = requireEnv('SANITY_DATASET');
+checkImportTarget(dataset, source, process.argv.includes('--overwrite'));
 const client = createClient({
   projectId: requireEnv('SANITY_PROJECT_ID'),
   dataset,

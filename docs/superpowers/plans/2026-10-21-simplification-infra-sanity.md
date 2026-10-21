@@ -10,6 +10,8 @@
 
 **Spec:** `docs/superpowers/specs/2026-10-21-simplification-infra-sanity-design.md`
 
+> **Mise à jour 2026-10-21 (après exécution des tâches 0–14)** : le formulaire de contact envoie l'email via **Brevo** (API transactionnelle) au lieu de Resend, à la demande de l'utilisateur. Variables : `BREVO_API_KEY`, `BREVO_LIST_ID`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL` (expéditeur validé dans Brevo), `CONTACT_FROM_NAME`. Les mentions de Resend ci-dessous sont caduques ; à la tâche 15, l'étape « Resend » devient « valider l'expéditeur dans Brevo → Senders, domains & dedicated IPs (idéalement authentifier le domaine 340consultancy.com) ». Les imports en `production` exigent `--overwrite` et refusent `--source bundled`.
+
 ## Global Constraints
 
 - Le site construit ne dépend jamais de Sanity à l'exécution : aucune requête Sanity depuis le navigateur.
@@ -3073,7 +3075,7 @@ Cette tâche suit la section 9 de la spec. Chaque action marquée « utilisateur
 
 Vérifier d'abord : `curl -s -o /dev/null -w "%{http_code}" https://cms.340consultancy.com/api/site-content` → `200`.
 Dans `.env` : `SANITY_DATASET=production`.
-Run: `npm run sanity:import -- --source strapi --strapi-url https://cms.340consultancy.com`
+Run: `npm run sanity:import -- --source strapi --strapi-url https://cms.340consultancy.com --overwrite`
 Expected : les images puis `… documents et … images écrits dans le dataset « production ».` Les avertissements `⚠ … champ absent du schéma, ignoré` attendus concernent uniquement des champs Strapi que le site n'affiche pas (`seo`, `order`, `slug`, `number`…) : les relire un par un ; tout autre champ signalé est un manque à corriger dans les schémas avant de continuer.
 
 - [ ] **Step 3 : vérification de la migration**
