@@ -1,7 +1,8 @@
 // UP2DATE page (single type) — lead magnet + newsletter copy.
-// Serializable: images → AssetKey, text verbatim.
+// Content comes from Sanity at build time (src/content/generated.ts). Images are CDN URLs.
 
 import type { AssetKey } from '@/content/assets';
+import { generated } from '@/content/generated';
 
 export interface Up2dateContent {
   hero: {
@@ -33,31 +34,4 @@ export interface Up2dateContent {
   };
 }
 
-export const up2date: Up2dateContent = {
-  hero: {
-    title: { lead: 'UP', accent: '2', tail: 'DATE' },
-    tagline: 'Consider yourself updated.',
-    image: 'up2date',
-    scrollLabel: 'SCROLL',
-  },
-  leadMagnet: {
-    eyebrow: 'FREE DOWNLOAD',
-    headline: { line1: 'Your Free Social Media', line2: 'Content Calendar.' },
-    body: 'Download our free social media content calendar and plan a full month of posts — the same framework our clients use to stay consistent and on-brand.',
-    emailPlaceholder: 'Your email…',
-    buttonLabel: 'GET IT FOR FREE →',
-    successToast: 'Thanks! Check your inbox.',
-    errorToast: 'Something went wrong — please try again in a moment.',
-    image: 'starterguide',
-    imageAlt: 'Social Media Content Calendar',
-  },
-  newsletter: {
-    eyebrow: 'NEWSLETTER',
-    headline: { line1: 'Always stay', line2: 'up2date.' },
-    body: 'No spam. Just real insights, new blog posts and fresh social strategies — straight to your inbox.',
-    emailPlaceholder: 'Your email…',
-    buttonLabel: 'SUBSCRIBE →',
-    successToast: "You're in! 🎉",
-    errorToast: 'Something went wrong — please try again in a moment.',
-  },
-};
+export const up2date = generated.up2date as Up2dateContent;

@@ -1,7 +1,8 @@
 // Top navigation content — shared across all pages.
-// Serializable: logo → AssetKey, links → href strings.
+// Content comes from Sanity at build time (src/content/generated.ts). Images are CDN URLs.
 
 import type { AssetKey } from '@/content/assets';
+import { generated } from '@/content/generated';
 
 export interface NavLinkItem {
   label: string;
@@ -25,28 +26,4 @@ export interface NavContent {
   closeMenuLabel: string;
 }
 
-export const nav: NavContent = {
-  logo: { src: 'logo-340-white', alt: '340', ariaLabel: '340 Consultancy — Home' },
-  leftLinks: [
-    { label: 'HOME', href: '/' },
-    { label: 'ABOUT US', href: '/about-us' },
-    { label: 'SERVICES', href: '/services' },
-  ],
-  rightLinks: [
-    { label: 'OUR WORK', href: '/work' },
-    { label: 'UP2DATE', href: '/about' },
-  ],
-  bookNow: { label: 'BOOK NOW', href: '/contact' },
-  servicesLabel: 'SERVICES',
-  serviceLinks: [
-    { label: 'Social Media Strategy', href: '/services/strategy' },
-    { label: 'Social Media Management', href: '/services/management' },
-    { label: '1:1 Coaching', href: '/services/coaching' },
-    { label: 'Content & Copywriting', href: '/services/content' },
-    { label: 'Workshops', href: '/services/workshops' },
-  ],
-  closeLabel: 'CLOSE',
-  mobileTagline: 'Social Media Consultancy',
-  openMenuLabel: 'Open menu',
-  closeMenuLabel: 'Close menu',
-};
+export const nav = generated.nav as NavContent;

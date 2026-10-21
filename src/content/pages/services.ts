@@ -3,6 +3,7 @@
 // src/content/collections/services.ts.
 
 import type { AssetKey } from '@/content/assets';
+import { generated } from '@/content/generated';
 
 export interface ProcessStep {
   phase: string;
@@ -35,32 +36,4 @@ export interface ServicesPageContent {
   };
 }
 
-export const servicesPage: ServicesPageContent = {
-  hero: {
-    headline: { lead: 'OUR ', accent: 'SERVICES' },
-    tagline: 'Pick your game plan',
-    image: 'services-hero',
-    imagePosition: '50% 20%',
-    scrollLabel: 'SCROLL',
-  },
-  bento: {
-    eyebrow: 'WHAT WE DO',
-    heading: 'Our Services',
-    hint: 'Click any service for details & pricing',
-    viewDetailsLabel: 'VIEW DETAILS',
-    workshopTools: ['Canva', 'CapCut', 'Instagram'],
-    workshopNote: 'Remote',
-  },
-  process: {
-    eyebrow: 'THE PROCESS',
-    headline: { lead: 'HOW IT ', accent: 'WORKS' },
-    sub: 'Four steps from first conversation to measurable growth.',
-    steps: [
-      { phase: '1', title: 'FREE INTRO CALL', desc: 'We get to know your business, goals and challenges. No commitment, just clarity.' },
-      { phase: '2', title: 'ONBOARDING', desc: 'We share an onboarding questionnaire, gather your brand assets, and set the foundation.' },
-      { phase: '3', title: 'EXECUTION', desc: 'Strategy goes live. Content is created, published, and managed based on what your audience needs.' },
-      { phase: '4', title: 'REVIEW & OPTIMIZE', desc: 'Regular check-ins, performance tracking and transparent reporting. We optimize as we go.' },
-    ],
-    hashtag: '#340consultancy',
-  },
-};
+export const servicesPage = generated.servicesPage as ServicesPageContent;

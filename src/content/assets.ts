@@ -84,9 +84,9 @@ export type AssetKey = keyof typeof assets;
 /**
  * Resolve a stable asset key to its bundled URL.
  *
- * After CMS hydration (src/lib/cmsContent.ts) image fields may hold a full
- * media URL from Strapi instead of a registered key — those pass through
- * unchanged. `string & {}` keeps AssetKey autocomplete while allowing URLs.
+ * Content image fields hold Sanity CDN URLs, which pass through unchanged;
+ * registered keys still resolve to bundled files.
+ * `string & {}` keeps AssetKey autocomplete while allowing URLs.
  */
 export const img = (key: AssetKey | (string & {})): string =>
   (assets as Record<string, string>)[key] ?? key;
