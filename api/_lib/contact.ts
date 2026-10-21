@@ -2,9 +2,10 @@ import { z } from 'zod';
 import { brevoConfigured, fail, OK, subscribeToBrevo, type ApiResult, type BrevoEnv } from './brevo.js';
 
 export interface ContactEnv extends BrevoEnv {
-  RESEND_API_KEY?: string;
   CONTACT_TO_EMAIL?: string;
+  /** Sender address, verified in Brevo (Senders & domains). */
   CONTACT_FROM_EMAIL?: string;
+  CONTACT_FROM_NAME?: string;
 }
 
 const optionalText = (max: number) => z.string().trim().max(max).optional().default('');
@@ -21,7 +22,7 @@ const schema = z.object({
 });
 
 export async function handleContact(input: unknown, env: ContactEnv, fetchFn: typeof fetch = fetch): Promise<ApiResult> {
-  if (!env.RESEND_API_KEY || !env.CONTACT_TO_EMAIL || !env.CONTACT_FROM_EMAIL) return fail(500, 'not_configured');
+  if (!env.BREVO_API_KEY || !env.CONTACT_TO_EMAIL || !env.CONTACT_FROM_EMAIL) return fail(500, 'not_configured');
   const parsed = schema.safeParse(input);
   if (!parsed.success) return fail(400, 'invalid_input');
   const f = parsed.data;
@@ -38,19 +39,20 @@ export async function handleContact(input: unknown, env: ContactEnv, fetchFn: ty
     f.message || '(no message)',
   ].join('\n');
 
-  const res = await fetchFn('https://api.resend.com/emails', {
+  // Brevo transactional email API (same account and key as the newsletter).
+  const res = await fetchFn('https://api.brevo.com/v3/smtp/email', {
     method: 'POST',
-    headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'content-type': 'application/json' },
+    headers: { 'api-key': env.BREVO_API_KEY, 'content-type': 'application/json', accept: 'application/json' },
     body: JSON.stringify({
-      from: env.CONTACT_FROM_EMAIL,
-      to: [env.CONTACT_TO_EMAIL],
-      reply_to: f.email,
+      sender: { name: env.CONTACT_FROM_NAME || '340 Consultancy website', email: env.CONTACT_FROM_EMAIL },
+      to: [{ email: env.CONTACT_TO_EMAIL }],
+      replyTo: { email: f.email, name: f.name },
       subject: `New contact form message from ${f.name}`,
-      text,
+      textContent: text,
     }),
   });
   if (!res.ok) {
-    console.error('[contact] Resend failed:', res.status, await res.text().catch(() => ''));
+    console.error('[contact] Brevo email failed:', res.status, await res.text().catch(() => ''));
     return fail(502, 'upstream_failed');
   }
 

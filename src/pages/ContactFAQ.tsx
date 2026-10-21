@@ -109,7 +109,7 @@ const ContactFAQ: React.FC = () => {
     if (submitting) return;
     setSubmitting(true);
     try {
-      // Emailed to the owner (Resend); ticking "newsletter" also subscribes in Brevo.
+      // Emailed to the owner via Brevo; ticking "newsletter" also subscribes the visitor.
       await postForm('/api/contact', {
         name: form.name,
         email: form.email,
