@@ -73,27 +73,28 @@ technique d'agrégation), `instagram-post` (devient un champ liste d'URLs).
 
 | Type Sanity | Champs | Différences avec l'existant |
 |---|---|---|
-| `blogPost` | title, slug, category, excerpt, image, number, author, publishedDate, body, seo | `body` passe en Portable Text (texte riche) ; l'ancien champ `date` (qui contient en fait la catégorie) devient `category`. |
-| `caseStudy` | mêmes champs que `CaseStudy` (client, industry, services, website, headline, heroImg, intro, challenge, approach, resultText, stats[], visuals[2], gallery[], cardImg, cardTag, cardStat, cardHeadline), seo | Les `AssetKey` deviennent des images Sanity (avec recadrage). |
-| `service` | mêmes champs que `src/content/collections/services.ts`, seo | Images → images Sanity. |
-| `testimonial` | quote, author (+ champs existants) | Aucun. |
+| `blogPost` | id (slug), title, category, excerpt, image, author, publishedDate, body, publishedAt | `body` passe en Portable Text (texte riche) ; l'ancien champ `date` (qui contient en fait la catégorie) devient `category`. `number` (01, 02…) reste calculé d'après la position, comme aujourd'hui ; `publishedAt` sert au tri (plus récent en premier). |
+| `caseStudy` | mêmes champs que `CaseStudy` (client, industry, services, website, headline, heroImg, intro, challenge, approach, resultText, stats[], visuals[2], gallery[], cardImg, cardTag, cardStat, cardHeadline), order | Les `AssetKey` deviennent des images Sanity (avec recadrage). |
+| `service` | mêmes champs que `src/content/collections/services.ts`, order | Images → images Sanity. |
+| `testimonial` | quote, name, role, order | Aucun. |
 
 ### Pages uniques (singletons)
 
 `homePage`, `aboutPage`, `servicesPage`, `workPage`, `up2datePage`,
 `contactPage`, `privacyPage`, `notFoundPage`, `siteSettings`.
 
-`siteSettings` regroupe `nav`, `footer`, `cta`, `showcase`, `igPostUrls`.
+`siteSettings` regroupe, comme le `global` de Strapi aujourd'hui : `nav`, `footer`, `cta`,
+`testimonialsCta`, `showcase`, `blogSection`, `blogPage`, `serviceDetailLabels`,
+`caseStudyLabels`, `managementAddOns`, `strategyAddOns`, `igPostUrls`.
 
 Chaque singleton reprend la forme de l'objet TypeScript correspondant dans
-`src/content/pages/*.ts` / `src/content/sections/*.ts`, plus un bloc `seo`
-(title, description). Le Studio range les singletons dans un menu « Pages »
+`src/content/pages/*.ts` / `src/content/sections/*.ts`. Le Studio range les singletons dans un menu « Pages »
 (Structure Builder) et interdit leur création multiple ou leur suppression.
 
 ### Règles transverses
-- Les champs affichés systématiquement par le site sont marqués requis (validation Sanity bloquant la publication).
+- Un champ est marqué requis (validation Sanity bloquant la publication) quand il est rempli dans tout le contenu existant ; les booléens et objets ne le sont jamais.
 - Les icônes restent une liste fermée (`IconName`) proposée en liste déroulante.
-- Les images sont servies via `@sanity/image-url` avec largeur adaptée et `auto=format` (WebP/AVIF automatiques), ce qui remplace le plugin de conversion.
+- Les images sont servies par le CDN Sanity avec largeur adaptée et `auto=format` (WebP/AVIF automatiques), ce qui remplace le plugin de conversion.
 
 ## 4. Lecture du contenu au build
 
@@ -105,7 +106,7 @@ Chaque singleton reprend la forme de l'objet TypeScript correspondant dans
   continuent d'importer depuis `@/content` : aucun changement côté pages, sauf
   le rendu du corps des articles (`BlogArticlePage.tsx`), qui passe à
   `@portabletext/react`.
-- Les champs image sortent en URL absolues du CDN Sanity ; l'helper `img()`
+- Les champs image sortent en URL absolues du CDN Sanity (URL construite par le code, avec le recadrage choisi dans le Studio) ; l'helper `img()`
   accepte une URL au lieu d'un `AssetKey`.
 - La transformation (Sanity → types du site) est une fonction pure, testée
   séparément de l'appel réseau.
@@ -189,5 +190,6 @@ définitif depuis Strapi vise le dataset `production`.
 ## 10. Hors périmètre
 
 - Pré-rendu HTML des pages pour le SEO (possible ensuite, puisque le contenu est connu au build).
+- Titre et description SEO par page : le site actuel ne lit pas les champs SEO de Strapi (les balises viennent d'`index.html`) ; ils reviendront avec le pré-rendu.
 - Refonte visuelle, multilingue.
 - Mise à jour générale des dépendances du site (une partie des alertes `npm audit` disparaît avec Strapi).
