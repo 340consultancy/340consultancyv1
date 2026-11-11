@@ -1,0 +1,23 @@
+{
+  "blogBodies": {
+    "blog-3": "An audit sounds like something you hire a consultancy for (and yes, we do them) — but a first honest pass takes one afternoon and answers the question your gut keeps asking: is any of this working?\n\n## Look at reach before likes\nLikes measure your existing audience's politeness. Reach measures whether new people see you at all. If reach is flat for three months, your content is talking to the same room.\n\n## Check your profile like a stranger\nOpen your profile in a private window. In five seconds, is it clear what you do, who it's for, and what to do next? Most bios fail at least one of the three.\n\n## Map your last 30 posts against your pillars\nCount how many posts served each theme. Almost every audit reveals one pillar hogging the feed and one — usually the one that converts — barely showing up.\n\n## Find your top three and your bottom three\nDon't average. Look at the extremes: what do your best posts share, and what do the flops have in common? That pattern is your next month's strategy.\n\nIf the afternoon version raises more questions than it answers, that's normal — it's exactly where a full audit (and a strategy built on it) starts.",
+    "blog-2": "Every business that posts \"when we have time\" eventually stops posting. A content calendar isn't bureaucracy — it's the difference between a channel that compounds and one that restarts every month.\n\n## Start with pillars, not posts\nDefine three to five recurring themes your brand talks about. Every post slots into a pillar; if it doesn't fit any, it probably doesn't belong on your feed.\n\n## Plan two weeks, not two months\nLong horizons collapse under real life. A rolling two-week plan stays realistic, leaves room for reactive content, and still kills the \"what do we post today?\" panic.\n\n## Batch the boring parts\nWrite captions in one sitting, design visuals in another, schedule everything in a third. Context-switching is what makes social media feel like a full-time job.\n\n## Review what actually happened\nOnce a month, compare the plan against performance. Keep the formats that worked, drop the ones that didn't — the calendar is a living document, not a contract.\n\nWant a head start? Our free content calendar template (on the UP2DATE page) is the exact framework our clients use.",
+    "blog-1": "LinkedIn is where your next client is already scrolling — but most small businesses post like it's a job board. Here are the four content types we see perform again and again, no matter the industry.\n\n## 1. Behind-the-scenes of real work\nShow the messy middle, not just the polished result. A photo of a project in progress with two sentences on what you're solving beats any stock-photo announcement.\n\n## 2. Lessons from client conversations\nAnonymize it, then share it: \"A client asked us this week whether X still works — here's what we told them.\" It positions you as the person people ask.\n\n## 3. Opinionated takes on your industry\nNot rage-bait — a clear stance. \"We stopped doing weekly reports and our clients are happier\" invites discussion and shows how you think.\n\n## 4. Small wins with real numbers\nConcrete beats impressive. \"+38% profile views in 30 days\" from a small account is more credible (and more shareable) than vague success claims.\n\nPick one type, post it this week, and watch what your network responds to. Consistency on one format beats sporadic attempts at all four."
+  },
+  "industry": {
+    "titleLead": "Every",
+    "titleAccent": "industry.",
+    "labels": [
+      "Exhibit Design",
+      "Intercultural Consulting",
+      "Food & Hospitality",
+      "Life Coaching",
+      "Retail",
+      "Education"
+    ]
+  },
+  "work": {
+    "subtitle": "The numbers speak for themselves.",
+    "viewLabel": "VIEW CASE"
+  }
+}

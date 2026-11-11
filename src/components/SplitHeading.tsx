@@ -27,24 +27,28 @@ const SplitHeading: React.FC<Props> = ({
     fontFamily: "'Kelson Sans BG', sans-serif",
     fontWeight: 700,
     fontSize: size,
-    lineHeight: 0.9,
+    lineHeight: 1.12,
     letterSpacing: '-0.01em',
     textTransform: 'uppercase',
     textAlign: align,
     margin: 0,
+    padding: '0.06em 0.025em',
+    overflowWrap: 'anywhere',
   };
 
   return (
     <div className={className} style={{ textAlign: align }}>
-      <h2 style={{ ...baseStyle, color: solidColor }}>{line1}</h2>
-      <h2
-        style={{
-          ...baseStyle,
-          color: 'transparent',
-          WebkitTextStroke: `1.5px ${strokeColor}`,
-        }}
-      >
-        {line2}
+      <h2 style={{ ...baseStyle, color: solidColor }}>
+        <span style={{ display: 'block' }}>{line1}</span>
+        <span
+          style={{
+            display: 'block',
+            color: 'transparent',
+            WebkitTextStroke: `1.5px ${strokeColor}`,
+          }}
+        >
+          {line2}
+        </span>
       </h2>
     </div>
   );

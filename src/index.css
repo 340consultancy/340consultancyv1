@@ -147,6 +147,8 @@
   }
 
   .text-micro {
+    position: relative;
+    top: -0.5rem;
     font-family: var(--font-subheading);
     font-size: 0.5rem;
     line-height: 1.2;

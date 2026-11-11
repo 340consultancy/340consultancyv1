@@ -54,7 +54,7 @@ const TextCell: React.FC<{ eyebrow: string; titleLead: string; titleAccent: stri
         fontFamily: "'Kelson Sans BG', sans-serif",
         fontWeight: 700,
         fontSize: 'clamp(2rem, 4vw, 3.6rem)',
-        lineHeight: 0.9,
+        lineHeight: 1.12,
         textTransform: 'uppercase',
         margin: 0,
       }}

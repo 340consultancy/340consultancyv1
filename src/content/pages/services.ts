@@ -1,8 +1,6 @@
-// Services overview page (single type). Serializable: images → AssetKey,
-// text verbatim. The service entries themselves live in
+// Services overview page (single type). Serializable: text verbatim. The
+// service entries themselves (title, tagline, photo, includes) live in
 // src/content/collections/services.ts.
-
-import type { AssetKey } from '@/content/assets';
 
 export interface ProcessStep {
   phase: string;
@@ -10,22 +8,32 @@ export interface ProcessStep {
   desc: string;
 }
 
+/** One "Where are you right now?" answer and the services it points to. */
+export interface ServiceSituation {
+  label: string;
+  /** Service keys (collection `service`.key), in recommendation order. */
+  services: string[];
+  reco: string;
+}
+
 export interface ServicesPageContent {
+  /** Green hero = the situation selector. */
   hero: {
-    headline: { lead: string; accent: string };
-    tagline: string;
-    image: AssetKey;
-    imagePosition: string;
-    scrollLabel: string;
-  };
-  bento: {
-    eyebrow: string;
+    /** Multi-line heading (rendered with white-space: pre-line) — keep the \n. */
     heading: string;
-    hint: string;
-    viewDetailsLabel: string;
-    workshopTools: string[];
-    workshopNote: string;
+    question: string;
+    showAllLabel: string;
+    /** Line in the pink band while no situation is picked. */
+    defaultReco: string;
+    situations: ServiceSituation[];
   };
+  grid: {
+    matchBadge: string;
+    cardCtaLabel: string;
+    /** Last card of the grid, always shown: points undecided visitors to a call. */
+    helpCard: { heading: string; text: string; ctaLabel: string };
+  };
+  /** "How it works" steps shared by the services overview and detail pages. */
   process: {
     eyebrow: string;
     headline: { lead: string; accent: string };
@@ -37,19 +45,26 @@ export interface ServicesPageContent {
 
 export const servicesPage: ServicesPageContent = {
   hero: {
-    headline: { lead: 'OUR ', accent: 'SERVICES' },
-    tagline: 'Pick your game plan',
-    image: 'services-hero',
-    imagePosition: '50% 20%',
-    scrollLabel: 'SCROLL',
+    heading: 'Pick your\ngame plan',
+    question: 'Where are you right now?',
+    showAllLabel: 'Show all services',
+    defaultReco: 'Not sure where to start? You don’t need to be. Tell us where you are and we’ll take it from there.',
+    situations: [
+      { label: 'I’m starting from scratch', services: ['strategy'], reco: 'Start with a strategy. It sets the foundation everything else builds on.' },
+      { label: 'I post, but nothing grows', services: ['strategy', 'coaching'], reco: 'Step back with a strategy, then get coached on what to change week to week.' },
+      { label: 'I have no time to post', services: ['management'], reco: 'Hand us the day-to-day. We run your channels so you can run your business.' },
+      { label: 'I want to do it myself', services: ['workshops', 'coaching'], reco: 'Learn the tools in a workshop, then keep sharpening your approach with 1:1 coaching.' },
+      { label: 'I need content, fast', services: ['content'], reco: 'Get posts, copy and decks made for you, as a one-off or on top of a package.' },
+    ],
   },
-  bento: {
-    eyebrow: 'WHAT WE DO',
-    heading: 'Our Services',
-    hint: 'Click any service for details & pricing',
-    viewDetailsLabel: 'VIEW DETAILS',
-    workshopTools: ['Canva', 'CapCut', 'Instagram'],
-    workshopNote: 'Remote',
+  grid: {
+    matchBadge: 'Fits you',
+    cardCtaLabel: 'See what’s included',
+    helpCard: {
+      heading: 'Not sure\nyet?',
+      text: 'Book a free intro call and we’ll figure out what fits you.',
+      ctaLabel: 'Book a free call',
+    },
   },
   process: {
     eyebrow: 'THE PROCESS',

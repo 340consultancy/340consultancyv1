@@ -101,7 +101,7 @@ const ServicesNavItem: React.FC = () => {
             <div
               style={{
                 minWidth: 250,
-                background: 'hsl(0 0% 6% / 0.97)',
+                background: 'hsl(89 71% 15% / 0.98)',
                 backdropFilter: 'blur(18px) saturate(1.4)',
                 WebkitBackdropFilter: 'blur(18px) saturate(1.4)',
                 border: '1px solid hsl(354 100% 87% / 0.12)',
@@ -138,9 +138,9 @@ const BookNow: React.FC<{ mobile?: boolean }> = ({ mobile }) => {
       style={{
         display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
         borderRadius: 9999,
-        background: hov ? 'hsl(89 71% 15%)' : 'transparent',
-        color: 'hsl(354 100% 87%)',
-        border: hov ? '1px solid hsl(89 71% 15%)' : '1px solid hsl(354 100% 87% / 0.6)',
+        background: hov ? 'hsl(354 100% 87%)' : 'transparent',
+        color: hov ? 'hsl(89 71% 15%)' : 'hsl(354 100% 87%)',
+        border: hov ? '1px solid hsl(354 100% 87%)' : '1px solid hsl(354 100% 87% / 0.6)',
         padding: mobile ? '14px 44px' : '9px 22px',
         fontFamily: "'Kelson Sans BG', sans-serif",
         fontWeight: 700,
@@ -149,7 +149,7 @@ const BookNow: React.FC<{ mobile?: boolean }> = ({ mobile }) => {
         textTransform: 'uppercase',
         textDecoration: 'none',
         transition: 'all 0.22s ease',
-        boxShadow: hov ? '0 4px 20px hsl(89 71% 15% / 0.4)' : 'none',
+        boxShadow: hov ? '0 4px 20px hsl(354 100% 87% / 0.3)' : 'none',
         whiteSpace: 'nowrap',
         flexShrink: 0,
       }}
@@ -286,7 +286,7 @@ const TopNav: React.FC = () => {
           alignItems: 'center',
           paddingLeft: 'clamp(1.25rem, 3.5vw, 2.5rem)',
           paddingRight: 'clamp(1.25rem, 3.5vw, 2.5rem)',
-          background: scrolled ? 'hsl(0 0% 6% / 0.94)' : 'transparent',
+          background: scrolled ? 'hsl(89 71% 15% / 0.96)' : 'transparent',
           backdropFilter: scrolled ? 'blur(22px) saturate(1.5)' : 'none',
           WebkitBackdropFilter: scrolled ? 'blur(22px) saturate(1.5)' : 'none',
           borderBottom: scrolled ? '1px solid hsl(354 100% 87% / 0.1)' : '1px solid transparent',
@@ -409,7 +409,7 @@ const TopNav: React.FC = () => {
             transition={{ duration: 0.28 }}
             style={{
               position: 'fixed', inset: 0, zIndex: 40,
-              background: 'hsl(0 0% 5% / 0.98)',
+              background: 'hsl(89 71% 15% / 0.99)',
               backdropFilter: 'blur(18px)',
               WebkitBackdropFilter: 'blur(18px)',
               display: 'flex', flexDirection: 'column',

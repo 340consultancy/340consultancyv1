@@ -1,271 +1,178 @@
+// /work — green header, results, industries, case studies, pink client ticker
+// and green testimonials.
+
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { motion, useReducedMotion } from 'framer-motion';
 import TopNav from '@/components/TopNav';
-import Testimonials from '@/components/Testimonials';
 import Footer from '@/components/Footer';
 import YesCTA from '@/components/YesCTA';
-import HoverEyes from '@/components/HoverEyes';
-import ContentIndustryShowcase from '@/components/ContentIndustryShowcase';
+import GreenHeader from '@/components/GreenHeader';
+import Testimonials from '@/components/Testimonials';
 import { Marquee } from '@/components/ui/marquee';
-import { useIsMobile } from '@/hooks/use-mobile';
-import { work, img } from '@/content';
+import { work, caseStudies, showcase, img } from '@/content';
 
-/* ── palette accent shortcuts ── */
+const GREEN = 'hsl(89 71% 15%)';
+const OFFWHITE = 'hsl(36 21% 95%)';
+const BEIGE = 'hsl(36 18% 92%)';
+const INK = 'hsl(0 0% 13%)';
 const ROSA = 'hsl(354 100% 87%)';
-const DARK = 'hsl(0 0% 13%)';
+const FONT_DISPLAY = "'Kelson Sans BG', sans-serif";
+const FONT_BODY = "'Poppins', sans-serif";
+const EASE = [0.16, 1, 0.3, 1] as const;
 
-const CLIENTS = work.clients;
-const STATS = work.stats;
+const css = `
+.wr-toc a { display: grid; grid-template-columns: 2.2rem 1fr; align-items: baseline; padding: 0.9rem 0; border-top: 1px solid hsl(36 21% 95% / 0.18); color: hsl(36 21% 95% / 0.85); text-decoration: none; transition: color .25s ease; }
+.wr-toc a:last-child { border-bottom: 1px solid hsl(36 21% 95% / 0.18); }
+.wr-toc a:hover, .wr-toc a:focus-visible { color: ${ROSA}; }
+.wr-spread { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(1rem, 2.5vw, 2.5rem); align-items: center; }
+.wr-spread .wr-img { grid-column: 1 / span 5; }
+.wr-spread .wr-text { grid-column: 9 / span 4; }
+.wr-spread.is-flipped .wr-img { grid-column: 8 / span 5; grid-row: 1; }
+.wr-spread.is-flipped .wr-text { grid-column: 1 / span 4; grid-row: 1; }
+.wr-img-frame { position: relative; overflow: hidden; aspect-ratio: 4 / 5; background: hsl(36 14% 88%); }
+.wr-img-frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(.16,1,.3,1); }
+.wr-spread a:hover .wr-img-frame img { transform: scale(1.035); }
+.wr-read { display: inline-block; position: relative; padding-bottom: 6px; color: ${INK}; text-decoration: none; }
+.wr-read::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: currentColor; transform-origin: left; transition: transform .45s cubic-bezier(.16,1,.3,1), background-color .3s ease; }
+.wr-read:hover::after, .wr-read:focus-visible::after { background: ${GREEN}; transform: scaleX(0.4); }
+.wr-industries { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid hsl(0 0% 13% / 0.14); border-left: 1px solid hsl(0 0% 13% / 0.14); }
+.wr-industry { position: relative; overflow: hidden; min-height: clamp(9rem, 18vw, 13rem); display: flex; align-items: center; justify-content: center; text-align: center; padding: 1.5rem; border-right: 1px solid hsl(0 0% 13% / 0.14); border-bottom: 1px solid hsl(0 0% 13% / 0.14); outline: none; }
+.wr-industry img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.06); transition: opacity .5s ease, transform 1.2s cubic-bezier(.16,1,.3,1); }
+.wr-industry::after { content: ''; position: absolute; inset: 0; background: hsl(89 71% 15% / 0.55); opacity: 0; transition: opacity .5s ease; }
+.wr-industry span { position: relative; z-index: 1; color: ${INK}; transition: color .35s ease; }
+.wr-industry:hover img, .wr-industry:focus-visible img { opacity: 1; transform: scale(1); }
+.wr-industry:hover::after, .wr-industry:focus-visible::after { opacity: 1; }
+.wr-industry:hover span, .wr-industry:focus-visible span { color: ${OFFWHITE}; }
+.wr-root a:focus-visible { outline: 2px solid ${GREEN}; outline-offset: 4px; }
+@media (max-width: 860px) {
+  .wr-spread .wr-img, .wr-spread .wr-text, .wr-spread.is-flipped .wr-img, .wr-spread.is-flipped .wr-text { grid-column: 1 / -1; grid-row: auto; }
+  .wr-spread .wr-img { width: 85%; max-width: 28rem; justify-self: center; }
+  .wr-spread .wr-text { margin-top: 1.75rem; }
+  .wr-industries { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+`;
 
-/* ── Logo separator between items ── */
-const LogoSep: React.FC = () => (
-  <div style={{
-    display: 'flex', alignItems: 'center', justifyContent: 'center',
-    flexShrink: 0, margin: '0 clamp(1rem, 2.5vw, 2rem)',
-  }}>
-    <img
-      src={img(work.separatorLogo)}
-      alt=""
-      aria-hidden
-      style={{ height: 18, width: 'auto', opacity: 0.12, userSelect: 'none', pointerEvents: 'none' }}
-    />
-  </div>
-);
-
-/* ── Client pill badge — uniform: tile + name only ── */
-const ClientBadge: React.FC<{ initials: string; color: string; name: string }> = ({
-  initials, color, name,
-}) => (
-  <div style={{
-    display: 'inline-flex', alignItems: 'center', gap: 12,
-    padding: '9px 22px 9px 10px',
-    border: '1px solid hsl(36 21% 95% / 0.08)',
-    borderRadius: 999,
-    background: 'hsl(36 21% 95% / 0.03)',
-    flexShrink: 0,
-  }}>
-    {/* coloured initial tile */}
-    <div style={{
-      width: 34, height: 34, borderRadius: 8, background: color,
-      display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-      border: '1px solid hsl(36 21% 95% / 0.08)',
-    }}>
-      <span style={{
-        fontFamily: "'Kelson Sans BG', sans-serif", fontWeight: 700,
-        fontSize: '0.72rem', letterSpacing: '0.06em', color: 'hsl(36 21% 95% / 0.65)',
-      }}>
-        {initials}
-      </span>
-    </div>
-    {/* name */}
-    <p style={{
-      fontFamily: "'Kelson Sans BG', sans-serif", fontWeight: 700,
-      fontSize: 'clamp(0.78rem, 1.1vw, 0.98rem)', letterSpacing: '0.04em',
-      textTransform: 'uppercase', color: 'hsl(36 21% 95% / 0.82)',
-      lineHeight: 1.2, margin: 0, whiteSpace: 'nowrap',
-    }}>
-      {name}
-    </p>
-  </div>
-);
-
-/* ── Stat badge ── */
-const StatBadge: React.FC<{ value: string; label: string; client: string }> = ({ value, label, client }) => (
-  <div style={{
-    display: 'inline-flex', alignItems: 'baseline', gap: 10,
-    flexShrink: 0,
-  }}>
-    <span style={{
-      fontFamily: "'Kelson Sans BG', sans-serif", fontWeight: 700,
-      fontSize: 'clamp(1.6rem, 2.8vw, 2.4rem)', letterSpacing: '-0.02em',
-      color: ROSA, lineHeight: 1.35, whiteSpace: 'nowrap',
-    }}>
-      {value}
-    </span>
-    <span style={{
-      fontFamily: "'Poppins', sans-serif", fontWeight: 700,
-      fontSize: '0.58rem', letterSpacing: '0.2em', textTransform: 'uppercase',
-      color: 'hsl(36 21% 95% / 0.55)', whiteSpace: 'nowrap',
-    }}>
-      {label}
-    </span>
-  </div>
-);
+/** "Café & Retail · DE" → "Café & Retail, DE" */
+const industryText = (industry: string) => industry.split('·').map((s) => s.trim()).join(', ');
 
 const WorkResults: React.FC = () => {
-  const navigate = useNavigate();
-  const isMobile = useIsMobile();
+  const reduce = useReducedMotion();
+  const industry = showcase.industry;
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="wr-root" style={{ minHeight: '100vh', background: OFFWHITE }}>
+      <style>{css}</style>
       <TopNav />
 
-      {/* Custom hero — no overlays, clean photo */}
-      <section style={{ height: '88vh', position: 'relative', overflow: 'hidden', background: 'hsl(0 0% 5%)', display: 'flex', flexDirection: 'column' }}>
-        <img
-          src={img(work.hero.image)}
-          alt=""
-          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center center' }}
-        />
-        {/* Only a bottom gradient for text readability */}
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, transparent 50%, hsl(0 0% 5% / 0.68) 80%, hsl(0 0% 5%) 100%)', pointerEvents: 'none' }} />
+      {/* HEADER — green, pink title, contents. */}
+      <GreenHeader lead={work.hero.headline.lead} accent={work.hero.headline.accent} intro={work.hero.subtitle}>
+        <nav aria-label="Case studies" className="wr-toc" style={{ display: 'flex', flexDirection: 'column' }}>
+          {caseStudies.map((cs, i) => (
+            <a key={cs.slug} href={`#${cs.slug}`}>
+              <span style={{ fontFamily: FONT_BODY, fontSize: '0.8rem', opacity: 0.6 }}>{i + 1}</span>
+              <span style={{ fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: 'clamp(1.1rem, 1.6vw, 1.45rem)', textTransform: 'uppercase', letterSpacing: '0.02em' }}>{cs.client}</span>
+            </a>
+          ))}
+        </nav>
+      </GreenHeader>
 
+      {/* RESULTS TICKER — from the original page. */}
+      <section aria-label="Results" style={{ background: BEIGE, padding: 'clamp(1.6rem, 3vh, 2.2rem) 0', borderBottom: '1px solid hsl(0 0% 13% / 0.08)' }}>
+        <Marquee pauseOnHover repeat={3} className="[--duration:34s] [--gap:0px]">
+          {work.stats.map((s) => (
+            <div key={s.value + s.label} style={{ display: 'inline-flex', alignItems: 'baseline', gap: 10, flexShrink: 0, margin: '0 clamp(1.6rem, 3vw, 3rem)' }}>
+              <span style={{ fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: 'clamp(1.6rem, 2.8vw, 2.4rem)', letterSpacing: '-0.02em', color: GREEN, lineHeight: 1.3, whiteSpace: 'nowrap' }}>{s.value}</span>
+              <span style={{ fontFamily: FONT_BODY, fontWeight: 700, fontSize: '0.6rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'hsl(0 0% 13% / 0.55)', whiteSpace: 'nowrap' }}>{s.label}</span>
+            </div>
+          ))}
+        </Marquee>
+      </section>
 
-        {/* Text bottom */}
-        <div style={{ position: 'relative', zIndex: 10, flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', paddingBottom: '2.5rem', textAlign: 'center' }}>
-          <motion.h1
-            initial={{ opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.85, delay: 0.07, ease: [0.16, 1, 0.3, 1] }}
-            style={{ fontFamily: "'Kelson Sans BG', sans-serif", fontWeight: 700, fontSize: 'clamp(2.8rem, 6.5vw, 6.5rem)', lineHeight: 0.9, letterSpacing: '0.02em', textTransform: 'uppercase', color: 'hsl(36 21% 95%)', margin: 0 }}
-          >
-            {work.hero.headline.lead}
-            <span style={{ fontFamily: "'Kelson Sans BG', sans-serif", color: 'transparent', WebkitTextStroke: '1.5px hsl(354 100% 87%)' }}>{work.hero.headline.accent}</span>
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.75, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
-            style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 700, fontSize: 'clamp(1.15rem, 2.8vw, 2rem)', color: 'hsl(36 21% 95% / 0.78)', letterSpacing: '-0.01em', marginTop: '1.2rem' }}
-          >
-            {work.hero.subtitle}
-          </motion.p>
+      {/* INDUSTRIES — 8 fields in 2 rows; hovering shows a photo. */}
+      <section className="container-wide" style={{ paddingTop: 'clamp(5rem, 12vh, 8rem)', paddingBottom: 'clamp(5rem, 12vh, 8rem)' }}>
+        <p className="text-micro mb-4 tracking-[0.3em]" style={{ color: GREEN }}>{industry.text.eyebrow}</p>
+        <h2 style={{ fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: 'clamp(2.6rem, 6vw, 5rem)', lineHeight: 1.12, textTransform: 'uppercase', margin: '0 0 1.2rem' }}>
+          <span style={{ color: GREEN }}>{industry.text.titleLead} </span>
+          <span style={{ color: 'transparent', WebkitTextStroke: `1.5px ${GREEN}` }}>{industry.text.titleAccent}</span>
+        </h2>
+        <p style={{ fontFamily: FONT_BODY, fontSize: '1rem', lineHeight: 1.65, color: 'hsl(0 0% 13% / 0.7)', maxWidth: '44ch', margin: '0 0 clamp(2.5rem, 6vh, 3.5rem)' }}>{industry.text.sub}</p>
+        <div className="wr-industries">
+          {industry.items.slice(0, 8).map((it) => (
+            <div key={it.label} className="wr-industry" tabIndex={0}>
+              <img src={img(it.img)} alt="" loading="lazy" />
+              <span style={{ fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: 'clamp(1.15rem, 1.8vw, 1.6rem)', lineHeight: 1.05, textTransform: 'uppercase' }}>{it.label}</span>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* ── CLIENT × RESULT MARQUEE STRIP ─────────────────────────────── */}
-      <section style={{
-        background: DARK,
-        position: 'relative',
-        overflowX: 'clip',
-        overflowY: 'visible',
-        padding: 'clamp(2.4rem, 4vh, 3.2rem) 0',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 'clamp(1.4rem, 2.2vh, 2rem)',
-      }}>
-        {/* Top accent bar */}
-        <div style={{
-          position: 'absolute', top: 0, left: 0, right: 0, height: 3,
-          background: `linear-gradient(90deg, transparent 0%, ${ROSA}55 30%, ${ROSA}55 70%, transparent 100%)`,
-        }} />
-        {/* Bottom accent bar */}
-        <div style={{
-          position: 'absolute', bottom: 0, left: 0, right: 0, height: 1,
-          background: `linear-gradient(90deg, transparent, ${ROSA}18 50%, transparent)`,
-        }} />
-
-        {/* ── Row 1: client badges → left ── */}
-        <Marquee
-          pauseOnHover
-          reverse={false}
-          repeat={3}
-          className="[--duration:38s] [--gap:0px]"
-        >
-          {CLIENTS.map((c) => (
-            <React.Fragment key={c.name}>
-              <ClientBadge
-                initials={c.initials}
-                color={c.color}
-                name={c.name}
-              />
-              <LogoSep />
-            </React.Fragment>
-          ))}
-        </Marquee>
-
-        {/* Centre hairline */}
-        <div style={{
-          height: 1,
-          background: `linear-gradient(90deg, transparent, ${ROSA}12 50%, transparent)`,
-          margin: '0 clamp(2rem, 6vw, 6rem)',
-        }} />
-
-        {/* ── Row 2: result stats → right ── */}
-        <Marquee
-          pauseOnHover
-          reverse={true}
-          repeat={3}
-          className="[--duration:30s] [--gap:0px]"
-        >
-          {STATS.map(s => (
-            <React.Fragment key={s.value + s.label}>
-              <StatBadge value={s.value} label={s.label} client={s.client} />
-              <div style={{
-                display: 'flex', alignItems: 'center', margin: '0 clamp(1.2rem, 2.5vw, 2.4rem)',
-                flexShrink: 0,
-              }}>
-                <span style={{
-                  fontFamily: "'Kelson Sans BG', sans-serif", fontWeight: 700,
-                  fontSize: '1.1rem', color: `${ROSA}30`, lineHeight: 1,
-                }}>◆</span>
-              </div>
-            </React.Fragment>
-          ))}
-        </Marquee>
-      </section>
-
-      {/* CASE STUDIES — bento grid */}
-      <section className="bg-foreground">
-        <div className="container-wide pt-20 md:pt-28 pb-16 md:pb-20">
-          {/* Section header */}
-          <div className="mb-10">
-            <p className="text-micro mb-4 tracking-[0.3em] text-primary">{work.cases.eyebrow}</p>
-            <h2 style={{ fontFamily: "'Kelson Sans BG', sans-serif", fontWeight: 700, fontSize: 'clamp(2.5rem, 6vw, 5rem)', lineHeight: 0.9, letterSpacing: '-0.01em', textTransform: 'uppercase' }}>
-              <span style={{ color: 'hsl(36 21% 95%)' }}>{work.cases.heading.lead}</span>
-              <span style={{ color: 'transparent', WebkitTextStroke: '1.5px hsl(354 100% 87%)' }}>{work.cases.heading.accent}</span>
-            </h2>
-          </div>
-
-          {/* Card grid — same 5-card bento as homepage: 2 wide + 3 medium */}
-          <div className="flex flex-col gap-px" style={{ background: 'hsl(var(--background) / 0.12)' }}>
-
-          {/* ── 3 case studies (feedback #52: first row removed) ── */}
-          <div className="flex flex-col md:flex-row gap-px">
-            {work.cases.cards.map((card, i) => (
-              <HoverEyes key={i} style={{ flex: 1 }} onClick={() => card.slug ? navigate(`/work/${card.slug}`) : navigate('/work')}>
+      {/* SPREADS — one per case, alternating sides. */}
+      <main className="container-wide" style={{ paddingTop: 'clamp(5rem, 12vh, 9rem)', paddingBottom: 'clamp(4rem, 10vh, 8rem)', display: 'flex', flexDirection: 'column', gap: 'clamp(6rem, 16vh, 12rem)' }}>
+        {caseStudies.map((cs, i) => {
+          const lead = cs.stats[0];
+          const to = `/work/${cs.slug}`;
+          return (
+            <article key={cs.slug} id={cs.slug} className={`wr-spread${i % 2 ? ' is-flipped' : ''}`} style={{ scrollMarginTop: 120 }}>
+              <Link to={to} className="wr-img" aria-label={`${cs.client}: ${work.cases.viewLabel}`} tabIndex={-1}>
                 <motion.div
-                  className="relative overflow-hidden group"
-                  style={{ minHeight: 'clamp(260px, 38vh, 420px)', height: '100%' }}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.7, delay: 0.2 + i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                  className="wr-img-frame"
+                  initial={reduce ? false : { clipPath: 'inset(18% 0% 0% 0%)' }}
+                  whileInView={{ clipPath: 'inset(0% 0% 0% 0%)' }}
+                  viewport={{ once: true, margin: '-12% 0px' }}
+                  transition={{ duration: 1.3, ease: EASE }}
                 >
-                  <img src={img(card.img)} alt={card.client}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                    style={{ filter: 'brightness(0.5) saturate(0.75)' }} />
-                  <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.04) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0.78) 100%)' }} />
-                  <div className="absolute top-6 left-6 z-10">
-                    <p style={{ fontSize: '8.5px', color: 'rgba(255,255,255,0.5)', letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 600 }}>{card.client}</p>
-                    <p style={{ fontSize: '7.5px', color: 'rgba(255,255,255,0.28)', letterSpacing: '0.14em', textTransform: 'uppercase', marginTop: '3px' }}>{card.tag}</p>
-                  </div>
-                  <div className="absolute top-6 right-6 z-10" style={{ background: 'rgba(255,255,255,0.09)', backdropFilter: 'blur(8px)', border: '1px solid rgba(255,255,255,0.15)', padding: '4px 10px', borderRadius: 999 }}>
-                    <p style={{ fontSize: '7.5px', color: 'rgba(255,255,255,0.8)', letterSpacing: '0.12em', textTransform: 'uppercase', fontWeight: 700 }}>{card.stat}</p>
-                  </div>
-                  <div className="absolute bottom-6 left-6 right-6 z-10">
-                    <p style={{ fontFamily: 'Kelson Sans BG, sans-serif', fontSize: 'clamp(28px, 3.8vw, 58px)', color: '#fff', lineHeight: 0.92, letterSpacing: '0.02em', whiteSpace: 'pre-line', textShadow: '0 2px 16px rgba(0,0,0,0.4)' }}>{card.headline}</p>
-                  </div>
-                  <div className={`absolute bottom-6 right-6 z-10 transition-opacity duration-300 ${isMobile ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
-                    <div style={{ background: 'hsl(354 100% 87%)', padding: '6px 11px', display: 'flex', alignItems: 'center', gap: 5, borderRadius: 999 }}>
-                      <span style={{ fontFamily: "'Poppins', sans-serif", fontSize: '7px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'hsl(89 71% 15%)', fontWeight: 700 }}>{work.cases.viewLabel}</span>
-                      <ArrowRight size={8} color="hsl(89 71% 15%)" />
-                    </div>
-                  </div>
+                  <img src={img(cs.cardImg)} alt="" loading={i === 0 ? 'eager' : 'lazy'} />
                 </motion.div>
-              </HoverEyes>
-            ))}
-          </div>
+              </Link>
 
-          </div>
-        </div>
+              <div className="wr-text">
+                <p style={{ fontFamily: FONT_BODY, fontWeight: 600, fontSize: '0.95rem', color: INK, margin: 0 }}>{cs.client}</p>
+                <p style={{ fontFamily: FONT_BODY, fontSize: '0.85rem', color: 'hsl(0 0% 13% / 0.55)', margin: '0.2rem 0 1.6rem' }}>
+                  {industryText(cs.industry)}
+                </p>
+                <h2 style={{ fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: 'clamp(2.2rem, 4.2vw, 4rem)', lineHeight: 1.12, textTransform: 'uppercase', color: GREEN, margin: '0 0 1.6rem' }}>
+                  {cs.headline}
+                </h2>
+                <p style={{ fontFamily: FONT_BODY, fontSize: '1rem', lineHeight: 1.7, color: 'hsl(0 0% 13% / 0.78)', maxWidth: '44ch', margin: '0 0 2.2rem' }}>
+                  {cs.intro}
+                </p>
+                {lead && (
+                  <div style={{ borderTop: '1px solid hsl(0 0% 13% / 0.15)', paddingTop: '1.2rem', marginBottom: '2.2rem', display: 'flex', alignItems: 'baseline', gap: '1rem', flexWrap: 'wrap' }}>
+                    <span style={{ fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: 'clamp(2rem, 3vw, 2.8rem)', lineHeight: 1, color: INK }}>{lead.value}</span>
+                    <span style={{ fontFamily: FONT_BODY, fontSize: '0.9rem', color: 'hsl(0 0% 13% / 0.62)' }}>{lead.label}</span>
+                  </div>
+                )}
+                <Link to={to} className="wr-read" style={{ fontFamily: FONT_BODY, fontWeight: 600, fontSize: '0.95rem' }}>
+                  {work.cases.viewLabel}
+                </Link>
+              </div>
+            </article>
+          );
+        })}
+      </main>
+
+      {/* CLIENT TICKER — pink band with white client cards. */}
+      <section aria-label={work.clientsHeading} style={{ background: ROSA, padding: 'clamp(2rem, 4vh, 2.8rem) 0' }}>
+        <Marquee pauseOnHover repeat={3} className="[--duration:38s] [--gap:0px]">
+          {work.clients.map((c) => (
+            <React.Fragment key={c.name}>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 12, padding: '9px 22px 9px 10px', border: '1px solid hsl(0 0% 13% / 0.12)', borderRadius: 999, background: '#fff', flexShrink: 0 }}>
+                <span style={{ width: 34, height: 34, borderRadius: 8, background: GREEN, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: '0.72rem', letterSpacing: '0.06em', color: 'hsl(36 21% 95% / 0.85)', flexShrink: 0 }}>
+                  {c.initials}
+                </span>
+                <span style={{ fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: 'clamp(0.8rem, 1.1vw, 1rem)', letterSpacing: '0.04em', textTransform: 'uppercase', color: INK, whiteSpace: 'nowrap' }}>
+                  {c.name}
+                </span>
+              </div>
+              <img src={img('logo-340')} alt="" aria-hidden style={{ height: 16, width: 'auto', opacity: 0.18, margin: '0 clamp(1rem, 2.5vw, 2rem)', alignSelf: 'center', flexShrink: 0 }} />
+            </React.Fragment>
+          ))}
+        </Marquee>
       </section>
 
-      {/* CONTENT WE CREATE + EVERY INDUSTRY — two hover-image rectangles */}
-      <ContentIndustryShowcase />
-
-      <Testimonials />
+      {/* TESTIMONIALS — green with light quotes and pink names. */}
+      <Testimonials showCta={false} />
 
       <YesCTA />
       <Footer />

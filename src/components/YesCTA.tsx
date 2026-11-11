@@ -69,28 +69,14 @@ const YesCTA: React.FC = () => {
     <section
       className="w-full flex flex-col items-center justify-center overflow-hidden"
       style={{
-        background: 'hsl(0 0% 13%)',
-        paddingTop: 'clamp(1.75rem, 3.5vw, 2.75rem)',
-        paddingBottom: 'clamp(1.75rem, 3.5vw, 2.75rem)',
+        background: '#fff',
+        paddingTop: 'clamp(4rem, 8vw, 7rem)',
+        paddingBottom: 'clamp(4rem, 8vw, 7rem)',
         paddingLeft: '1.5rem',
         paddingRight: '1.5rem',
         position: 'relative',
       }}
     >
-      {/* Top rule */}
-      <motion.div
-        initial={{ scaleX: 0 }}
-        whileInView={{ scaleX: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-        style={{
-          width: '100%', maxWidth: 640, height: 1,
-          background: 'linear-gradient(90deg, transparent 0%, hsl(36 21% 95% / 0.08) 50%, transparent 100%)',
-          marginBottom: 'clamp(1rem, 2vw, 1.6rem)',
-          transformOrigin: 'center',
-        }}
-      />
-
       {/* Eyebrow */}
       <motion.p
         initial={{ opacity: 0, y: 16 }}
@@ -101,7 +87,7 @@ const YesCTA: React.FC = () => {
           fontFamily: "'Montserrat', sans-serif",
           fontWeight: 700, fontSize: '0.5rem',
           letterSpacing: '0.35em', textTransform: 'uppercase',
-          color: 'hsl(354 100% 87%)',
+          color: 'hsl(89 71% 15%)',
           marginBottom: '1.25rem',
         }}
       >
@@ -115,6 +101,8 @@ const YesCTA: React.FC = () => {
           line2={cta.headline.line2}
           size="clamp(2.6rem, 6vw, 5rem)"
           align="center"
+          solidColor="hsl(89 71% 15%)"
+          strokeColor="hsl(89 71% 15%)"
         />
       </div>
 
@@ -230,7 +218,7 @@ const YesCTA: React.FC = () => {
                     fontFamily: "'Poppins', sans-serif",
                     fontWeight: 700, fontSize: '0.6rem',
                     letterSpacing: '0.32em', textTransform: 'uppercase',
-                    color: 'hsl(36 21% 95% / 0.3)',
+                    color: 'hsl(0 0% 13% / 0.55)',
                   }}
                 >
                   {cta.nameLabel}
@@ -246,17 +234,17 @@ const YesCTA: React.FC = () => {
                   style={{
                     background: 'transparent',
                     border: 'none',
-                    borderBottom: '1px solid hsl(36 21% 95% / 0.16)',
+                    borderBottom: '1px solid hsl(0 0% 13% / 0.25)',
                     fontFamily: "'Poppins', sans-serif",
                     fontWeight: 600,
                     fontSize: 'clamp(1.6rem, 4vw, 2.8rem)',
-                    color: 'hsl(36 21% 95%)',
+                    color: 'hsl(0 0% 13%)',
                     outline: 'none',
                     textAlign: 'center',
                     minWidth: 'min(380px, 80vw)',
                     paddingBottom: '0.55rem',
                     letterSpacing: '-0.01em',
-                    caretColor: 'hsl(354 100% 87%)',
+                    caretColor: 'hsl(89 71% 15%)',
                   }}
                 />
               </div>
@@ -297,19 +285,6 @@ const YesCTA: React.FC = () => {
         </AnimatePresence>
       </div>
 
-      {/* Bottom rule */}
-      <motion.div
-        initial={{ scaleX: 0 }}
-        whileInView={{ scaleX: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
-        style={{
-          width: '100%', maxWidth: 640, height: 1,
-          background: 'linear-gradient(90deg, transparent 0%, hsl(36 21% 95% / 0.08) 50%, transparent 100%)',
-          marginTop: 'clamp(1rem, 2vw, 1.6rem)',
-          transformOrigin: 'center',
-        }}
-      />
     </section>
   );
 };

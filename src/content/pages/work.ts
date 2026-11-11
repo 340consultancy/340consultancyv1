@@ -34,6 +34,8 @@ export interface WorkContent {
   /** Small logo used as separator in the client marquee. */
   separatorLogo: AssetKey;
   clients: WorkClient[];
+  /** Heading above the client list (clients without a published case study). */
+  clientsHeading: string;
   stats: WorkStat[];
   cases: {
     eyebrow: string;
@@ -47,7 +49,7 @@ export const work: WorkContent = {
   hero: {
     image: 'work-hero',
     headline: { lead: 'OUR ', accent: 'WORK' },
-    subtitle: 'The numbers speak for themselves.',
+    subtitle: 'Strategy, management and content for brands working in English, German and Spanish. Here is what changed for three of them.',
     scrollLabel: 'SCROLL',
   },
   separatorLogo: 'logo-340-white',
@@ -61,6 +63,7 @@ export const work: WorkContent = {
     { initials: 'NE', color: '#24201c', name: 'New Edge' },
     { initials: 'WX', color: '#1c2020', name: 'Weltladen Xanten' },
   ],
+  clientsHeading: 'We also work with',
   stats: [
     { value: '+200', label: 'Followers in 10 days', client: '' },
     { value: '3K → 30K', label: 'Profile views', client: '' },
@@ -73,7 +76,7 @@ export const work: WorkContent = {
   cases: {
     eyebrow: 'RESULTS THAT MATTER',
     heading: { lead: 'Case ', accent: 'Studies' },
-    viewLabel: 'VIEW CASE',
+    viewLabel: 'Read the case study',
     cards: [
       { slug: 'galeria-eldorado', client: 'Galería Eldorado', tag: 'Strategy · DE', headline: 'ESTRATEGIA\nQUE\nFUNCIONA.', stat: '318 Qualified Leads', img: 'sea-3' },
       { slug: null, client: 'Bloom Collective', tag: 'Content + Copy · EN', headline: 'FROM 0\nTO 16K\nREACH.', stat: '+86% Engagement', img: 'sea-4' },

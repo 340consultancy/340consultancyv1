@@ -46,8 +46,8 @@ export const showcase: { content: ShowcaseHalf; industry: ShowcaseHalf } = {
   industry: {
     text: {
       eyebrow: "INDUSTRIES WE'VE WORKED IN",
-      titleLead: 'Every',
-      titleAccent: 'industry.',
+      titleLead: 'Many',
+      titleAccent: 'worlds.',
       sub: 'No two fields are alike. Neither is the work we make for them.',
     },
     items: [
@@ -57,6 +57,8 @@ export const showcase: { content: ShowcaseHalf; industry: ShowcaseHalf } = {
       { label: 'Life Coaching', img: 'showcase-coaching' },
       { label: 'Retail', img: 'showcase-retail' },
       { label: 'Education', img: 'showcase-education' },
+      { label: 'Travel', img: 'industry-travel' },
+      { label: 'Tech', img: 'ipad-zebra' },
     ],
     defaultImages: ['linda-nancy', 'founders'],
   },

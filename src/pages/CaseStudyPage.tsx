@@ -1,359 +1,208 @@
+// /work/:slug — case study as a long-read.
+// Green cover with the headline and the facts, a wide photo that breaks out
+// of the cover, then the three chapters (challenge → approach → results)
+// with a sticky chapter title, the numbers, and the next case as the closing page.
+
 import React from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
-import { ArrowRight, ArrowLeft, ExternalLink } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Link, useParams } from 'react-router-dom';
+import { motion, useReducedMotion } from 'framer-motion';
 import TopNav from '@/components/TopNav';
 import Footer from '@/components/Footer';
 import YesCTA from '@/components/YesCTA';
-import { useIsMobile } from '@/hooks/use-mobile';
 import { caseStudies, caseStudyLabels, img } from '@/content';
 
+const GREEN = 'hsl(89 71% 15%)';
+const OFFWHITE = 'hsl(36 21% 95%)';
+const BEIGE = 'hsl(36 18% 92%)';
+const INK = 'hsl(0 0% 13%)';
 const ROSA = 'hsl(354 100% 87%)';
+const FONT_DISPLAY = "'Kelson Sans BG', sans-serif";
+const FONT_BODY = "'Poppins', sans-serif";
+const EASE = [0.16, 1, 0.3, 1] as const;
+
+const css = `
+.cs-root a:focus-visible { outline: 2px solid ${ROSA}; outline-offset: 4px; }
+.cs-facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem clamp(1rem, 3vw, 3rem); }
+.cs-chapter { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(1rem, 2.5vw, 2.5rem); }
+.cs-chapter > .cs-label { grid-column: 1 / span 3; position: sticky; top: 120px; align-self: start; }
+.cs-chapter > .cs-body { grid-column: 5 / span 6; }
+.cs-pair { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(1rem, 2.5vw, 2.5rem); align-items: start; }
+.cs-pair > :first-child { grid-column: 1 / span 6; aspect-ratio: 4 / 5; }
+.cs-pair > :last-child { grid-column: 8 / span 5; aspect-ratio: 1 / 1; margin-top: clamp(4rem, 14vw, 14rem); }
+.cs-pair.is-single > :first-child { grid-column: 1 / -1; aspect-ratio: 16 / 9; margin-top: 0; }
+.cs-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.cs-stats > div + div { border-left: 1px solid hsl(0 0% 13% / 0.12); }
+.cs-next { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); min-height: 70vh; color: ${OFFWHITE}; text-decoration: none; }
+.cs-next img { transition: transform 1.4s cubic-bezier(.16,1,.3,1); }
+.cs-next:hover img { transform: scale(1.04); }
+.cs-back { color: hsl(36 21% 95% / 0.7); text-decoration: none; transition: color .2s ease; }
+.cs-back:hover { color: ${ROSA}; }
+@media (max-width: 860px) {
+  .cs-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cs-cover { aspect-ratio: 4 / 3 !important; }
+  .cs-chapter > .cs-label, .cs-chapter > .cs-body { grid-column: 1 / -1; }
+  .cs-chapter > .cs-label { position: static; margin-bottom: 1.25rem; }
+  .cs-pair > :first-child, .cs-pair > :last-child { grid-column: 1 / -1; margin-top: 0; }
+  .cs-pair > :last-child { margin-top: 1rem; }
+  .cs-stats { grid-template-columns: 1fr; }
+  .cs-stats > div + div { border-left: 0; border-top: 1px solid hsl(0 0% 13% / 0.12); }
+  .cs-next { grid-template-columns: 1fr; }
+  .cs-next > :first-child { min-height: 42vh; }
+}
+`;
+
+const Photo: React.FC<{ src: string; natural?: boolean; style?: React.CSSProperties; className?: string }> = ({ src, natural = false, style, className }) => (
+  <div className={className} style={{ position: 'relative', overflow: 'hidden', background: 'hsl(36 14% 88%)', ...(natural ? { aspectRatio: 'auto' } : {}), ...style }}>
+    <img src={src} alt="" loading="lazy" style={{ display: 'block', position: natural ? 'relative' : 'absolute', inset: 0, width: '100%', height: natural ? 'auto' : '100%', objectFit: 'cover' }} />
+  </div>
+);
+
+const Chapter: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
+  <section className="cs-chapter">
+    <h2 className="cs-label" style={{ fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: 'clamp(1.6rem, 2.4vw, 2.2rem)', lineHeight: 1, textTransform: 'uppercase', color: GREEN, margin: 0 }}>
+      {title}
+    </h2>
+    <div className="cs-body">{children}</div>
+  </section>
+);
+
+const bodyText: React.CSSProperties = { fontFamily: FONT_BODY, fontSize: 'clamp(1rem, 1.15vw, 1.1rem)', lineHeight: 1.8, color: 'hsl(0 0% 13% / 0.82)', maxWidth: '62ch', margin: 0 };
+
+/** "Café & Retail · DE" → "Café & Retail, DE" */
+const industryText = (industry: string) => industry.split('·').map((s) => s.trim()).join(', ');
 
 const CaseStudyPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
-  const navigate = useNavigate();
-  const isMobile = useIsMobile();
-  const study = caseStudies.find((c) => c.slug === slug);
-  const others = caseStudies.filter((c) => c.slug !== slug);
+  const reduce = useReducedMotion();
+  const index = caseStudies.findIndex((c) => c.slug === slug);
+  const study = caseStudies[index];
 
   if (!study) {
     return (
-      <div style={{ minHeight: '100vh', background: 'hsl(0 0% 13%)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div style={{ minHeight: '100vh', background: GREEN, display: 'grid', placeItems: 'center', color: OFFWHITE, fontFamily: FONT_BODY }}>
         <div style={{ textAlign: 'center' }}>
-          <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: '0.6rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'hsl(36 21% 95% / 0.35)', marginBottom: '1.5rem' }}>
-            {caseStudyLabels.notFound.message}
-          </p>
-          <Link to="/work" style={{ fontFamily: "'Kelson Sans BG', sans-serif", color: ROSA, textDecoration: 'none', fontSize: '0.9rem', letterSpacing: '0.1em' }}>
-            {caseStudyLabels.notFound.backLabel}
-          </Link>
+          <p style={{ marginBottom: '1rem' }}>{caseStudyLabels.notFound.message}</p>
+          <Link to="/work" style={{ color: ROSA }}>{caseStudyLabels.notFound.backLabel}</Link>
         </div>
       </div>
     );
   }
 
+  const next = caseStudies[(index + 1) % caseStudies.length];
+  // Editors can provide fewer than the bundled pair; never render an empty src.
+  const visuals = (Array.isArray(study.visuals) ? study.visuals : [])
+    .filter((photo) => typeof photo === 'string' && photo.trim() !== '')
+    .slice(0, 2);
+  // Studio Displays ends with the results; older CMS content may still
+  // contain its removed gallery photo.
+  const widePhoto = study.slug === 'studio-displays' ? undefined : study.gallery[0] ?? visuals[0];
+  const facts: { label: string; value: string; href?: string }[] = [
+    { label: caseStudyLabels.meta.client, value: study.client },
+    { label: caseStudyLabels.meta.industry, value: industryText(study.industry) },
+    { label: caseStudyLabels.meta.services, value: study.services.split('+').map((s) => s.trim()).join(', ') },
+    ...(study.website ? [{ label: caseStudyLabels.meta.website, value: study.website, href: `https://${study.website}` }] : []),
+  ];
+
   return (
-    <div style={{ minHeight: '100vh', background: 'hsl(0 0% 13%)' }}>
+    <div className="cs-root" style={{ minHeight: '100vh', background: OFFWHITE }}>
+      <style>{css}</style>
       <TopNav />
 
-      {/* HERO — full bleed dark, 88vh to align with TopNav */}
-      <section style={{ position: 'relative', height: '88vh', overflow: 'hidden', background: 'hsl(0 0% 5%)' }}>
-        <img
-          src={img(study.heroImg)}
-          alt={study.client}
-          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.28 }}
-        />
-        {/* Gradient overlay */}
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, hsl(0 0% 5% / 0.3) 0%, hsl(0 0% 5% / 0.05) 35%, hsl(0 0% 5% / 0.7) 75%, hsl(0 0% 5%) 100%)' }} />
-
-
-        {/* Hero content */}
-        <div style={{
-          position: 'relative', zIndex: 10, height: '100%',
-          display: 'flex', flexDirection: 'column', justifyContent: 'flex-end',
-          padding: 'clamp(6rem, 10vw, 9rem) clamp(1.5rem, 5vw, 5rem) clamp(2rem, 4vh, 3.5rem)',
-        }}>
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
+      {/* COVER */}
+      <header style={{ background: GREEN, color: OFFWHITE }}>
+        <div className="container-wide" style={{ paddingTop: 'calc(88px + clamp(2.5rem, 6vh, 4.5rem))', paddingBottom: 'clamp(9rem, 22vh, 16rem)' }}>
+          <Link to="/work" className="cs-back" style={{ fontFamily: FONT_BODY, fontSize: '0.9rem' }}>
+            {caseStudyLabels.backLabel}
+          </Link>
+          <motion.h1
+            initial={reduce ? false : { opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 1, ease: EASE }}
+            style={{ fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: 'clamp(3rem, 9.5vw, 9.5rem)', lineHeight: 1.12, textTransform: 'uppercase', color: ROSA, margin: 'clamp(2.5rem, 6vh, 4.5rem) 0 clamp(3rem, 7vh, 5rem)', maxWidth: '12ch' }}
           >
-            {/* Industry · Services tag line */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: '1.2rem' }}>
-              <span style={{ fontFamily: "'Poppins', sans-serif", fontSize: '0.6rem', letterSpacing: '0.28em', textTransform: 'uppercase', color: 'hsl(36 21% 95% / 0.38)' }}>
-                {study.industry}
-              </span>
-              <span style={{ width: 32, height: 1, background: 'hsl(36 21% 95% / 0.18)', flexShrink: 0 }} />
-              <span style={{ fontFamily: "'Poppins', sans-serif", fontSize: '0.6rem', letterSpacing: '0.28em', textTransform: 'uppercase', color: ROSA }}>
-                {study.services}
-              </span>
-            </div>
-
-            {/* Client name */}
-            <p style={{
-              fontFamily: "'Poppins', sans-serif", fontWeight: 800,
-              fontSize: 'clamp(0.9rem, 2vw, 1.3rem)',
-              color: 'hsl(36 21% 95% / 0.42)',
-              letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '0.6rem',
-            }}>
-              {study.client}
-            </p>
-
-            {/* Headline */}
-            <h1 style={{
-              fontFamily: "'Kelson Sans BG', sans-serif",
-              fontSize: 'clamp(2.75rem, 12vw, 13rem)',
-              lineHeight: 0.88, letterSpacing: '0.01em',
-              color: 'hsl(36 21% 95%)',
-              textShadow: '0 4px 40px rgba(0,0,0,0.45)',
-              whiteSpace: 'pre-line',
-              margin: 0,
-            }}>
-              {study.headline}
-            </h1>
-          </motion.div>
-
+            {study.headline}
+          </motion.h1>
+          <dl className="cs-facts" style={{ margin: 0, borderTop: '1px solid hsl(36 21% 95% / 0.2)', paddingTop: '1.4rem' }}>
+            {facts.map((f) => (
+              <div key={f.label}>
+                <dt style={{ fontFamily: FONT_BODY, fontSize: '0.8rem', color: 'hsl(36 21% 95% / 0.55)', marginBottom: '0.35rem' }}>{f.label}</dt>
+                <dd style={{ fontFamily: FONT_BODY, fontWeight: 500, fontSize: '0.95rem', lineHeight: 1.45, margin: 0 }}>
+                  {f.href
+                    ? <a href={f.href} target="_blank" rel="noopener noreferrer" style={{ color: ROSA, textDecoration: 'none' }}>{f.value}</a>
+                    : f.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
         </div>
-      </section>
+      </header>
 
-      {/* ← BACK — below hero, top of content */}
-      <div style={{ background: 'hsl(0 0% 13%)', padding: 'clamp(1.2rem, 2vw, 1.8rem) clamp(1.5rem, 5vw, 5rem)' }}>
-        <motion.button
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          onClick={() => navigate('/work')}
-          style={{
-            background: 'none', border: 'none', cursor: 'pointer',
-            display: 'inline-flex', alignItems: 'center', gap: 8,
-            fontFamily: "'Poppins', sans-serif", fontWeight: 700,
-            fontSize: '0.58rem', letterSpacing: '0.26em', textTransform: 'uppercase',
-            color: 'hsl(36 21% 95% / 0.35)',
-            transition: 'color 0.2s ease', padding: 0,
-          }}
-          onMouseEnter={e => (e.currentTarget.style.color = ROSA)}
-          onMouseLeave={e => (e.currentTarget.style.color = 'hsl(36 21% 95% / 0.35)')}
+      {/* COVER PHOTO — breaks out of the green band. */}
+      <div className="container-wide" style={{ marginTop: 'clamp(-14rem, -18vh, -7rem)' }}>
+        <motion.div
+          initial={reduce ? false : { clipPath: 'inset(0% 6% 0% 6%)' }}
+          animate={{ clipPath: 'inset(0% 0% 0% 0%)' }}
+          transition={{ duration: 1.4, delay: 0.25, ease: EASE }}
         >
-          <ArrowLeft size={12} />
-          {caseStudyLabels.backLabel}
-        </motion.button>
+          <Photo src={img(study.heroImg)} className="cs-cover" style={{ aspectRatio: '21 / 10' }} />
+        </motion.div>
       </div>
 
-      {/* META GRID */}
-      <section style={{ background: 'hsl(0 0% 13%)' }}>
-        <div className="container-wide" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1px', background: 'hsl(36 21% 95% / 0.05)' }}>
-          {[
-            { label: caseStudyLabels.meta.client, value: study.client },
-            { label: caseStudyLabels.meta.services, value: study.services },
-            ...(study.website ? [{ label: caseStudyLabels.meta.website, value: study.website, href: `https://${study.website}` }] : []),
-            { label: caseStudyLabels.meta.industry, value: study.industry },
-          ].map((item, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.07 }}
-              style={{ background: 'hsl(0 0% 7%)', padding: 'clamp(1.5rem, 4vw, 2.5rem)' }}
-            >
-              <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: '0.52rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'hsl(36 21% 95% / 0.25)', marginBottom: '0.6rem' }}>
-                {item.label}
-              </p>
-              {'href' in item && item.href ? (
-                <a href={item.href} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: "'Poppins', sans-serif", fontWeight: 700, fontSize: 'clamp(0.82rem, 1.4vw, 0.98rem)', color: ROSA, textDecoration: 'none' }}>
-                  {item.value}
-                  <ExternalLink size={11} />
-                </a>
-              ) : (
-                <p style={{ fontFamily: "'Poppins', sans-serif", fontWeight: 700, fontSize: 'clamp(0.82rem, 1.4vw, 0.98rem)', color: 'hsl(36 21% 95% / 0.82)', lineHeight: 1.35 }}>
-                  {item.value}
-                </p>
-              )}
-            </motion.div>
-          ))}
-        </div>
-      </section>
+      {/* LEDE */}
+      <div className="container-wide" style={{ paddingTop: 'clamp(5rem, 12vh, 9rem)', paddingBottom: 'clamp(5rem, 12vh, 9rem)' }}>
+        <p style={{ fontFamily: FONT_DISPLAY, fontWeight: 300, fontSize: 'clamp(1.6rem, 3.1vw, 2.9rem)', lineHeight: 1.22, color: INK, maxWidth: '32ch', margin: '0 auto' }}>
+          {study.intro}
+        </p>
+      </div>
 
-      {/* INTRO */}
-      <section style={{ padding: 'clamp(3.5rem, 8vw, 7rem) clamp(1.5rem, 5vw, 5rem)', background: 'hsl(0 0% 13%)' }}>
-        <div style={{ maxWidth: 860 }}>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            style={{
-              fontFamily: "'Montserrat', serif",
-              fontStyle: 'italic',
-              fontSize: 'clamp(1.4rem, 3vw, 2.5rem)',
-              lineHeight: 1.4,
-              color: 'hsl(36 21% 95% / 0.85)',
-              letterSpacing: '-0.01em',
-            }}
-          >
-            {study.intro}
-          </motion.p>
-        </div>
-      </section>
+      {/* CHAPTERS */}
+      <div className="container-wide" style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(5rem, 13vh, 9rem)', paddingBottom: 'clamp(5rem, 12vh, 9rem)' }}>
+        <Chapter title={caseStudyLabels.sections.challenge}>
+          <p style={bodyText}>{study.challenge}</p>
+        </Chapter>
 
-      {/* THE CHALLENGE */}
-      <section style={{ padding: 'clamp(3rem, 7vw, 6rem) clamp(1.5rem, 5vw, 5rem)', background: 'hsl(0 0% 13%)', borderTop: 'none' }}>
-        <div style={{ maxWidth: 760 }}>
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: '0.48rem', letterSpacing: '0.32em', textTransform: 'uppercase', color: 'hsl(354 100% 87%)', marginBottom: '1rem' }}>
-              {caseStudyLabels.sections.challenge}
-            </p>
-            <div style={{ width: 28, height: 2, background: ROSA, borderRadius: 999, marginBottom: '1.6rem' }} />
-            <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: 'clamp(0.92rem, 1.6vw, 1.05rem)', lineHeight: 1.9, color: 'hsl(36 21% 95% / 0.65)', fontWeight: 400 }}>
-              {study.challenge}
-            </p>
-          </motion.div>
-        </div>
-      </section>
+        {visuals.length > 0 && (
+          <div className={`cs-pair${visuals.length === 1 ? ' is-single' : ''}`}>
+            {visuals.map((photo, i) => <Photo key={i} src={img(photo)} natural={study.slug !== 'studio-displays'} />)}
+          </div>
+        )}
 
-      {/* CASE VISUALS — 3 square images in one row (feedback #59) */}
-      <section style={{ background: 'hsl(0 0% 13%)', padding: 'clamp(2.5rem,5vw,4.5rem) clamp(1.5rem,5vw,5rem)' }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: 'clamp(0.6rem,1.5vw,1.2rem)' }}>
-          {[...study.visuals, ...study.gallery].slice(0, 3).map((key, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-              style={{ aspectRatio: '1 / 1', overflow: 'hidden', borderRadius: 8 }}
-            >
-              <img
-                src={img(key)}
-                alt=""
-                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.7s ease' }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLImageElement).style.transform = 'scale(1.05)'; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLImageElement).style.transform = 'scale(1)'; }}
-              />
-            </motion.div>
-          ))}
-        </div>
-      </section>
+        <Chapter title={caseStudyLabels.sections.approach}>
+          <p style={bodyText}>{study.approach}</p>
+        </Chapter>
 
-      {/* OUR APPROACH */}
-      <section style={{ padding: 'clamp(3rem, 7vw, 6rem) clamp(1.5rem, 5vw, 5rem)', background: 'hsl(0 0% 13%)', borderTop: 'none' }}>
-        <div style={{ maxWidth: 760 }}>
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: '0.48rem', letterSpacing: '0.32em', textTransform: 'uppercase', color: 'hsl(354 100% 87%)', marginBottom: '1rem' }}>
-              {caseStudyLabels.sections.approach}
-            </p>
-            <div style={{ width: 28, height: 2, background: ROSA, borderRadius: 999, marginBottom: '1.6rem' }} />
-            <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: 'clamp(0.92rem, 1.6vw, 1.05rem)', lineHeight: 1.9, color: 'hsl(36 21% 95% / 0.65)', fontWeight: 400 }}>
-              {study.approach}
-            </p>
-          </motion.div>
-        </div>
-      </section>
+        {widePhoto && <Photo src={img(widePhoto)} natural={study.slug !== 'studio-displays'} style={study.slug === 'studio-displays' ? { aspectRatio: '16 / 7' } : undefined} />}
 
-      {/* RESULTS TEXT */}
-      <section style={{ padding: 'clamp(3rem, 7vw, 6rem) clamp(1.5rem, 5vw, 5rem)', background: 'hsl(0 0% 13%)', borderTop: 'none' }}>
-        <div style={{ maxWidth: 760 }}>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-          >
-            <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: '0.48rem', letterSpacing: '0.32em', textTransform: 'uppercase', color: 'hsl(354 100% 87%)', marginBottom: '1rem' }}>
-              {caseStudyLabels.sections.results}
-            </p>
-            <div style={{ width: 28, height: 2, background: ROSA, borderRadius: 999, marginBottom: '1.6rem' }} />
-            <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: 'clamp(0.92rem, 1.6vw, 1.05rem)', lineHeight: 1.9, color: 'hsl(36 21% 95% / 0.65)', fontWeight: 400 }}>
-              {study.resultText}
-            </p>
-          </motion.div>
-        </div>
-      </section>
+        <Chapter title={caseStudyLabels.sections.results}>
+          <p style={bodyText}>{study.resultText}</p>
+        </Chapter>
 
-
-      {/* STATS STRIP */}
-      <section style={{ background: ROSA, overflow: 'hidden' }}>
-        <div className="container-wide" style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : `repeat(${study.stats.length}, 1fr)`, gap: '1px', background: 'rgba(0,0,0,0.1)' }}>
-          {study.stats.map((stat, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.55, delay: i * 0.1 }}
-              style={{ background: ROSA, padding: 'clamp(2rem, 5vw, 3.5rem) clamp(1.5rem, 3vw, 2.5rem)', textAlign: 'center' }}
-            >
-              <p style={{ fontFamily: "'Kelson Sans BG', sans-serif", fontSize: 'clamp(3rem, 6vw, 5.5rem)', lineHeight: 0.9, color: 'hsl(0 0% 8%)', letterSpacing: '0.02em' }}>
-                {stat.value}
-              </p>
-              <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: '0.62rem', letterSpacing: '0.22em', textTransform: 'uppercase', color: 'hsl(0 0% 8% / 0.52)', marginTop: '0.7rem' }}>
-                {stat.label}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* OTHER CASES */}
-      <section style={{ padding: 'clamp(3.5rem, 8vw, 7rem) clamp(1.5rem, 5vw, 5rem)', background: 'hsl(0 0% 13%)' }}>
-        <div className="container-wide">
-          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: 'clamp(2rem, 5vw, 3.5rem)', gap: '1rem', flexWrap: 'wrap' }}>
-            <div>
-              <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: '0.48rem', letterSpacing: '0.32em', textTransform: 'uppercase', color: 'hsl(36 21% 95% / 0.25)', marginBottom: '0.7rem' }}>
-                {caseStudyLabels.others.eyebrow}
-              </p>
-              <h2 style={{ fontFamily: "'Kelson Sans BG', sans-serif", fontSize: 'clamp(2.4rem, 5.5vw, 5rem)', lineHeight: 0.9, color: 'hsl(36 21% 95%)', margin: 0 }}>
-                <span style={{ color: 'hsl(36 21% 95%)' }}>{caseStudyLabels.others.heading.lead}</span>
-                <span style={{ color: 'transparent', WebkitTextStroke: `1.5px ${ROSA}` }}>{caseStudyLabels.others.heading.accent}</span>
-              </h2>
+        {/* THE NUMBERS */}
+        <div className="cs-stats" style={{ background: BEIGE }}>
+          {study.stats.map((s) => (
+            <div key={s.label} style={{ padding: 'clamp(2rem, 4vw, 3.5rem)' }}>
+              <p style={{ fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: 'clamp(2.8rem, 5.5vw, 5.2rem)', lineHeight: 1.12, color: GREEN, margin: '0 0 0.8rem' }}>{s.value}</p>
+              <p style={{ fontFamily: FONT_BODY, fontSize: '0.95rem', lineHeight: 1.5, color: 'hsl(0 0% 13% / 0.7)', margin: 0, maxWidth: '26ch' }}>{s.label}</p>
             </div>
-            <Link
-              to="/work"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontFamily: "'Poppins', sans-serif", fontWeight: 700, fontSize: '0.58rem', letterSpacing: '0.22em', textTransform: 'uppercase', color: 'hsl(36 21% 95% / 0.4)', textDecoration: 'none', transition: 'color 0.2s ease' }}
-              onMouseEnter={e => (e.currentTarget.style.color = ROSA)}
-              onMouseLeave={e => (e.currentTarget.style.color = 'hsl(36 21% 95% / 0.4)')}
-            >
-              {caseStudyLabels.others.allWorkLabel} <ArrowRight size={12} />
-            </Link>
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: '2px' }}>
-            {others.map((other, i) => (
-              <motion.div
-                key={other.slug}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.65, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                style={{ flex: 1, position: 'relative', overflow: 'hidden', minHeight: isMobile ? 'clamp(240px, 60vw, 340px)' : 'clamp(280px, 42vh, 480px)', borderRadius: 8 }}
-                className="group"
-              >
-                <Link to={`/work/${other.slug}`} style={{ display: 'block', width: '100%', height: '100%', textDecoration: 'none' }}>
-                  <img
-                    src={img(other.cardImg)}
-                    alt={other.client}
-                    style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.5) saturate(0.8)', transition: 'transform 0.7s ease, filter 0.5s ease' }}
-                    className="group-hover:scale-105"
-                    onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.filter = 'brightness(0.65) saturate(0.9)'; }}
-                    onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.filter = 'brightness(0.5) saturate(0.8)'; }}
-                  />
-                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0.75) 100%)' }} />
-                  {/* Client info */}
-                  <div style={{ position: 'absolute', top: 20, left: 20 }}>
-                    <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: '8px', color: 'rgba(255,255,255,0.5)', letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 700 }}>{other.client}</p>
-                    <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: '7px', color: 'rgba(255,255,255,0.26)', letterSpacing: '0.14em', textTransform: 'uppercase', marginTop: 3 }}>{other.cardTag}</p>
-                  </div>
-                  {/* Stat badge — pill */}
-                  <div style={{ position: 'absolute', top: 20, right: 20, background: 'rgba(255,255,255,0.09)', backdropFilter: 'blur(8px)', border: '1px solid rgba(255,255,255,0.14)', padding: '4px 12px', borderRadius: 999 }}>
-                    <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: '7.5px', color: 'rgba(255,255,255,0.82)', letterSpacing: '0.12em', textTransform: 'uppercase', fontWeight: 700 }}>{other.cardStat}</p>
-                  </div>
-                  {/* Headline */}
-                  <div style={{ position: 'absolute', bottom: 20, left: 20, right: 20 }}>
-                    <p style={{ fontFamily: "'Kelson Sans BG', sans-serif", fontSize: 'clamp(2rem, 4vw, 4rem)', color: '#fff', lineHeight: 0.92, letterSpacing: '0.02em', whiteSpace: 'pre-line', textShadow: '0 2px 20px rgba(0,0,0,0.4)' }}>{other.cardHeadline}</p>
-                  </div>
-                  {/* VIEW CASE hover pill */}
-                  <div style={{ position: 'absolute', bottom: 20, right: 20 }}>
-                    <div style={{ background: ROSA, borderRadius: 999, padding: '8px 14px', display: 'flex', alignItems: 'center', gap: 6, opacity: isMobile ? 1 : 0, transition: 'opacity 0.3s ease' }} className={isMobile ? undefined : 'group-hover:opacity-100'}>
-                      <span style={{ fontFamily: "'Poppins', sans-serif", fontSize: '0.55rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'hsl(0 0% 8%)', fontWeight: 700 }}>{caseStudyLabels.others.viewCaseLabel}</span>
-                      <ArrowRight size={10} color="hsl(0 0% 8%)" />
-                    </div>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
+          ))}
         </div>
-      </section>
+      </div>
+
+      {/* NEXT CASE — the closing page. */}
+      {next && next.slug !== study.slug && (
+        <Link to={`/work/${next.slug}`} className="cs-next" style={{ background: GREEN }}>
+          <div style={{ position: 'relative', overflow: 'hidden' }}>
+            <img src={img(next.heroImg)} alt="" loading="lazy" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+          </div>
+          <div style={{ padding: 'clamp(2.5rem, 6vw, 6rem)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '3rem' }}>
+            <p style={{ fontFamily: FONT_BODY, fontSize: '0.9rem', color: 'hsl(36 21% 95% / 0.6)', margin: 0 }}>{caseStudyLabels.others.eyebrow}</p>
+            <div>
+              <p style={{ fontFamily: FONT_BODY, fontWeight: 600, fontSize: '1rem', margin: '0 0 1rem' }}>{next.client}</p>
+              <p style={{ fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: 'clamp(2.4rem, 5vw, 5rem)', lineHeight: 1.12, textTransform: 'uppercase', margin: 0 }}>{next.headline}</p>
+            </div>
+          </div>
+        </Link>
+      )}
 
       <YesCTA />
       <Footer />

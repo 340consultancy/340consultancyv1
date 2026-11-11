@@ -48,8 +48,8 @@ export const up2date: Up2dateContent = {
     buttonLabel: 'GET IT FOR FREE →',
     successToast: 'Thanks! Check your inbox.',
     errorToast: 'Something went wrong — please try again in a moment.',
-    image: 'starterguide',
-    imageAlt: 'Social Media Content Calendar',
+    image: 'founders',
+    imageAlt: 'Nancy and Linda, founders of 340 Consultancy',
   },
   newsletter: {
     eyebrow: 'NEWSLETTER',

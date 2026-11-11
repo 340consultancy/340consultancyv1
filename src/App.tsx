@@ -112,7 +112,10 @@ function AppRoutes() {
         animate="center"
         exit="exit"
         transition={{ duration: 0.38, ease: [0.32, 0, 0.18, 1] }}
-        style={{ position: 'relative', width: '100%', minHeight: '100vh', overflow: 'hidden' }}
+        // `clip`, not `hidden`: same clipping without creating a scroll container,
+        // so the sticky booking card on /services/:slug and the sticky chapter
+        // titles on /work/:slug keep working.
+        style={{ position: 'relative', width: '100%', minHeight: '100vh', overflow: /^\/(services|work)\/[^/]+$/.test(location.pathname) ? 'clip' : 'hidden' }}
       >
         <Routes location={location}>
           <Route path="/" element={<Index />} />

@@ -284,7 +284,8 @@ interface TextSideProps {
   external?: boolean;
 }
 
-const TextSide: React.FC<TextSideProps> = ({ eyebrow, headline, body, ctaLabel, ctaHref, external }) => {
+const TextSide: React.FC<TextSideProps & { className?: string; light?: boolean }> = ({ eyebrow, headline, body, ctaLabel, ctaHref, external, className = 'bg-foreground', light = false }) => {
+  const ctaColor = light ? 'hsl(89 71% 15%)' : 'hsl(354 100% 87%)';
   const inner = (
     <>
       <span>{ctaLabel}</span>
@@ -298,23 +299,24 @@ const TextSide: React.FC<TextSideProps> = ({ eyebrow, headline, body, ctaLabel, 
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-12% 0px -12% 0px' }}
       transition={{ duration: 0.85, ease: EASE }}
-      className="flex flex-col justify-center bg-foreground overflow-hidden"
+      className={`flex flex-col justify-center overflow-hidden ${className}`}
       style={{
         padding: 'clamp(1.5rem, 3.5vw, 3rem)',
         borderTop: 'none',
       }}
     >
-      <p className="text-micro mb-3 tracking-[0.3em]">{eyebrow}</p>
+      <p className="text-micro mb-3 tracking-[0.3em]" style={light ? { color: 'hsl(89 71% 15%)' } : undefined}>{eyebrow}</p>
       <SplitHeading
         line1={headline[0]}
         line2={headline[1]}
         size="clamp(1.6rem, 3.2vw, 2.8rem)"
         className="mb-4"
+        {...(light ? { solidColor: 'hsl(89 71% 15%)', strokeColor: 'hsl(89 71% 15%)' } : {})}
       />
       <p
         className="leading-[1.7] mb-6"
         style={{
-          color: 'hsl(36 21% 95% / 0.65)',
+          color: light ? 'hsl(0 0% 13% / 0.7)' : 'hsl(36 21% 95% / 0.65)',
           maxWidth: '32ch',
           fontSize: 'clamp(0.8rem, 0.95vw, 0.95rem)',
         }}
@@ -327,7 +329,7 @@ const TextSide: React.FC<TextSideProps> = ({ eyebrow, headline, body, ctaLabel, 
           target="_blank"
           rel="noreferrer"
           className="btn-inline text-primary inline-flex items-center gap-2 self-start"
-          style={{ color: 'hsl(354 100% 87%)' }}
+          style={{ color: ctaColor }}
         >
           {inner}
         </a>
@@ -335,7 +337,7 @@ const TextSide: React.FC<TextSideProps> = ({ eyebrow, headline, body, ctaLabel, 
         <Link
           to={ctaHref}
           className="btn-inline text-primary inline-flex items-center gap-2 self-start"
-          style={{ color: 'hsl(354 100% 87%)' }}
+          style={{ color: ctaColor }}
         >
           {inner}
         </Link>
@@ -392,5 +394,26 @@ const BlogSection: React.FC = () => {
     </section>
   );
 };
+
+/** The Instagram row on its own, on brand green (home page and UP2DATE). */
+export const SocialPostsSection: React.FC<{ tone?: 'green' | 'light' }> = ({ tone = 'green' }) => (
+  <section aria-label={blogSection.social.headline.join(' ')} style={{ background: tone === 'green' ? 'hsl(89 71% 15%)' : '#fff', color: tone === 'green' ? 'hsl(36 21% 95%)' : 'hsl(0 0% 13%)', paddingTop: 'clamp(3rem, 6vw, 5rem)', paddingBottom: 'clamp(3rem, 6vw, 5rem)' }}>
+    <div className="grid grid-cols-1 md:grid-cols-[35fr_65fr] md:h-[56vh]">
+      <TextSide
+        className=""
+        light={tone === 'light'}
+        eyebrow={blogSection.social.eyebrow}
+        headline={blogSection.social.headline}
+        body={blogSection.social.body}
+        ctaLabel={blogSection.social.ctaLabel}
+        ctaHref={blogSection.social.ctaHref}
+        external={blogSection.social.external}
+      />
+      <div className="relative overflow-hidden h-[60vh] md:h-full">
+        <InstagramEmbeds posts={igPostUrls} tone={tone === 'light' ? 'onLight' : 'onDark'} />
+      </div>
+    </div>
+  </section>
+);
 
 export default BlogSection;

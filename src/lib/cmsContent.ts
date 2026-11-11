@@ -14,6 +14,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { strapiMediaUrl } from '@/lib/strapi';
+import legacyDefaults from './cmsLegacyDefaults.json';
 import {
   nav, footer, cta, showcase,
   testimonials, testimonialsCta,
@@ -25,6 +26,18 @@ import {
 
 const STRAPI_URL = import.meta.env.VITE_STRAPI_URL as string | undefined;
 const FETCH_TIMEOUT_MS = 4000;
+
+// Capture release defaults before hydration mutates the exported content.
+const releaseDefaults = {
+  blogBodies: Object.fromEntries(blogArticles.map((post) => [post.id, post.body])),
+  industryHeading: {
+    titleLead: showcase.industry.text.titleLead,
+    titleAccent: showcase.industry.text.titleAccent,
+  },
+  additionalIndustries: showcase.industry.items.slice(legacyDefaults.industry.labels.length).map((item) => ({ ...item })),
+  workSubtitle: work.hero.subtitle,
+  workViewLabel: work.cases.viewLabel,
+};
 
 /** Strapi bookkeeping keys that must never leak into the content objects
  *  (alsoOnThisPage is the CMS-only editor guide shown on page singles). */
@@ -138,6 +151,46 @@ interface SiteContentPayload {
   instagramPosts?: unknown[];
 }
 
+/** Upgrade only untouched defaults from the previous client release.
+ *  The legacy snapshot comes from client/main:cms/data/seed.json. Custom
+ *  text, metadata and uploaded media continue through the normal CMS merge. */
+function upgradeLegacyDefaults(payload: SiteContentPayload): void {
+  if (Array.isArray(payload.blogPosts)) {
+    for (const post of payload.blogPosts) {
+      if (!isPlainObject(post) || typeof post.slug !== 'string') continue;
+      const oldBody = legacyDefaults.blogBodies[post.slug];
+      const updatedBody = releaseDefaults.blogBodies[post.slug];
+      if (typeof oldBody === 'string' && post.body === oldBody && typeof updatedBody === 'string') {
+        post.body = updatedBody;
+      }
+    }
+  }
+
+  const industry = payload.global?.showcaseIndustry;
+  if (isPlainObject(industry)) {
+    const text = industry.text;
+    // Treat the two-part heading as one value so partially edited headings stay intact.
+    if (isPlainObject(text) && text.titleLead === legacyDefaults.industry.titleLead && text.titleAccent === legacyDefaults.industry.titleAccent) {
+      Object.assign(text, releaseDefaults.industryHeading);
+    }
+    const items = industry.items;
+    const labels = legacyDefaults.industry.labels;
+    if (Array.isArray(items) && items.length === labels.length && items.every((item, index) => isPlainObject(item) && item.label === labels[index])) {
+      items.push(...releaseDefaults.additionalIndustries.map((item) => ({ ...item })));
+    }
+  }
+
+  const workPage = payload.workPage;
+  if (isPlainObject(workPage)) {
+    if (isPlainObject(workPage.hero) && workPage.hero.subtitle === legacyDefaults.work.subtitle) {
+      workPage.hero.subtitle = releaseDefaults.workSubtitle;
+    }
+    if (isPlainObject(workPage.cases) && workPage.cases.viewLabel === legacyDefaults.work.viewLabel) {
+      workPage.cases.viewLabel = releaseDefaults.workViewLabel;
+    }
+  }
+}
+
 /**
  * Fetch all CMS content and merge it into the local content modules.
  * Resolves quickly (no-op) when VITE_STRAPI_URL is not configured; never
@@ -189,6 +242,8 @@ export async function hydrateContentFromCms(): Promise<void> {
   }
 
   try {
+    upgradeLegacyDefaults(payload);
+
     // ── shared / global ──
     if (isPlainObject(payload.global)) {
       const g = payload.global;

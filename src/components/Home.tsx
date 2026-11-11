@@ -1,17 +1,28 @@
+// Home page, assembled from the client review (Oct 2026): the original photo
+// hero (without the services strip), the pink introduction band, the services
+// list, who it's for, the founders, selected work, how we work, the social
+// posts and the YES call to action. Light sections with a few green ones.
+
 import React from 'react';
-import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
-import HoverEyes from '@/components/HoverEyes';
+import { motion, useReducedMotion } from 'framer-motion';
+import { ArrowRight, Check } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import SplitHeading from '@/components/SplitHeading';
 import YesCTA from '@/components/YesCTA';
 import Testimonials from '@/components/Testimonials';
-import BlogSection from '@/components/BlogSection';
-import PhoneCinematicAnimation from '@/components/PhoneCinematicAnimation';
-import { useIsMobile } from '@/hooks/use-mobile';
-import { home, img } from '@/content';
-import { SplitTransition } from '@/components/ui/animated-scroll';
-import ScrollAdventure from '@/components/ScrollAdventure';
+import { SocialPostsSection } from '@/components/BlogSection';
+import { home, servicesPage, caseStudies, img } from '@/content';
+
+const GREEN = 'hsl(89 71% 15%)';
+const ROSA = 'hsl(354 100% 87%)';
+const OFFWHITE = 'hsl(36 21% 95%)';
+const INK = 'hsl(0 0% 13%)';
+const FONT_DISPLAY = "'Kelson Sans BG', sans-serif";
+const FONT_SUB = "'Montserrat', sans-serif";
+const FONT_BODY = "'Poppins', sans-serif";
+
+/** Light sections use green headings. */
+const LIGHT_HEADING = { solidColor: GREEN, strokeColor: GREEN } as const;
 
 /**
  * Each service row must open its own detail page. Older CMS entries still
@@ -24,512 +35,211 @@ const serviceRowHref = (href: string | undefined, index: number): string =>
     ? href
     : `/services/${SERVICE_ROW_SLUGS[index] ?? ''}`.replace(/\/$/, '');
 
+const css = `
+.hm-split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(2rem, 6vw, 6rem); align-items: center; }
+.hm-split.is-flipped { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+.hm-row { display: grid; grid-template-columns: 1.8rem minmax(0, 1fr) auto; align-items: center; gap: 1rem; padding: 1.05rem .25rem; border-top: 1px solid hsl(0 0% 13% / 0.12); color: ${INK}; text-decoration: none; transition: background-color .25s ease, padding .35s cubic-bezier(.16,1,.3,1); }
+.hm-row:hover { background: hsl(36 18% 92%); padding-left: .9rem; }
+.hm-row:hover .hm-arrow { transform: translateX(4px); color: ${GREEN}; }
+.hm-arrow { transition: transform .3s ease, color .3s ease; color: hsl(0 0% 13% / 0.35); }
+.hm-fit { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: clamp(2rem, 4vw, 4rem); }
+.hm-cases { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 2.5vw, 2.5rem); }
+.hm-case { color: ${INK}; text-decoration: none; }
+.hm-case img { transition: transform 1.2s cubic-bezier(.16,1,.3,1); }
+.hm-case:hover img { transform: scale(1.04); }
+.hm-principles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(2rem, 5vw, 5rem); }
+.hm-link { color: ${INK}; font-family: ${FONT_BODY}; font-weight: 600; font-size: .95rem; text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1.5px; }
+.hm-root a:focus-visible { outline: 2px solid ${GREEN}; outline-offset: 3px; }
+@media (max-width: 860px) {
+  .hm-split, .hm-split.is-flipped, .hm-fit { grid-template-columns: 1fr; }
+  .hm-split.is-flipped > :first-child { order: 2; }
+  .hm-cases, .hm-principles { grid-template-columns: 1fr; }
+}
+`;
+
 const Home: React.FC = () => {
-  const navigate = useNavigate();
-  const isMobile = useIsMobile();
+  const reduce = useReducedMotion();
+  const { hero, servicesPanel, foundersPanel, quickCheck, approachPanel } = home;
 
   return (
-    <div>
-      {/* HERO — Brand Burgundy, outlined "340" motif, pink accents */}
-      <section id="hero-bg" className="relative w-full overflow-hidden" style={{ height: isMobile ? '92vh' : '88vh', background: 'hsl(0 0% 5%)' }}>
-        {/* ── Hero photo ── */}
+    <div className="hm-root" style={{ background: OFFWHITE }}>
+      <style>{css}</style>
+
+      {/* HERO — the original photo hero (kept as the home page's own header). */}
+      <section id="hero-bg" className="relative w-full overflow-hidden" style={{ background: 'hsl(0 0% 5%)' }}>
         <img
-          src={img(home.hero.image)}
+          src={img(hero.image)}
           alt=""
           aria-hidden
           className="absolute inset-0 w-full h-full object-cover"
           style={{ objectPosition: '50% 35%', opacity: 0.55 }}
         />
-        {/* ── Dark gradient overlay — strong at top, lighter at mid, deep at bottom ── */}
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{
-            background: 'linear-gradient(to bottom, hsl(0 0% 5% / 0.45) 0%, hsl(0 0% 5% / 0.1) 40%, hsl(0 0% 5% / 0.6) 75%, hsl(0 0% 5%) 100%)',
-          }}
+          style={{ background: 'linear-gradient(to bottom, hsl(0 0% 5% / 0.45) 0%, hsl(0 0% 5% / 0.1) 40%, hsl(0 0% 5% / 0.6) 75%, hsl(0 0% 5%) 100%)' }}
         />
-
-
-        {/* ── Grain overlay ── */}
         <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            opacity: 0.06,
-            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E")`,
-            backgroundSize: '200px 200px',
-          }}
-        />
-
-        {/* ── Bottom: Eyebrow + Headline + Services strip + Scroll indicator ── */}
-        <div
-          className="absolute bottom-0 left-0 right-0 z-10 text-center"
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            paddingBottom: 'clamp(1.2rem, 3vh, 2rem)',
-            paddingLeft: '6vw',
-            paddingRight: '6vw',
-            gap: 0,
-          }}
+          className="relative z-10 text-center"
+          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: 'calc(88px + clamp(4rem, 10vh, 8rem))', paddingBottom: 'clamp(3.5rem, 8vh, 6rem)', paddingLeft: '6vw', paddingRight: '6vw' }}
         >
-          {/* Eyebrow — Cormorant italic pink */}
           <motion.p
-            initial={{ opacity: 0, y: 10 }}
+            initial={reduce ? false : { opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: 'easeOut' }}
-            style={{
-              fontFamily: "'Montserrat', serif",
-              fontStyle: 'italic',
-              fontSize: '0.95rem',
-              letterSpacing: '0.05em',
-              color: 'hsl(354 100% 87%)',
-              marginBottom: '0.75rem',
-            }}
+            style={{ fontFamily: FONT_SUB, fontStyle: 'italic', fontSize: '0.95rem', letterSpacing: '0.05em', color: ROSA, marginBottom: 'clamp(2rem, 5vh, 3.5rem)' }}
           >
-            {home.hero.eyebrow}
+            {hero.eyebrow}
           </motion.p>
-
-          {/* Headline — same style as PageHero */}
           <motion.h1
-            initial={{ opacity: 0, y: 32 }}
+            initial={reduce ? false : { opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.85, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
-            style={{
-              fontFamily: "'Kelson Sans BG', sans-serif",
-              fontWeight: 700,
-              fontSize: 'clamp(2.3rem, 9vw, 6.5rem)',
-              lineHeight: 0.9,
-              letterSpacing: '-0.02em',
-              textTransform: 'uppercase',
-              margin: 0,
-            }}
+            style={{ fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: 'clamp(2.3rem, 9vw, 6.5rem)', lineHeight: 1.12, letterSpacing: '-0.02em', textTransform: 'uppercase', margin: 0 }}
           >
-            <span style={{ display: 'block', color: 'hsl(36 21% 95%)' }}>{home.hero.headline.line1}</span>
+            <span style={{ display: 'block', color: OFFWHITE }}>{hero.headline.line1}</span>
             <span style={{ display: 'block' }}>
-              <span style={{ color: 'hsl(36 21% 95%)' }}>{home.hero.headline.line2Lead}</span>
-              <span style={{ color: 'transparent', WebkitTextStroke: '1.5px hsl(354 100% 87%)' }}>{home.hero.headline.accent}</span>
+              <span style={{ color: OFFWHITE }}>{hero.headline.line2Lead}</span>
+              <span style={{ color: 'transparent', WebkitTextStroke: `1.5px ${ROSA}` }}>{hero.headline.accent}</span>
             </span>
           </motion.h1>
-
-          {/* Hairline separator */}
-          <motion.div
-            initial={{ opacity: 0, scaleX: 0 }}
-            animate={{ opacity: 1, scaleX: 1 }}
-            transition={{ duration: 0.7, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
-            style={{
-              width: 'clamp(18rem, 60vw, 52rem)',
-              height: 1,
-              background: 'linear-gradient(90deg, transparent, hsl(354 100% 87% / 0.2) 50%, transparent)',
-              marginTop: 'clamp(0.9rem, 2vh, 1.4rem)',
-              marginBottom: 0,
-              transformOrigin: 'center',
-            }}
-          />
-
-          {/* Services strip */}
-          <motion.div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: 'clamp(8px, 2vw, 24px)',
-              rowGap: '0.5rem',
-              marginTop: 'clamp(0.7rem, 1.5vh, 1rem)',
-              flexWrap: 'wrap',
-              maxWidth: '100%',
-            }}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.85, ease: 'easeOut' }}
-          >
-            {home.hero.services.map(({ name, slug }, i) => (
-              <React.Fragment key={i}>
-                {i > 0 && !isMobile && (
-                  <span style={{ width: 1, height: 24, background: 'rgba(255,255,255,0.12)', display: 'block', flexShrink: 0 }} />
-                )}
-                <Link
-                  to={`/services/${slug}`}
-                  style={{ textAlign: 'center', flexShrink: 0, textDecoration: 'none', padding: isMobile ? '4px 2px' : 0 }}
-                >
-                  <p style={{
-                    fontFamily: 'Poppins, sans-serif',
-                    fontSize: isMobile ? '9px' : 'clamp(7px, 0.9vw, 10px)',
-                    color: 'hsl(354 100% 87% / 0.85)',
-                    fontWeight: 700,
-                    letterSpacing: '0.12em',
-                    textTransform: 'uppercase',
-                    lineHeight: 1.3,
-                    whiteSpace: 'nowrap',
-                  }}>{name}</p>
-                </Link>
-              </React.Fragment>
-            ))}
-          </motion.div>
-
         </div>
-
       </section>
 
-      {/* 340 KNOWS THE WAY */}
-      <SplitTransition
-        rightImage={img(home.way.image)}
-        rightImagePosition={home.way.imagePosition}
-        leftContent={
-          <div className="max-w-md">
-            <p className="text-micro mb-4 tracking-[0.3em]">{home.way.eyebrow}</p>
-            <SplitHeading
-              line1={home.way.headline.line1}
-              line2={home.way.headline.line2}
-              size="clamp(2rem, 4.5vw, 3.8rem)"
-              className="mb-6"
-            />
-            {home.way.paragraphs.map((p, i) => (
-              <p key={i} className="text-sm md:text-base text-background/70 leading-[1.8] mb-4">
-                {p}
-              </p>
-            ))}
-            <p className="font-serif-elegant italic text-base md:text-lg text-background">
-              {home.way.signoff}
-            </p>
-          </div>
-        }
-      />
-
-      {/* FOUNDERS + APPROACH + SERVICES — single ScrollAdventure, 3 pages */}
-      <ScrollAdventure
-        pages={[
-          {
-            leftBgImage: img(home.servicesPanel.image),
-            leftBgImagePosition: home.servicesPanel.imagePosition,
-            rightBgImage: null,
-            leftContent: null,
-            rightContent: (
-              <div className="max-w-lg w-full">
-                <p className="text-micro mb-4 tracking-[0.3em]">{home.servicesPanel.eyebrow}</p>
-                <SplitHeading
-                  line1={home.servicesPanel.headline.line1}
-                  line2={home.servicesPanel.headline.line2}
-                  size="clamp(2.5rem, 6vw, 5rem)"
-                  className="mb-10"
-                />
-                <div className="space-y-px w-full" style={{ background: 'hsl(var(--background) / 0.08)' }}>
-                  {home.servicesPanel.rows.map((s, i) => (
-                    <Link
-                      key={s.num}
-                      to={serviceRowHref(s.href, i)}
-                      className="group flex items-center justify-between px-5 py-4 bg-foreground transition-colors duration-200 hover:bg-background/5"
-                    >
-                      <div className="flex items-center gap-4">
-                        <span className="text-micro text-background/20 w-5">{s.num}</span>
-                        <span style={{ fontFamily: 'Kelson Sans BG, sans-serif', fontSize: 'clamp(16px, 2vw, 24px)', color: 'hsl(var(--background))', letterSpacing: '0.05em' }}>{s.name}</span>
-                        <span className="text-micro text-background/30">{s.tag}</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <span className="text-micro font-bold" style={{ color: 'hsl(354 100% 87%)' }}>{s.price}</span>
-                        <ArrowRight className="w-3.5 h-3.5 text-background/20 group-hover:text-background/60 group-hover:translate-x-1 transition-all duration-300" />
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-                <div className="mt-8">
-                  <Link to={home.servicesPanel.cta.href} className="btn-inline text-secondary inline-flex items-center gap-2">
-                    <span>{home.servicesPanel.cta.label}</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-              </div>
-            ),
-          },
-          {
-            leftBgImage: img(home.foundersPanel.image),
-            leftBgImagePosition: home.foundersPanel.imagePosition,
-            leftBgImageGrayscale: true,
-            rightBgImage: null,
-            leftContent: null,
-            rightContent: (
-              <div className="max-w-lg">
-                <p className="text-micro mb-4 tracking-[0.3em]">{home.foundersPanel.eyebrow}</p>
-                <SplitHeading
-                  line1={home.foundersPanel.headline.line1}
-                  line2={home.foundersPanel.headline.line2}
-                  size="clamp(2.5rem, 6vw, 5rem)"
-                  className="mb-8"
-                />
-                <p className="font-serif-elegant italic text-base md:text-lg text-secondary mb-6">
-                  {home.foundersPanel.lede}
-                </p>
-                <p className="text-sm md:text-base text-background/60 leading-[1.8]">
-                  {home.foundersPanel.body}
-                </p>
-                <p className="text-xs text-background/30 mt-6">{home.foundersPanel.note}</p>
-                <div className="mt-8">
-                  <Link to={home.foundersPanel.cta.href} className="btn-inline text-secondary inline-flex items-center gap-2">
-                    <span>{home.foundersPanel.cta.label}</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-              </div>
-            ),
-          },
-          {
-            leftBgImage: null,
-            rightBgImage: img(home.approachPanel.image),
-            rightBgImagePosition: home.approachPanel.imagePosition,
-            leftContent: (
-              <div className="max-w-xl w-full">
-                <p className="text-micro mb-4 tracking-[0.3em]">{home.approachPanel.eyebrow}</p>
-                <SplitHeading
-                  line1={home.approachPanel.headline.line1}
-                  line2={home.approachPanel.headline.line2}
-                  size="clamp(2.2rem, 5vw, 4rem)"
-                  className="mb-8"
-                />
-
-                {/* 4 approach cards — 2x2 grid */}
-                <div
-                  className="grid grid-cols-1 sm:grid-cols-2 gap-px mb-8"
-                  style={{ background: 'hsl(var(--background) / 0.08)' }}
-                >
-                  {home.approachPanel.cards.map((c) => (
-                    <div key={c.num} className="bg-foreground p-5 md:p-6">
-                      <span className="text-micro text-primary/60 mb-2 block">{c.num}</span>
-                      <p
-                        style={{
-                          fontFamily: "'Kelson Sans BG', sans-serif",
-                          fontWeight: 700,
-                          fontSize: 'clamp(0.95rem, 1.1vw, 1.05rem)',
-                          color: 'hsl(36 21% 95%)',
-                          letterSpacing: '0.01em',
-                          lineHeight: 1.2,
-                          marginBottom: '0.55rem',
-                        }}
-                      >
-                        {c.title}
-                      </p>
-                      <p
-                        className="leading-[1.6]"
-                        style={{ color: 'hsl(36 21% 95% / 0.55)', fontSize: 'clamp(0.72rem, 0.85vw, 0.82rem)' }}
-                      >
-                        {c.body}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Languages strip */}
-                <div className="flex items-center gap-5">
-                  <p
-                    className="text-micro shrink-0"
-                    style={{ color: 'hsl(36 21% 95% / 0.5)', maxWidth: '8rem', lineHeight: 1.4, whiteSpace: 'pre-line' }}
-                  >
-                    {home.approachPanel.languages.label}
-                  </p>
-                  <div
-                    className="flex-1 grid grid-cols-4 gap-px"
-                    style={{ background: 'hsl(var(--background) / 0.08)' }}
-                  >
-                    {home.approachPanel.languages.items.map((l) => (
-                      <div key={l.code} className="bg-foreground py-3 px-3 text-center">
-                        <p
-                          style={{
-                            fontFamily: "'Kelson Sans BG', sans-serif",
-                            fontWeight: 700,
-                            fontSize: '1rem',
-                            color: 'hsl(354 100% 87%)',
-                            letterSpacing: '0.1em',
-                            lineHeight: 1,
-                            marginBottom: 4,
-                          }}
-                        >
-                          {l.code}
-                        </p>
-                        <p
-                          className="text-micro"
-                          style={{ color: 'hsl(36 21% 95% / 0.45)', letterSpacing: '0.18em' }}
-                        >
-                          {l.label}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ),
-            rightContent: null,
-          },
-        ]}
-      />
-
-      {/* CASE STUDIES — Zwetschke card grid */}
-      <section className="bg-foreground">
-        <div className="container-wide pt-16 md:pt-28 pb-16 md:pb-20">
-          {/* Section header */}
-          <div className="flex items-end justify-between mb-10">
-            <div>
-              <p className="text-micro mb-4 tracking-[0.3em] text-primary">{home.cases.eyebrow}</p>
-              <SplitHeading
-                line1={home.cases.headline.line1}
-                line2={home.cases.headline.line2}
-                size="clamp(2.5rem, 6vw, 5rem)"
-              />
-            </div>
-            <Link to="/work" className="hidden md:inline-flex items-center gap-2 text-micro text-primary/60 hover:text-primary transition-colors duration-300 pb-1">
-              <span>{home.cases.seeAllLabel}</span>
-              <ArrowRight className="w-3 h-3" />
+      {/* PINK BAND */}
+      <section style={{ background: ROSA }}>
+        <div className="container-wide" style={{ paddingTop: '1.6rem', paddingBottom: '1.6rem', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '1rem 2rem' }}>
+          <p style={{ fontFamily: FONT_SUB, fontWeight: 600, fontSize: 'clamp(1.05rem, 1.7vw, 1.4rem)', lineHeight: 1.4, color: GREEN, margin: 0, maxWidth: '60ch' }}>
+            {servicesPage.hero.defaultReco}
+          </p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem 1.6rem' }}>
+            <Link to="/services" style={{ fontFamily: FONT_BODY, fontWeight: 600, fontSize: '0.95rem', color: GREEN, textDecoration: 'underline', textUnderlineOffset: 5, textDecorationThickness: 1.5 }}>
+              {servicesPage.hero.question}
             </Link>
-          </div>
-
-          {/* Card grid */}
-          <div className="flex flex-col gap-px" style={{ background: 'hsl(var(--background) / 0.12)' }}>
-          {/* 3 case cards — single uniform grid */}
-          <div className="flex flex-col md:flex-row gap-px">
-            {home.cases.cards.map((card, i) => (
-              <HoverEyes key={i} style={{ flex: 1 }} onClick={() => navigate(`/work/${card.slug}`)}>
-                <motion.div
-                  className="relative overflow-hidden group"
-                  style={{ minHeight: 'clamp(300px, 44vh, 480px)', height: '100%' }}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.7, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  {/* Background image */}
-                  <img
-                    src={img(card.img)}
-                    alt={card.client}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                    style={{ filter: 'brightness(0.55) saturate(0.8)' }}
-                  />
-                  {/* Gradient */}
-                  <div className="absolute inset-0" style={{
-                    background: 'linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0.72) 100%)',
-                  }} />
-                  {/* Client tag — top left */}
-                  <div className="absolute top-7 left-7 z-10">
-                    <p style={{
-                      fontSize: '9px', color: 'rgba(255,255,255,0.55)',
-                      letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 600,
-                    }}>{card.client}</p>
-                    <p style={{
-                      fontSize: '8px', color: 'rgba(255,255,255,0.32)',
-                      letterSpacing: '0.14em', textTransform: 'uppercase', marginTop: '3px',
-                    }}>{card.tag}</p>
-                  </div>
-                  {/* Stat pill — top right */}
-                  <div className="absolute top-7 right-7 z-10" style={{
-                    background: 'rgba(255,255,255,0.1)',
-                    backdropFilter: 'blur(8px)',
-                    border: '1px solid rgba(255,255,255,0.18)',
-                    padding: '5px 11px',
-                    borderRadius: 999,
-                  }}>
-                    <p style={{
-                      fontSize: '8.5px', color: 'rgba(255,255,255,0.85)',
-                      letterSpacing: '0.12em', textTransform: 'uppercase', fontWeight: 700,
-                    }}>{card.stat}</p>
-                  </div>
-                  {/* Headline — bottom left */}
-                  <div className="absolute bottom-7 left-7 right-7 z-10">
-                    <p style={{
-                      fontFamily: 'Kelson Sans BG, sans-serif',
-                      fontSize: 'clamp(28px, 3.6vw, 56px)',
-                      color: '#fff',
-                      lineHeight: 0.92,
-                      letterSpacing: '0.02em',
-                      whiteSpace: 'pre-line',
-                      textShadow: '0 2px 20px rgba(0,0,0,0.4)',
-                    }}>{card.headline}</p>
-                  </div>
-                </motion.div>
-              </HoverEyes>
-            ))}
-          </div>
-
-        </div>
-
-          {/* Mobile CTA */}
-          <div className="md:hidden pt-8">
-            <Link to="/work" className="btn-inline text-secondary inline-flex items-center gap-2">
-              <span>{home.cases.mobileCtaLabel}</span>
-              <ArrowRight className="w-4 h-4" />
+            <Link to="/contact" style={{ fontFamily: FONT_BODY, fontWeight: 600, fontSize: '0.95rem', color: GREEN, textDecoration: 'underline', textUnderlineOffset: 5, textDecorationThickness: 1.5 }}>
+              {servicesPage.grid.helpCard.ctaLabel}
             </Link>
           </div>
         </div>
       </section>
 
-      {/* QUICK CHECK — IS THIS FOR ME? */}
-      <section className="bg-foreground" style={{ paddingTop: 'clamp(1.6rem, 3vw, 2.6rem)', paddingBottom: 'clamp(1.6rem, 3vw, 2.6rem)' }}>
-        <div className="container-wide">
-          <p className="text-micro mb-4 tracking-[0.3em] text-primary">{home.quickCheck.eyebrow}</p>
-          <SplitHeading
-            line1={home.quickCheck.headline.line1}
-            line2={home.quickCheck.headline.line2}
-            size="clamp(1.8rem, 4vw, 3.2rem)"
-            className="mb-5"
-          />
-
-          {/* 2/3 + 1/3 layout */}
-          <div className="flex flex-col lg:flex-row gap-px" style={{ background: 'hsl(var(--background) / 0.08)' }}>
-            {/* Left — 2/3: the 4 points */}
-            <div className="lg:w-2/3 flex flex-col bg-foreground">
-              {home.quickCheck.items.map((item, i) => (
-                <motion.div
-                  key={i}
-                  className="flex items-start"
-                  style={{
-                    gap: 'clamp(0.9rem, 2vw, 2rem)',
-                    padding: 'clamp(0.55rem, 1.1vw, 0.95rem) clamp(1.1rem, 2vw, 1.8rem)',
-                    borderTop: i === 0 ? 'none' : '1px solid hsl(var(--background) / 0.1)',
-                  }}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.55, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}>
-                  <span
-                    aria-hidden
-                    style={{
-                      fontFamily: "'Kelson Sans BG', sans-serif",
-                      fontWeight: 700,
-                      fontSize: 'clamp(1.3rem, 2vw, 1.9rem)',
-                      lineHeight: 1,
-                      color: 'transparent',
-                      WebkitTextStroke: '1.2px hsl(354 100% 87% / 0.75)',
-                      flexShrink: 0,
-                      width: 'clamp(2rem, 3.2vw, 2.8rem)',
-                      paddingTop: '0.05em',
-                    }}>
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <p
-                    className="text-background/75"
-                    style={{
-                      fontFamily: "'Poppins', sans-serif",
-                      fontSize: 'clamp(0.88rem, 1vw, 1.04rem)',
-                      lineHeight: 1.5,
-                      maxWidth: '46ch',
-                      margin: 0,
-                    }}>
-                    {item}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Right — 1/3: cinematic phone animation */}
-            <div className="lg:w-1/3 bg-foreground flex items-center justify-center relative overflow-hidden" style={{ minHeight: 'clamp(240px, 34vh, 380px)' }}>
-              <PhoneCinematicAnimation />
-            </div>
+      {/* OUR SERVICES — smaller image left, list right. */}
+      <section className="container-wide hm-split" style={{ paddingTop: 'clamp(5rem, 12vh, 8rem)', paddingBottom: 'clamp(5rem, 12vh, 8rem)' }}>
+        <div style={{ aspectRatio: '4 / 5', overflow: 'hidden', background: 'hsl(36 18% 92%)' }}>
+          <img src={img(servicesPanel.image)} alt="" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: servicesPanel.imagePosition }} />
+        </div>
+        <div>
+          <p className="text-micro mb-6 tracking-[0.3em]" style={{ color: GREEN }}>{servicesPanel.eyebrow}</p>
+          <SplitHeading line1={servicesPanel.headline.line1} line2={servicesPanel.headline.line2} size="clamp(2.5rem, 6vw, 5rem)" className="mb-10" {...LIGHT_HEADING} />
+          <div style={{ borderBottom: '1px solid hsl(0 0% 13% / 0.12)' }}>
+            {servicesPanel.rows.map((s, i) => (
+              <Link key={s.num} to={serviceRowHref(s.href, i)} className="hm-row">
+                <span style={{ fontFamily: FONT_BODY, fontSize: '0.75rem', color: 'hsl(0 0% 13% / 0.4)' }}>{s.num}</span>
+                <span style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', gap: '0.3rem 1rem' }}>
+                  <span style={{ fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: 'clamp(1.2rem, 2vw, 1.6rem)', letterSpacing: '0.03em' }}>{s.name}</span>
+                  <span style={{ fontFamily: FONT_BODY, fontSize: '0.8rem', color: 'hsl(0 0% 13% / 0.5)' }}>{s.tag}</span>
+                </span>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  <span style={{ fontFamily: FONT_BODY, fontWeight: 700, fontSize: '0.85rem', color: GREEN, whiteSpace: 'nowrap' }}>{s.price}</span>
+                  <ArrowRight className="hm-arrow" size={16} aria-hidden />
+                </span>
+              </Link>
+            ))}
+          </div>
+          <div className="mt-8">
+            <Link to={servicesPanel.cta.href} className="hm-link">{servicesPanel.cta.label}</Link>
           </div>
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
-      <Testimonials />
+      {/* WHO IT'S FOR — green. */}
+      <section style={{ background: GREEN, color: OFFWHITE }}>
+        <div className="container-wide hm-fit" style={{ paddingTop: 'clamp(5rem, 12vh, 8rem)', paddingBottom: 'clamp(5rem, 12vh, 8rem)' }}>
+          <h2 style={{ fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: 'clamp(2.4rem, 4.6vw, 4.2rem)', lineHeight: 1.12, textTransform: 'uppercase', color: ROSA, margin: 0 }}>
+            {quickCheck.headline.line1} {quickCheck.headline.line2}
+          </h2>
+          <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+            {quickCheck.items.map((item) => (
+              <li key={item} style={{ display: 'flex', gap: '1rem', padding: '1.1rem 0', borderTop: '1px solid hsl(36 21% 95% / 0.16)', fontFamily: FONT_BODY, fontSize: 'clamp(.88rem, 1.02vw, .98rem)', lineHeight: 1.55 }}>
+                <Check size={20} strokeWidth={2.4} aria-hidden style={{ color: ROSA, flexShrink: 0, marginTop: 3 }} />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
-      {/* BLOG */}
-      <BlogSection />
+      {/* FOUNDERS — text left, smaller image right. */}
+      <section className="container-wide hm-split is-flipped" style={{ paddingTop: 'clamp(5rem, 12vh, 8rem)', paddingBottom: 'clamp(5rem, 12vh, 8rem)' }}>
+        <div>
+          <p className="text-micro mb-4 tracking-[0.3em]" style={{ color: GREEN }}>{foundersPanel.eyebrow}</p>
+          <SplitHeading line1={foundersPanel.headline.line1} line2={foundersPanel.headline.line2} size="clamp(2.5rem, 6vw, 5rem)" className="mb-8" solidColor={ROSA} strokeColor={ROSA} />
+          <p style={{ fontFamily: FONT_SUB, fontStyle: 'italic', fontSize: 'clamp(1.05rem, 1.4vw, 1.2rem)', lineHeight: 1.5, color: GREEN, maxWidth: '40ch', margin: '0 0 1.4rem' }}>{foundersPanel.lede}</p>
+          <p style={{ fontFamily: FONT_BODY, fontSize: '1rem', lineHeight: 1.8, color: 'hsl(0 0% 13% / 0.75)', maxWidth: '56ch', margin: 0 }}>{foundersPanel.body}</p>
+          <p style={{ fontFamily: FONT_BODY, fontSize: '0.8rem', color: 'hsl(0 0% 13% / 0.5)', margin: '1.4rem 0 2rem' }}>{foundersPanel.note}</p>
+          <Link to={foundersPanel.cta.href} className="hm-link">{foundersPanel.cta.label}</Link>
+        </div>
+        <div style={{ aspectRatio: '4 / 5', overflow: 'hidden', background: 'hsl(36 18% 92%)' }}>
+          <img src={img(foundersPanel.image)} alt="" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: foundersPanel.imagePosition, filter: 'grayscale(1)' }} />
+        </div>
+      </section>
 
-      {/* CTA */}
+      {/* SELECTED WORK */}
+      <section style={{ borderTop: '1px solid hsl(0 0% 13% / 0.1)' }}>
+        <div className="container-wide" style={{ paddingTop: 'clamp(5rem, 12vh, 8rem)', paddingBottom: 'clamp(5rem, 12vh, 8rem)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: '1rem', marginBottom: 'clamp(2rem, 4vh, 3rem)' }}>
+            <h2 style={{ fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: 'clamp(2.2rem, 4.4vw, 4rem)', lineHeight: 1.12, textTransform: 'uppercase', color: INK, margin: 0 }}>Selected work</h2>
+            <Link to="/work" className="hm-link">See all work</Link>
+          </div>
+          <div className="hm-cases">
+            {caseStudies.map((cs) => (
+              <Link key={cs.slug} to={`/work/${cs.slug}`} className="hm-case">
+                <div style={{ position: 'relative', aspectRatio: '4 / 5', overflow: 'hidden', background: 'hsl(36 14% 88%)', marginBottom: '1.2rem' }}>
+                  <img src={img(cs.cardImg)} alt="" loading="lazy" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+                  {cs.stats[0] && (
+                    <span style={{ position: 'absolute', left: 14, bottom: 14, padding: '7px 13px', borderRadius: 999, background: GREEN, color: ROSA, fontFamily: FONT_BODY, fontSize: 12, fontWeight: 600 }}>
+                      {cs.stats[0].value} {cs.stats[0].label}
+                    </span>
+                  )}
+                </div>
+                <p style={{ fontFamily: FONT_BODY, fontWeight: 600, fontSize: '0.95rem', margin: '0 0 0.5rem' }}>{cs.client}</p>
+                <h3 style={{ fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: 'clamp(1.6rem, 2.3vw, 2.2rem)', lineHeight: 1.12, textTransform: 'uppercase', color: GREEN, margin: 0 }}>{cs.headline}</h3>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* HOW WE WORK — green. */}
+      <section style={{ background: GREEN, color: OFFWHITE }}>
+        <div className="container-wide" style={{ paddingTop: 'clamp(5rem, 12vh, 8rem)', paddingBottom: 'clamp(5rem, 12vh, 8rem)' }}>
+          <h2 style={{ fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: 'clamp(2.4rem, 5vw, 4.6rem)', lineHeight: 1.12, textTransform: 'uppercase', color: ROSA, margin: '0 0 clamp(2.5rem, 6vh, 4rem)' }}>
+            {approachPanel.headline.line1} {approachPanel.headline.line2.replace(/\.$/, '')}
+          </h2>
+          <div className="hm-principles">
+            {approachPanel.cards.map((c) => (
+              <div key={c.title} style={{ padding: '1.6rem 0', borderTop: '1px solid hsl(36 21% 95% / 0.16)' }}>
+                <h3 style={{ fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: 'clamp(1.4rem, 2vw, 1.8rem)', textTransform: 'uppercase', margin: '0 0 0.7rem' }}>{c.title}</h3>
+                <p style={{ fontFamily: FONT_BODY, fontSize: '0.98rem', lineHeight: 1.65, color: 'hsl(36 21% 95% / 0.8)', margin: 0, maxWidth: '46ch' }}>{c.body}</p>
+              </div>
+            ))}
+          </div>
+          <div style={{ marginTop: 'clamp(3rem, 7vh, 4.5rem)', display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', gap: '1rem clamp(1.5rem, 4vw, 3.5rem)' }}>
+            <p style={{ fontFamily: FONT_BODY, fontSize: '0.95rem', color: 'hsl(36 21% 95% / 0.75)', margin: 0 }}>We work in four languages</p>
+            {approachPanel.languages.items.map((l) => (
+              <span key={l.code} style={{ display: 'inline-flex', alignItems: 'baseline', gap: '0.6rem' }}>
+                <span style={{ fontFamily: FONT_DISPLAY, fontWeight: 700, fontSize: 'clamp(2rem, 3.4vw, 3rem)', lineHeight: 1, color: ROSA }}>{l.code}</span>
+                <span style={{ fontFamily: FONT_BODY, fontSize: '0.85rem', color: 'hsl(36 21% 95% / 0.75)' }}>{l.label}</span>
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Testimonials tone="light" />
+
+      {/* SOCIAL POSTS */}
+      <SocialPostsSection tone="light" />
+
       <YesCTA />
     </div>
   );

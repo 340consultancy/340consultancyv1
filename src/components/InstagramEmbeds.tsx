@@ -4,6 +4,8 @@ import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 interface Props {
   posts: string[]; // Instagram post permalink URLs
+  /** Colour of the controls: light on a dark/green section (default), dark on a light one. */
+  tone?: 'onDark' | 'onLight';
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -17,7 +19,10 @@ const OFFWHITE = 'hsl(36 21% 95%)';
 // window.instgrm.Embeds.process() — safe to call repeatedly.
 const processEmbeds = () => window.instgrm?.Embeds?.process?.();
 
-const InstagramEmbeds: React.FC<Props> = ({ posts }) => {
+const InstagramEmbeds: React.FC<Props> = ({ posts, tone = 'onDark' }) => {
+  const FG = tone === 'onLight' ? 'hsl(0 0% 13%)' : OFFWHITE;
+  const ACCENT = tone === 'onLight' ? 'hsl(89 71% 15%)' : PINK;
+  const fgA = (a: number) => (tone === 'onLight' ? `hsl(0 0% 13% / ${a})` : `hsl(36 21% 95% / ${a})`);
   const trackRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -88,7 +93,7 @@ const InstagramEmbeds: React.FC<Props> = ({ posts }) => {
   const total = posts.length;
 
   return (
-    <div className="relative h-full w-full overflow-hidden bg-foreground">
+    <div className="relative h-full w-full overflow-hidden">
       <style>{`
         .ig-track::-webkit-scrollbar { display: none; }
         .ig-track { scrollbar-width: none; -ms-overflow-style: none; }
@@ -192,25 +197,25 @@ const InstagramEmbeds: React.FC<Props> = ({ posts }) => {
             fontWeight: 700,
             fontSize: 11,
             letterSpacing: '0.32em',
-            color: OFFWHITE,
+            color: FG,
           }}
         >
-          <span style={{ color: PINK }}>{String(activeIndex + 1).padStart(2, '0')}</span>
-          <span style={{ color: 'hsl(36 21% 95% / 0.25)', margin: '0 10px' }}>/</span>
-          <span style={{ color: 'hsl(36 21% 95% / 0.5)' }}>{String(total).padStart(2, '0')}</span>
+          <span style={{ color: ACCENT }}>{String(activeIndex + 1).padStart(2, '0')}</span>
+          <span style={{ color: fgA(0.3), margin: '0 10px' }}>/</span>
+          <span style={{ color: fgA(0.55) }}>{String(total).padStart(2, '0')}</span>
         </div>
 
         {/* Progress rail */}
         <div
           className="flex-1 relative"
-          style={{ height: 1, background: 'hsl(36 21% 95% / 0.1)' }}
+          style={{ height: 1, background: fgA(0.15) }}
         >
           <div
             style={{
               position: 'absolute',
               left: 0, top: 0, bottom: 0,
               width: `${progress * 100}%`,
-              background: PINK,
+              background: ACCENT,
               transition: 'width 0.2s linear',
             }}
           />
@@ -222,7 +227,7 @@ const InstagramEmbeds: React.FC<Props> = ({ posts }) => {
               left: `calc(${progress * 100}% - 3px)`,
               width: 6, height: 6,
               borderRadius: 9999,
-              background: PINK,
+              background: ACCENT,
               transform: 'translateY(-50%)',
               boxShadow: '0 0 12px hsl(354 100% 87% / 0.6)',
               transition: 'left 0.2s linear',
@@ -239,8 +244,8 @@ const InstagramEmbeds: React.FC<Props> = ({ posts }) => {
             style={{
               width: 38, height: 38, borderRadius: 9999,
               background: 'transparent',
-              border: '1px solid hsl(36 21% 95% / 0.18)',
-              color: OFFWHITE,
+              border: `1px solid ${fgA(0.25)}`,
+              color: FG,
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = 'hsl(354 100% 87% / 0.12)';
@@ -248,7 +253,7 @@ const InstagramEmbeds: React.FC<Props> = ({ posts }) => {
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.background = 'transparent';
-              e.currentTarget.style.borderColor = 'hsl(36 21% 95% / 0.18)';
+              e.currentTarget.style.borderColor = fgA(0.25);
             }}
           >
             <ArrowLeft size={14} />
@@ -260,8 +265,8 @@ const InstagramEmbeds: React.FC<Props> = ({ posts }) => {
             style={{
               width: 38, height: 38, borderRadius: 9999,
               background: 'transparent',
-              border: '1px solid hsl(36 21% 95% / 0.18)',
-              color: OFFWHITE,
+              border: `1px solid ${fgA(0.25)}`,
+              color: FG,
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = 'hsl(354 100% 87% / 0.12)';
@@ -269,7 +274,7 @@ const InstagramEmbeds: React.FC<Props> = ({ posts }) => {
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.background = 'transparent';
-              e.currentTarget.style.borderColor = 'hsl(36 21% 95% / 0.18)';
+              e.currentTarget.style.borderColor = fgA(0.25);
             }}
           >
             <ArrowRight size={14} />

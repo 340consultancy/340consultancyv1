@@ -26,7 +26,7 @@ const SocialBtn: React.FC<{
         height: 46,
         border: `1px solid ${hov ? 'hsl(354 100% 87%)' : 'hsl(354 100% 87% / 0.35)'}`,
         background: hov ? 'hsl(354 100% 87%)' : 'transparent',
-        color: hov ? 'hsl(0 0% 8%)' : 'hsl(354 100% 87%)',
+        color: hov ? 'hsl(89 71% 15%)' : 'hsl(354 100% 87%)',
         borderRadius: 12,
         textDecoration: 'none',
         flexShrink: 0,
@@ -54,7 +54,7 @@ const FooterNavLink: React.FC<{ to: string; label: string }> = ({ to, label }) =
         fontSize: '0.58rem',
         letterSpacing: '0.26em',
         textTransform: 'uppercase',
-        color: hov ? 'hsl(36 21% 95%)' : 'hsl(36 21% 95% / 0.32)',
+        color: hov ? 'hsl(354 100% 87%)' : 'hsl(36 21% 95% / 0.75)',
         textDecoration: 'none',
         transition: 'color 0.2s ease',
         whiteSpace: 'nowrap',
@@ -78,9 +78,9 @@ const BackToTop: React.FC = () => {
         display: 'inline-flex',
         alignItems: 'center',
         gap: '0.5rem',
-        background: hov ? 'hsl(89 71% 15%)' : 'hsl(354 100% 87%)',
-        border: `1px solid ${hov ? 'hsl(89 71% 15%)' : 'hsl(354 100% 87%)'}`,
-        color: hov ? 'hsl(354 100% 87%)' : 'hsl(0 0% 8%)',
+        background: hov ? 'hsl(36 21% 95%)' : 'hsl(354 100% 87%)',
+        border: `1px solid ${hov ? 'hsl(36 21% 95%)' : 'hsl(354 100% 87%)'}`,
+        color: 'hsl(89 71% 15%)',
         borderRadius: 999,
         padding: '0.75rem 1.6rem',
         fontFamily: "'Kelson Sans BG', sans-serif",
@@ -91,7 +91,7 @@ const BackToTop: React.FC = () => {
         cursor: 'pointer',
         transition: 'all 0.25s ease',
         boxShadow: hov
-          ? '0 4px 22px hsl(89 71% 15% / 0.4)'
+          ? '0 4px 22px hsl(0 0% 0% / 0.25)'
           : '0 4px 22px hsl(354 100% 87% / 0.35)',
         flexShrink: 0,
       }}
@@ -106,7 +106,7 @@ const BackToTop: React.FC = () => {
 const Footer: React.FC = () => {
   const isMobile = useIsMobile();
   return (
-    <footer style={{ background: 'hsl(0 0% 5%)', color: 'hsl(36 21% 95%)' }}>
+    <footer style={{ background: 'hsl(89 71% 15%)', color: 'hsl(36 21% 95%)' }}>
 
       {/* ── Top accent line ── */}
       <div style={{
@@ -203,7 +203,7 @@ const Footer: React.FC = () => {
             fontFamily: "'Montserrat', serif",
             fontStyle: 'italic',
             fontSize: 'clamp(0.85rem, 1.4vw, 1.15rem)',
-            color: 'hsl(36 21% 95% / 0.32)',
+            color: 'hsl(36 21% 95% / 0.7)',
             lineHeight: 1.5,
             textAlign: isMobile ? 'left' : 'right',
             maxWidth: isMobile ? '18ch' : '22ch',
@@ -216,7 +216,7 @@ const Footer: React.FC = () => {
       </div>
 
       {/* ── DIVIDER ── */}
-      <div style={{ height: 1, background: 'hsl(36 21% 95% / 0.07)', margin: '0 clamp(1.5rem,5vw,4rem)' }} />
+      <div style={{ height: 1, background: 'hsl(36 21% 95% / 0.16)', margin: '0 clamp(1.5rem,5vw,4rem)' }} />
 
       {/* ── HASHTAG + SOCIAL STRIP ── */}
       <div style={{
@@ -248,7 +248,7 @@ const Footer: React.FC = () => {
       </div>
 
       {/* ── DIVIDER ── */}
-      <div style={{ height: 1, background: 'hsl(36 21% 95% / 0.07)', margin: '0 clamp(1.5rem,5vw,4rem)' }} />
+      <div style={{ height: 1, background: 'hsl(36 21% 95% / 0.16)', margin: '0 clamp(1.5rem,5vw,4rem)' }} />
 
       {/* ── NAV LINKS ROW ── */}
       <div style={{
@@ -282,7 +282,7 @@ const Footer: React.FC = () => {
           fontSize: '0.5rem',
           letterSpacing: '0.3em',
           textTransform: 'uppercase',
-          color: 'hsl(36 21% 95% / 0.16)',
+          color: 'hsl(36 21% 95% / 0.55)',
         }}>
           {footer.copyright}
         </span>
@@ -296,12 +296,12 @@ const Footer: React.FC = () => {
               fontSize: '0.5rem',
               letterSpacing: '0.26em',
               textTransform: 'uppercase',
-              color: 'hsl(36 21% 95% / 0.18)',
+              color: 'hsl(36 21% 95% / 0.55)',
               textDecoration: 'none',
               transition: 'color 0.2s ease',
             }}
-            onMouseEnter={e => (e.currentTarget.style.color = 'hsl(36 21% 95% / 0.45)')}
-            onMouseLeave={e => (e.currentTarget.style.color = 'hsl(36 21% 95% / 0.18)')}
+            onMouseEnter={e => (e.currentTarget.style.color = 'hsl(36 21% 95%)')}
+            onMouseLeave={e => (e.currentTarget.style.color = 'hsl(36 21% 95% / 0.55)')}
           >
             {footer.privacy.label}
           </Link>
@@ -310,7 +310,7 @@ const Footer: React.FC = () => {
             fontFamily: "'Montserrat', serif",
             fontStyle: 'italic',
             fontSize: '0.72rem',
-            color: 'hsl(36 21% 95% / 0.14)',
+            color: 'hsl(36 21% 95% / 0.5)',
             letterSpacing: '0.02em',
           }}>
             {footer.tagline}
